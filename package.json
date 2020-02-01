@@ -1,0 +1,27 @@
+{
+  "name": "cheap-cheep",
+  "version": "1.0.0",
+  "description": "final-project",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.8.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rayhe921/Cheap-Cheep.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rayhe921/Cheap-Cheep/issues"
+  },
+  "homepage": "https://github.com/rayhe921/Cheap-Cheep#readme"
+}

@@ -1,2 +1,2 @@
 # Cheap-Cheep
-FInal Project
+Final Project
