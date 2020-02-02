@@ -1,3 +1,7 @@
 module.exports = {
-  Book: require("./user")
+  User: require("./user"),
+  Lists: require("./lists"),
+  Item: require("./item"),
+  List:require("./Lists")
+
 };
