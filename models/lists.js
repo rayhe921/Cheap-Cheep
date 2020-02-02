@@ -12,6 +12,7 @@ const ListsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
       },
+      date: Date.now()
    //need to create item of array //
 })
 
@@ -29,7 +30,7 @@ const ListSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Lists"
       },
-      Item: [ItemSchema]
+      Item: [ItemSchema],
 })
 const List = mongoose.model( "List", ListSchema);
 

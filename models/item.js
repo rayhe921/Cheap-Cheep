@@ -22,6 +22,9 @@ const ItemSchema = new Schema({
         type: Boolean,
         reuired: true,
 
+    },
+    searchTerm:{
+        type:String,
     }
 })
   const Item = moongose.model("Item", ItemSchema)
