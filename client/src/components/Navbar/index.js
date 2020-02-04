@@ -14,11 +14,11 @@ function Navbar(props) {
       </span>
       <div className="form-group">
         <form className="form-inline">
-          <input id="user-name" className="form-control mr-sm-2" type="username" placeholder="Username" aria-label="Username" />
+          <input id="username" className="form-control mr-sm-2" type="username" placeholder="Username" aria-label="Username" />
           <input id="password" className="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" />
         </form>
         <div>
-          <button id="login-button" className="btn btn-outline-success my-2" type="submit">Login</button>
+          <button id="login-button" className="btn btn-outline-success my-2" type="submit">{props.buttonName}</button>
         </div>
       </div>
     </nav>
