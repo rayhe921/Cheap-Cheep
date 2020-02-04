@@ -3,13 +3,24 @@ import "./style.css";
 
 function Navbar(props) {
   return (
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="/">
+    <nav className="navbar navbar-light bg-light">
+      <a className="navbar-brand" href="/">
         <img src={props.image} width="100" height="100" alt="logo" />
       </a>
-      <span class="navbar-text">
-        {props.title}
+      <span className="navbar-text text-center">
+        <h1>
+          {props.title}
+        </h1>
       </span>
+      <div className="form-group">
+        <form className="form-inline">
+          <input id="user-name" className="form-control mr-sm-2" type="username" placeholder="Username" aria-label="Username" />
+          <input id="password" className="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" />
+        </form>
+        <div>
+          <button id="login-button" className="btn btn-outline-success my-2" type="submit">Login</button>
+        </div>
+      </div>
     </nav>
   )
 }
