@@ -2,17 +2,16 @@ import React from "react";
 import "./style.css";
 
 function Navbar(props) {
-    return (
-        <nav className="navbar fixed-top navbar-light bg-primary">
-  <a className="navbar-brand" href="/">{props.children}</a>
-  <span className="navbar-text">
-    {props.navText}
-  </span>
-  <span className="navbar-text">
-    Score: {props.score} / Top Score: {props.highScore}  
-  </span>
-</nav>
-    )
+  return (
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <img src={props.image} width="100" height="100" alt="logo" />
+      </a>
+      <span class="navbar-text">
+        {props.title}
+      </span>
+    </nav>
+  )
 }
 
 export default Navbar;
