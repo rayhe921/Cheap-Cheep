@@ -5,6 +5,7 @@ import Registration from "../components/Registration";
 class Login extends Component {
   render() {
     return (
+      
       <Registration>
 
       </Registration>
