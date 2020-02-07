@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const ListsRoutes = require("./Lists");
+const UserRoutes = require("./user");
 const ItemRoutes = require("./Item");
 const ListRoutes = require("./List");
 
 // Book routes
-router.use("/Lists", ListsRoutes);
+router.use("/User", UserRoutes);
 router.use("/List", ListRoutes);
 router.use("/Item", ItemRoutes);
 
