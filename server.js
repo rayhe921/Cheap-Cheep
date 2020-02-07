@@ -19,10 +19,11 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/CheapCheep".then(data => {
-  console.log(data.result.n + " records inserted!");
-  process.exit(0);
-})
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/CheapCheep"
+// .then(data => {
+//   console.log(data.result.n + " records inserted!");
+//   process.exit(0);
+// })
 );
 
 // Send every other request to the React app
