@@ -1,20 +1,19 @@
 var cheerio = require("cheerio");
 const puppeteer = require('puppeteer');
 
+//This isn't actually working right at the moment; this should just be an API route so the promise returns correctly. Just leaving this in as it is for posterity.
+
 function scrapeWalmart(searchTerm){
 
+    //Set up the URL to search on walmart by adding the search term. Puppeteer is smart and will understand spaces.
     var url = "https://www.walmart.com/search/?query=" + searchTerm;
+    var firstMatch = {};
 
+    //Launch puppeteer
     puppeteer.launch().then(function (browser) {
         return browser.newPage();
     })
         .then(function (page) {
-            page.setViewport({
-                width: 1000,
-                height: 1300,
-                deviceScaleFactor: 1,
-            });
-    
             return page.goto(url).then(function () {
                 return page.content();
             })
@@ -24,18 +23,6 @@ function scrapeWalmart(searchTerm){
             var productNames = [];
             var productPrices = [];
             var productLinks = [];
-    
-    
-            // $(".product-brand").each(function (i, element) {
-            //     var name = $(element).next().text();
-
-            //     if (name = undefined){
-            //         name = $(element).next().text();
-            //     }
-    
-            //     //push each name into the productNames array
-            //     productNames.push(name);
-            // });
     
             $(".price-main").each(function (i, element) {
                 var price = $(element).children().first().text();
@@ -60,16 +47,15 @@ function scrapeWalmart(searchTerm){
                 productNames.push(name);
             });
     
-            var firstMatch = {
-                name: productNames[0],
-                price: productPrices[0],
-                link: productLinks[0]
-            }
-    
-            console.log(firstMatch);
-            console.log(productNames);
+             
+            firstMatch.name = productNames[0];
+            firstMatch.price = productPrices[0];
+            firstMatch.link = productLinks[0];
         })
-}
+        .then(function () {
+            console.log(firstMatch);    
+            return firstMatch
+        })
 
-//scrapeWalmart("handbag");
-scrapeWalmart("dinosaur");
+
+exports.scrapeWalmart = scrapeWalmart;
