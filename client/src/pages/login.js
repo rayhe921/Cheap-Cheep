@@ -8,7 +8,7 @@ class Login extends Component {
 
   state={
     username: "",
-    password: "",
+    password: ""
   };
 
    // Handles updating component state when the user types into the input field
