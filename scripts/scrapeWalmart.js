@@ -16,7 +16,6 @@ function scrapeWalmart(searchTerm){
             });
     
             return page.goto(url).then(function () {
-                page.screenshot({ path: './screencap1.png' });
                 return page.content();
             })
         })
@@ -27,12 +26,16 @@ function scrapeWalmart(searchTerm){
             var productLinks = [];
     
     
-            $(".product-brand").each(function (i, element) {
-                var name = $(element).next().text();
+            // $(".product-brand").each(function (i, element) {
+            //     var name = $(element).next().text();
+
+            //     if (name = undefined){
+            //         name = $(element).next().text();
+            //     }
     
-                //push each name into the productNames array
-                productNames.push(name);
-            });
+            //     //push each name into the productNames array
+            //     productNames.push(name);
+            // });
     
             $(".price-main").each(function (i, element) {
                 var price = $(element).children().first().text();
@@ -45,9 +48,16 @@ function scrapeWalmart(searchTerm){
             $(".product-title-link").each(function (i, element) {
                 var link = "walmart.com"
                 link += $(element).attr("href");;
+
+                var name = $(element).children().first().next().text();
+
+                if (name === ''){
+                    name = $(element).children().first().text();
+                }
     
                 // push each link into the productLinks array
                 productLinks.push(link);
+                productNames.push(name);
             });
     
             var firstMatch = {
@@ -57,8 +67,9 @@ function scrapeWalmart(searchTerm){
             }
     
             console.log(firstMatch);
+            console.log(productNames);
         })
 }
 
-scrapeWalmart("handbag");
+//scrapeWalmart("handbag");
 scrapeWalmart("dinosaur");
