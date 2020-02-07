@@ -23,6 +23,12 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
+  "proxy": {
+    "/api/*":  {
+      "target": "http://django:3000",
+      "secure": false
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rayhe921/Cheap-Cheep.git"

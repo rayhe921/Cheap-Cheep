@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Define middleware here
@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Cheapcheep");
 // Define API routes here
 
 // Send every other request to the React app
