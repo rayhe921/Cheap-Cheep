@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./style.css";
 // import Form from "../Form";
 import API from "../../utils/API";
+// import { Link } from "react-router-dom";
+
 
 class Registration extends Component {
 
@@ -31,12 +33,16 @@ class Registration extends Component {
                 userName: this.state.username,
                 password: this.state.password,
                 Email : this.state.email
+               
               })
                 .then(res => this.loadUsers())
                 .catch(err => console.log(err));
-          
+
+                console.log("this is working")
+
+                
         // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-        alert(`Hello ${this.state.username} ${this.state.password} ${this.state.email}`);
+        alert(`Hello!! your have created an account with us. ${this.state.username} ${this.state.password} ${this.state.email}`);
         this.setState({
             firstName: "",
             lastName: ""

@@ -5,7 +5,6 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const routes = require("./routes");
 const seeds = require("./scripts/seedDB")
-
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -19,12 +18,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/CheapCheep"
-// .then(data => {
-//   console.log(data.result.n + " records inserted!");
-//   process.exit(0);
-// })
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/CheapCheep");
 
 // Send every other request to the React app
 // Define any API routes before this runs
