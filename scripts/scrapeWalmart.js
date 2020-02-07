@@ -56,6 +56,6 @@ function scrapeWalmart(searchTerm){
             console.log(firstMatch);    
             return firstMatch
         })
-
-
+        
+    }
 exports.scrapeWalmart = scrapeWalmart;
