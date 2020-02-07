@@ -8,15 +8,13 @@ function Registration(prop) {
             <h5 className="text-center">It's quick and easy</h5>
             <hr />
             <form>
-                <div>
-                    <div className="form-group col-md-6">
-                        <label for="username">Username</label>
-                        <input type="text" placeholder="New Username Here" className="form-control" id="username" />
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label for="inputPassword4">Password</label>
-                        <input type="password" placeholder=" New Password Here" className="form-control" id="inputPassword4" />
-                    </div>
+                <div className="form-group col-md-6">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="New Username Here" className="form-control" id="username" />
+                </div>
+                <div className="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" placeholder=" New Password Here" className="form-control" id="inputPassword4" />
                 </div>
                 <div className="form-group col-md-6">
                     <label for="inputEmail">E-Mail Address</label>
