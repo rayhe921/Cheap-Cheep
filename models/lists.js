@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
 
+
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
@@ -16,7 +17,7 @@ const ListSchema = new Schema({
     //     type: Schema.Types.ObjectId,
     //     ref: "Lists"
     // },
-    Item: [ItemSchema],
+    // Item: [ItemSchema],
 })
 const List = mongoose.model("List", ListSchema);
 

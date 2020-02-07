@@ -44,18 +44,18 @@ export default {
 
   // Gets all user
   getAllUsers: function() {
-    return axios.get("/api/users");
+    return axios.get("/api/user");
   },
   // Gets a user with the given id
   getOneUser: function(id) {
-    return axios.get("/api/users/" + id);
+    return axios.get("/api/user/" + id);
   },
   // Deletes a user with the given id
   deleteUser: function(id) {
-    return axios.delete("/api/users/" + id);
+    return axios.delete("/api/user/" + id);
   },
   // Saves a user to the database
   saveUser: function(userData) {
-    return axios.post("/api/users", userData);
+    return axios.post("/api/user", userData);
   }
 };
