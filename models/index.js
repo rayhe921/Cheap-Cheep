@@ -1,6 +1,6 @@
 module.exports = {
   User: require("./user"),
   Item: require("./item"),
-  List:require("./Lists")
+  List:require("./lists")
 
 };
