@@ -3,10 +3,22 @@ const db = require("../models");
 
 // This file empties the Books collection and inserts the books below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/CheapCheep"
-);
+mongoose.connect( process.env.MONGODB_URI ||"mongodb://localhost/CheapCheep" , () => {
+  console.log('connecting to database')
+})
+
+// mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true}).then(() => {
+//   console.log('connecting to database')
+// }).catch((err) => {
+//   console.log(err)
+// })
+
+const userSeed = [
+  {
+    userName: "rayhe",
+    password: "123456"
+  }
+]
 
 const ItemSeed = [
   {
@@ -31,9 +43,9 @@ seacrhTerm : "iphone 8 plus"
  
 ];
 
-db.Item
+db.User
   .remove({})
-  .then(() => db.Item.collection.insertMany(ItemSeed))
+  .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
@@ -42,3 +54,15 @@ db.Item
     console.error(err);
     process.exit(1);
   });
+
+// db.Item
+//   .remove({})
+//   .then(() => db.Item.collection.insertMany(ItemSeed))
+//   .then(data => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   });
