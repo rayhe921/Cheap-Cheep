@@ -35,6 +35,8 @@ class Display extends Component {
         <Modal
           hideModal={this.hideModal}
           showModal={this.state.showModal}
+          title="Is This What you Wanted?"
+          body="Body"
         ></Modal>
         </div>
       </div>
