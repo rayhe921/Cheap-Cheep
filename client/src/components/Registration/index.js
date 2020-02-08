@@ -32,7 +32,7 @@ class Registration extends Component {
               API.saveUser({
                 userName: this.state.username,
                 password: this.state.password,
-                Email : this.state.email
+                email : this.state.email
                
               })
                 .then(res => this.loadUsers())
