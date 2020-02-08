@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Registration from "../components/Registration";
-// import InfoCard from "../components/InfoCard";
+import InfoCard from "../components/InfoCard";
 
 
 class Login extends Component {
@@ -13,12 +13,12 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        {/* <InfoCard
+      <div className="container">
+        <InfoCard
           listOne="Easy"
           listTwo="Organized"
           listThree="Cheap on your budget"
-        ></InfoCard> */}
+        ></InfoCard>
         <Registration
           // <Link to={"/books/" + book._id}>
 
