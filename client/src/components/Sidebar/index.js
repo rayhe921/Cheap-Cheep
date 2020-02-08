@@ -20,7 +20,7 @@ function Sidebar(prop) {
             </div>
             <div className="col-8 text-center d-flex justify-content-center">
             <form>
-                <button type="submit" class="btn btn-primary col align-self-center">Add List</button>
+                <button type="submit" className="btn btn-primary col align-self-center">Add List</button>
             </form>
         </div>
         </div>
