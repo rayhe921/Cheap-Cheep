@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "../src/components/Navbar";
+import Display from "./pages/display"
 import Login from "./pages/login";
 import Saved from "./pages/Saved";
+
 
 
 class App extends Component {
@@ -18,7 +20,7 @@ class App extends Component {
         ></Navbar>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route path="/saved" component={Saved}/>
+          <Route exact path="/main" component={Display} />
         </Switch>
         <Saved />
 
