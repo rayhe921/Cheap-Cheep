@@ -13,7 +13,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <InfoCard
           listOne="Easy"
           listTwo="Organized"
