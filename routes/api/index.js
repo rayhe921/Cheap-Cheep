@@ -4,8 +4,8 @@ const ItemRoutes = require("./item");
 const ListRoutes = require("./List");
 
 // Book routes
-router.use("/User", UserRoutes);
-router.use("/List", ListRoutes);
-router.use("/Item", ItemRoutes);
+router.use("/user", UserRoutes);
+router.use("/Llist", ListRoutes);
+router.use("/item", ItemRoutes);
 
 module.exports = router;
