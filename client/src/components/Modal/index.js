@@ -3,8 +3,8 @@ import "./style.css";
 
 
 
-function Modal({hideModal, showModal}, prop) {
-    const showHideClassName = showModal ? "modal display-block" : "modal display-none";
+function Modal(prop) {
+    const showHideClassName = prop.showModal ? "modal display-block" : "modal display-none";
     return (
         <div className={showHideClassName} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
@@ -19,7 +19,7 @@ function Modal({hideModal, showModal}, prop) {
                         <p>{prop.body}</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={hideModal} data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-secondary" onClick={prop.hideModal} data-dismiss="modal">Close</button>
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
