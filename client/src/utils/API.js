@@ -43,6 +43,7 @@ export default {
   //User API Methods
 
   // Gets all user
+
   getAllUsers: function () {
     return axios.get("/api/users");
   },
