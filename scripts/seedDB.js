@@ -29,11 +29,9 @@ db.User
   .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
-    
   })
   .catch(err => {
     console.error(err);
-  
   });
 
   const ItemSeed = [
@@ -87,9 +85,7 @@ db.Item
     .then(() => db.Item.collection.insertMany(ItemSeed))
     .then(data => {
         console.log(data.result.n + "  this records inserted!");
-     
     })
     .catch(err => {
         console.error(err);
-   
     });
