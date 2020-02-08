@@ -5,7 +5,7 @@ import "./App.css";
 import Navbar from "../src/components/Navbar";
 import Display from "./pages/display"
 import Login from "./pages/login";
-import Main from "./pages/main";
+
 
 
 class App extends Component {
@@ -19,11 +19,7 @@ class App extends Component {
         ></Navbar>
         <Switch>
           <Route exact path="/" component={Login} />
-<<<<<<< HEAD
-          <Route exact path="/main" component={Main} />
-=======
           <Route exact path="/main" component={Display} />
->>>>>>> master
         </Switch>
       </Router>
     );

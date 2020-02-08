@@ -6,7 +6,7 @@ import "./style.css";
 class Modal extends Component {
     render() {
         return (
-            <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal" tabindex="-1" role="dialog" id={this.props.}>
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
