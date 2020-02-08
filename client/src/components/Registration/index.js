@@ -63,7 +63,7 @@ class Registration extends Component {
                 <form className="form">
                     <div>
                         <div className="form-group col-md-6">
-                            <label for="username">Username</label>
+                            <label htmlFor="username">Username</label>
                             <input
                                 value={this.state.username}
                                 name="username"
@@ -74,7 +74,7 @@ class Registration extends Component {
                             />
                         </div>
                         <div className="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
+                            <label htmlFor="inputPassword4">Password</label>
                             <input
                                 value={this.state.password}
                                 name="password"
@@ -86,7 +86,7 @@ class Registration extends Component {
                         </div>
                     </div>
                     <div className="form-group col-md-6">
-                        <label for="inputemail">Email</label>
+                        <label htmlFor="inputemail">Email</label>
                         <input
                             value={this.state.email}
                             name="email"
@@ -97,7 +97,11 @@ class Registration extends Component {
                         />
                     </div>
 
-                    <button class="btn btn-primary col align-self-center" onClick={this.handleFormSubmit}>Submit</button>
+
+
+
+
+                    <button className="btn btn-primary col align-self-center" onClick={this.handleFormSubmit}>Submit</button>
                 </form>
             </div>
         );
