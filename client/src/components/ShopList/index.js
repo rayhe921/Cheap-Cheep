@@ -17,7 +17,7 @@ function ShopList(props) {
                     <tbody>
                         <tr>
                             <th className="">
-                                <button type="button" class=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                                <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
                             </th>
                             <td>Toothbrush</td>
                             <td>$ 5.99</td>

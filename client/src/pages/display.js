@@ -1,9 +1,26 @@
 import React, { Component } from "react";
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
-import Input from "../components/Input"
+import Input from "../components/Input";
+import Modal from "../components/Modal";
 
 class Display extends Component {
+
+  state = {
+    showModal: false
+  };
+
+  displayModal = (event) => {
+    event.preventDefault();
+    this.setState({showModal: true})
+
+     console.log("showModal: " + this.state.showModal)
+  };
+
+  hideModal = () => {
+    this.setState({showModal: false})
+  }
+
   render() {
     return (
       <div className="row">
@@ -12,7 +29,13 @@ class Display extends Component {
         </div>
         <div className="col-9">
         <Shoplist></Shoplist>
-        <Input></Input>
+        <Input
+          click={this.displayModal}
+        ></Input>
+        <Modal
+          hideModal={this.hideModal}
+          showModal={this.state.showModal}
+        ></Modal>
         </div>
       </div>
     );
