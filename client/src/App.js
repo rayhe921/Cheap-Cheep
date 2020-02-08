@@ -22,6 +22,7 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Display} />
         </Switch>
+
       </Router>
     );
   }
