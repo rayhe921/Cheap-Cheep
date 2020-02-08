@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function ShopList(props) {
+function ShopList(prop) {
     return (
         <div>
             <div className="col-8 text-center d-flex justify-content-between">
