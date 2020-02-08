@@ -17,6 +17,16 @@ const UserSchema = new Schema({
       },
       "Password should be longer."
     ]
+  },
+  email: {
+    type: String,
+    trim: true,
+    required: true,
+    // validate: {
+    //   validator: () => Promise.resolve(false),
+    //   message: 'Email validation failed'
+    // }
+
   }
 });
 const User = mongoose.model("User", UserSchema);
