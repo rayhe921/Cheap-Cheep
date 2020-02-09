@@ -9,7 +9,7 @@ router.route("/")
 router.route("/api/users")
   .post(userController.create);
 
-  
+
 // Matches with "/api/users/:id"
 router
   .route("/:id")

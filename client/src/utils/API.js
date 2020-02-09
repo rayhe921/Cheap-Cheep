@@ -5,8 +5,9 @@ export default {
   //Item API Methods
 
   // Gets all items
-  getAllItems: function () {
-    return axios.get("/api/item");
+  getItem: function () {
+    console.log("this is api.js getItem")
+    return axios.get("/");
   },
   // Gets a item with the given id
   getOneItem: function (id) {

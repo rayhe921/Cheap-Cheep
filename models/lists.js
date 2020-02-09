@@ -13,10 +13,10 @@ const ListSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Lists"
-    // },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "Lists"
+    },
     // Item: [ItemSchema],
 })
 const List = mongoose.model("List", ListSchema);

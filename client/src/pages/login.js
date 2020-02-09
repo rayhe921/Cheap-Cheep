@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Registration from "../components/Registration";
 import InfoCard from "../components/InfoCard";
-
+import Saved from "../pages/Saved"
 
 class Login extends Component {
 
@@ -24,6 +24,7 @@ class Login extends Component {
 
           onClick={this.handleFormSubmit}
           ></Registration>
+          <Saved />
       </div>
     );
   }
