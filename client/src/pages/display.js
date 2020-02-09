@@ -49,17 +49,18 @@ class Display extends Component {
             body="Body Two"
           ></Modal>
         </div>
-        <Shoplist></Shoplist>
-        <Input
-          click={this.displayModalOne}
-        ></Input>
-        <Modal
-          hideModal={this.hideModalOne}
-          showModalOne={this.state.showModalOne}
-          title="Is This What you Wanted?"
-          body="Body One"
-        ></Modal>
-
+        <div className="col-9">
+          <Shoplist></Shoplist>
+          <Input
+            click={this.displayModalOne}
+          ></Input>
+          <Modal
+            hideModal={this.hideModalOne}
+            showModalOne={this.state.showModalOne}
+            title="Is This What you Wanted?"
+            body="Body One"
+          ></Modal>
+        </div>
       </div>
     );
   }
