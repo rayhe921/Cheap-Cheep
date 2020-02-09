@@ -2,4 +2,7 @@
 
 .height{
     height: 25vh;
+} 
+nav {
+  background-image: url("../public/img/paven/paven.png");
 }
