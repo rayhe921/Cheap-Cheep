@@ -16,6 +16,7 @@ import InfoCard from "../components/InfoCard"
     componentWillMount() {
         API.getAllItems().then(
             (response) => {
+                console.log(response)
                 this.setState({Items: response.data});
             }
         ).catch(

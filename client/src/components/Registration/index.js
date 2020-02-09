@@ -35,18 +35,17 @@ class Registration extends Component {
                 email : this.state.email
                
               })
-                .then(res => this.loadUsers())
                 .catch(err => console.log(err));
 
                 console.log("this is working")
 
                 
-        // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
         alert(`Hello!! your have created an account with us. ${this.state.username} ${this.state.password} ${this.state.email}`);
         this.setState({
-            firstName: "",
-            lastName: ""
-        })
+            username: " ",
+            password: "",
+            email: ""
+            })
     }
     };
 
