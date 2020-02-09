@@ -7,38 +7,59 @@ import Modal from "../components/Modal";
 class Display extends Component {
 
   state = {
-    showModal: false
+    showModalOne: false,
+    showModalTwo: false
   };
 
-  displayModal = (event) => {
+  displayModalOne = (event) => {
     event.preventDefault();
-    this.setState({showModal: true})
+    this.setState({ showModalOne: true })
 
-     console.log("showModal: " + this.state.showModal)
+    console.log("showModalOne: " + this.state.showModalOne)
   };
 
-  hideModal = () => {
-    this.setState({showModal: false})
+  hideModalOne = () => {
+    this.setState({ showModalOne: false })
   }
+
+  displayModalTwo = (event) => {
+    event.preventDefault();
+    this.setState({ showModalTwo: true })
+
+    console.log("showModalTwo: " + this.state.showModalTwo)
+  };
+
+  hideModalTwo = () => {
+    this.setState({ showModalTwo: false })
+  }
+
 
   render() {
     return (
       <div className="row">
         <div className="col-3">
-        <Sidebar></Sidebar>
+          <Sidebar></Sidebar>
+          <Input
+            click={this.displayModalTwo}
+          ></Input>
+          <Modal
+            hideModal={this.hideModalTwo}
+            showModalTwo={this.state.showModalTwo}
+            title="Is This What you Wanted?"
+            body="Body Two"
+          ></Modal>
         </div>
-        <div className="col-9">
         <Shoplist></Shoplist>
         <Input
-          click={this.displayModal}
+          click={this.displayModalOne}
         ></Input>
         <Modal
-          hideModal={this.hideModal}
-          showModal={this.state.showModal}
+          hideModal={this.hideModalOne}
+          showModalOne={this.state.showModalOne}
           title="Is This What you Wanted?"
-          body="Body"
+          body="Body One"
         ></Modal>
-        </div>
+
       </div>
     );
   }
