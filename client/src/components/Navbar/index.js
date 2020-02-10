@@ -2,6 +2,8 @@ import React from "react";
 import "./style.css";
 
 function Navbar(props) {
+  const showLogout = props.showLogin ? "form-group display-block" : "form-group display-none";
+  const showLogoutButton = props.showLogoutButton ? "display-block" : "display-none"
   return (
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="/">
@@ -12,14 +14,17 @@ function Navbar(props) {
           {props.title}
         </h1>
       </span>
-      <div className="form-group">
-        <form className="form-inline">
+      <div className={showLogout}>
+        <form className="form-inline form-control-sm mr-3 w-15">
           <input id="username" className="form-control mr-sm-2" type="username" placeholder="Username" aria-label="Username" />
           <input id="password" className="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" />
         </form>
         <div>
-          <button id="login-button" className="btn btn-outline-success my-2" type="submit">{props.buttonName}</button>
+          <button id="login-button" onClick={props.onClick} className="btn btn-outline-success my-2" type="submit">{props.buttonName}</button>
         </div>
+      </div>
+      <div className={showLogoutButton}>
+      <button onClick={props.onClickLogout} className="btn btn-outline-success my-2" type="submit">{props.buttonNameTwo}</button>
       </div>
     </nav>
   )
