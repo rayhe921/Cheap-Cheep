@@ -6,32 +6,44 @@ import InfoCard from "../components/InfoCard"
 
 
 class Saved extends Component {
-    state = {
-      Items: []
-    };
-  
-    componentDidMount() {
-      this.loaditem();
-    }
-  
-    loaditem = () => {
-      API.getItem()
-        .then(res => this.setState({ Item: res.data }))
+  state = {
+    Items: []
+  };
 
-        .catch(err => console.log(err));
-        console.log(res)
+  componentDidMount() {
+    this.loaditem();
+  }
 
-    };
+  loaditem = () => {
+    API.getItem()
+      .then(res => this.setState({ Items: res.data }))
+
+      .catch(err => console.log(err));
+
+  };
 
 
-    render() {
-        console.log(this.state.Item);
-        return(
-            <main>
-                <InfoCard Items={this.state.Item} />
-            </main>
-        );
-    }
+  render() {
+    console.log(this.state.Items);
+    return (
+      <main>
+        <InfoCard Items={this.state.Item} />
+        {this.state.Items.map(Item => (
+          <ul>
+            <li>
+              <p key={Item._id}>
+                <strong>
+                  {Item.name} {Item.price} {Item.website} {Item.seacrhTerm}
+                </strong>
+              </p>
+            </li>
+          </ul>
+
+        ))}
+
+      </main>
+    );
+  }
 }
 
 export default Saved;
