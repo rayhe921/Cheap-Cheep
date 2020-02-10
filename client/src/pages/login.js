@@ -14,16 +14,18 @@ class Login extends Component {
   render() {
     return (
       <div className="container">
-        <InfoCard
-          listOne="Easy"
-          listTwo="Organized"
-          listThree="Cheap on your budget"
-        ></InfoCard>
-        <Registration
-          // <Link to={"/books/" + book._id}>
+        <div className="row">
+          <InfoCard
+            listOne="Easy"
+            listTwo="Organized"
+            listThree="Cheap on your budget"
+          ></InfoCard>
+          <Registration
+            // <Link to={"/books/" + book._id}>
 
-          onClick={this.handleFormSubmit}
+            onClick={this.handleFormSubmit}
           ></Registration>
+        </div>
       </div>
     );
   }

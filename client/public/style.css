@@ -1,4 +1,17 @@
 
-    body{
-    background-image: url("./img/retina_wood/retina_wood.png");
+body{
+background-image: url("./img/morocco/morocco.png" );}
+/* "./img/paven/paven.png" */
+    
+
+.container{
+  margin-top:2%;
+  margin: 2% 12vw 2%;
+}
+
+.navbar {
+  background-image: url(
+      "./img/paven/paven.png"
+    /* "./img/retina_wood/retina_wood.png" */
+    );
 }

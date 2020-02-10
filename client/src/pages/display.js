@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
 import Modal from "../components/Modal";
+import {Container, Row, Col} from "../components/Grid";
 
 class Display extends Component {
 
@@ -23,12 +24,12 @@ class Display extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-3">
+      <Container>
+        <Row>
+          <Col size="3">
             <Sidebar></Sidebar>
-          </div>
-          <div className="col-9">
+          </Col>
+          <Col size="9">
             <Shoplist></Shoplist>
             <Input
               click={this.displayModal}
@@ -39,9 +40,9 @@ class Display extends Component {
               title="Is This What you Wanted?"
               body="Body"
             ></Modal>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
