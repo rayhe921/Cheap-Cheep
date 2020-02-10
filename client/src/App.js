@@ -13,14 +13,19 @@ class App extends Component {
 
   state = {
     showLogin: true,
-    showLoginButton: false
+    hideLoginButton: true
   }
 
   handleLogin = (event) => {
     event.preventDefault();
-    this.setState({ showLoginButton: true})
-    // this.setState({ showLoginButton: true })
-    console.log("showLoginButton: " + this.state.showLoginButton)
+    this.setState({ hideLoginButton: false, showLogin: false })
+    console.log("hideLoginButton: " + this.state.hideLoginButton)
+  }
+
+  handleLogout = (event) => {
+    event.preventDefault();
+    this.setState({ hideLoginButton: true, showLogin: true })
+    console.log("hideLoginButton: " + this.state.hideLoginButton)
   }
 
   render() {
@@ -33,7 +38,8 @@ class App extends Component {
           buttonNameTwo="Logout"
           onClick={this.handleLogin}
           showLogin={this.state.showLogin}
-          showLoginButton={this.state.showLoginButton}
+          hideLoginButton={this.state.hideLoginButton}
+          onClickLogout={this.handleLogout}
         ></Navbar>
         <Switch>
           <Route exact path="/" component={Login} />
