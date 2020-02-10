@@ -5,7 +5,6 @@ import "./App.css";
 import Navbar from "../src/components/Navbar";
 import Display from "./pages/display"
 import Login from "./pages/login";
-import Saved from "./pages/Saved";
 
 
 
@@ -21,7 +20,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Display} />
-          <Route exact path="/save" component={Saved} />
 
         </Switch>
 
