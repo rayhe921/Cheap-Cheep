@@ -13,19 +13,19 @@ class App extends Component {
 
   state = {
     showLogin: true,
-    hideLoginButton: true
+    hideLogoutButton: true
   }
 
   handleLogin = (event) => {
     event.preventDefault();
-    this.setState({ hideLoginButton: false, showLogin: false })
-    console.log("hideLoginButton: " + this.state.hideLoginButton)
+    this.setState({ hideLogoutButton: false, showLogin: false })
+    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
   }
 
   handleLogout = (event) => {
     event.preventDefault();
-    this.setState({ hideLoginButton: true, showLogin: true })
-    console.log("hideLoginButton: " + this.state.hideLoginButton)
+    this.setState({ hideLogoutButton: true, showLogin: true })
+    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
   }
 
   render() {
@@ -38,7 +38,7 @@ class App extends Component {
           buttonNameTwo="Logout"
           onClick={this.handleLogin}
           showLogin={this.state.showLogin}
-          hideLoginButton={this.state.hideLoginButton}
+          hideLogoutButton={this.state.hideLogoutButton}
           onClickLogout={this.handleLogout}
         ></Navbar>
         <Switch>

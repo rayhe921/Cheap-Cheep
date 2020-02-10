@@ -3,7 +3,7 @@ import "./style.css";
 
 function Navbar(props) {
   const showLogout = props.showLogin ? "form-group" : "form-group display-none";
-  const hideLogoutButton = props.hideLogoutButton ? "display-none" : "display-block"
+  const hideLogoutButton = props.hideLogoutButton ? "display-none" : "display-block";
   return (
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="/">
