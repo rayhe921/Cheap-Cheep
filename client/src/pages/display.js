@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
 import Modal from "../components/Modal";
+import Button from "../components/Button"
 
 class Display extends Component {
 
@@ -39,9 +40,10 @@ class Display extends Component {
       <div className="row">
         <div className="col-3">
           <Sidebar></Sidebar>
-          <Input
+          <Button
             click={this.displayModalTwo}
-          ></Input>
+            title="Add a List"
+          ></Button>
           <Modal
             hideModal={this.hideModalTwo}
             showModalTwo={this.state.showModalTwo}
