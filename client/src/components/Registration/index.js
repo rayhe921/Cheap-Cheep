@@ -10,7 +10,7 @@ class Registration extends Component {
 
     // Setting the component's initial state
     state = {
-        username: " ",
+        username: "",
         password: "",
         email: ""
     };
