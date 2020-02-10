@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 
 function Sidebar(prop) {
+    
     return (
         <div className="col-9 justify-content-center">
         <div className="col-8 text-center d-flex justify-content-between">

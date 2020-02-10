@@ -3,6 +3,8 @@ import Registration from "../components/Registration";
 import InfoCard from "../components/InfoCard";
 import Saved from "../pages/Saved"
 import List from "../pages/list"
+import Shoplist from "../components/ShopList";
+
 class Login extends Component {
 
 

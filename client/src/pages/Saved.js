@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import API from "../utils/API";
 import InfoCard from "../components/InfoCard"
+import Shoplist from "../components/ShopList";
+
 
 
 
@@ -26,22 +28,37 @@ class Saved extends Component {
   render() {
     console.log(this.state.Items);
     return (
-      <main>
-        <InfoCard Items={this.state.Item} />
-        {this.state.Items.map(Item => (
-          <ul>
-            <li>
-              <p key={Item._id}>
-                <strong>
-                  {Item.name} {Item.price} {Item.website} {Item.seacrhTerm}
-                </strong>
-              </p>
-            </li>
-          </ul>
+      <div className="col-8 text-center d-flex justify-content-between">
+        <table className="table table-bordered table-hover table-sm m-7">
+          <thead>
+            <tr>
+              <th>Remove</th>
+              <th>Item Name</th>
+              <th>Lowest Price</th>
+              <th>Link</th>
+              <th>search Term</th>
 
-        ))}
-
-      </main>
+            </tr>
+          </thead>
+          <tbody>
+            <tr Items={this.state.Item} >
+              {this.state.Items.map(Item => (
+                <tbody key={Item._id}>
+                  <tr>
+                    <th className="">
+                      <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                    </th>
+                    <td>{Item.name}</td>
+                    <td>{Item.price}</td>
+                    <td>{Item.website}</td>
+                    <td>{Item.seacrhTerm}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
