@@ -95,16 +95,16 @@ db.Item
 
     const listSeed = [
       {
-        listName: "list Two"
-        
+        listName: "List One"
+
     
     },
     {
-      listName: "list Two"
+      listName: "List Two"
     
     },
     {
-      listName: "list Two"
+      listName: "List Three"
     
     },
     ]
