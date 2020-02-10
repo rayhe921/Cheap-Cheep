@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 function Navbar(props) {
-  const showLogout = props.showLogin ? "form-group display-block" : "form-group display-none";
+  const showLogout = props.showLogin ? "form-group" : "form-group display-none";
   const showLogoutButton = props.showLogoutButton ? "display-block" : "display-none"
   return (
     <nav className="navbar navbar-light bg-light">
