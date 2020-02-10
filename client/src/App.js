@@ -18,9 +18,9 @@ class App extends Component {
 
   handleLogin = (event) => {
     event.preventDefault();
-    this.setState({ showLogin: false })
-    this.setState({ showLoginButton: true })
-    console.log("showLogin: " + this.state.showLogin + "showLoginButton: " + this.state.showLoginButton)
+    this.setState({ showLoginButton: true})
+    // this.setState({ showLoginButton: true })
+    console.log("showLoginButton: " + this.state.showLoginButton)
   }
 
   render() {
@@ -30,6 +30,7 @@ class App extends Component {
           title="Cheap Cheep"
           image={logo}
           buttonName="Login"
+          buttonNameTwo="Logout"
           onClick={this.handleLogin}
           showLogin={this.state.showLogin}
           showLoginButton={this.state.showLoginButton}
