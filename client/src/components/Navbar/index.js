@@ -20,7 +20,7 @@ handleInputChange = event => {
       [name]: value
   });
 
-  console.log(this.state);
+  // console.log(this.state);
 };
 
 handleFormSubmit = event => {

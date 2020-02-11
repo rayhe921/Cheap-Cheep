@@ -9,8 +9,8 @@ router
 
 router
   .route("/login")
-  .get(userController.findByName);
-  
+  .post(userController.login);
+
 // Matches with "/api/users/:id"
 router
   .route("/:id")

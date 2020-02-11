@@ -49,7 +49,7 @@ export default {
   },
   login: function (user) {
     console.log(user);
-    return axios.get("/api/user/login", user);
+    return axios.post("/api/user/login", user);
   },
   // Gets a user with the given id
   getOneUser: function (id) {
