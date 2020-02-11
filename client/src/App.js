@@ -19,13 +19,11 @@ class App extends Component {
   handleLogin = (event) => {
     event.preventDefault();
     this.setState({ hideLogoutButton: false, showLogin: false })
-    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
   }
 
   handleLogout = (event) => {
     event.preventDefault();
     this.setState({ hideLogoutButton: true, showLogin: true })
-    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
   }
 
   render() {
