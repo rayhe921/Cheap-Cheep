@@ -54,27 +54,25 @@ class Registration extends Component {
     render() {
         // Notice how each input has a `value`, `name`, and `onChange` prop
         return (
-            <div className="col-6 card rounded">
+            <div className="card">
                 <Row>
                     <Col size="12">
                         <h2 className="font-weight-bold">Sign Up Here</h2>
                         <h5 className="text-center">It's quick and easy</h5>
                     </Col>
                 </Row>
-                <Row>
-                    <Col size="6">
-                        <hr></hr>
-                    </Col>
-                </Row>
+<div className="bubble">
+                </div>
                 {/* <p>
                     Hello {this.state.username} {this.state.password}
                     {this.state.email}
                 </p> */}
                 <Row>
+                    <Col size="12">
                     <form className="form align-content-center">
                         <div className="inputForm">
-                            <Col size="md-6" className="form-group text-center">
-                                <label htmlFor="username"><p>Username</p></label>
+                            <Col size="md-6" className="form-group">
+                                <label htmlFor="username">Username</label>
                                 <input
                                     value={this.state.username}
                                     name="username"
@@ -111,8 +109,10 @@ class Registration extends Component {
                             <button className="btn btn-success align-self-center" onClick={this.handleFormSubmit}>Submit</button>
                         </div>
                     </form>
+                    </Col>
                 </Row>
             </div>
+            
 
         );
     }

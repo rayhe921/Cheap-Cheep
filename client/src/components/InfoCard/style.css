@@ -1,9 +1,4 @@
-.infoCard{
-    float: left;
-    text-align: center;
-    line-height: 2rem;
-    padding-left: 8rem;
-    padding-right: 8rem;
-    padding-top: 2rem;
-    background-color: aliceblue;
+.card{
+    margin-top: 10vh;
+    background-image: url(./imgs/paper-img.jpg);
 }

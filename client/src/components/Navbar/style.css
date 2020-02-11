@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-
 
 .height{
-    height: 20vh;
+    height: 20%;
 } 
-=======
-#login-button{
-    float: right;
-    margin-right: 0.5rem;
-}
 
 .display-block {
     display: initial;
@@ -17,4 +10,4 @@
 .display-none {
     display: none;
   }
->>>>>>> 4896594b57dfe1734648ca99bd9b54683a85158a
+

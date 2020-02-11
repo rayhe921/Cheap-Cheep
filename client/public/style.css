@@ -1,7 +1,9 @@
 
 body{
-background-image: url("./img/morocco/morocco.png" );}
-/* "./img/paven/paven.png" */
+background-image: url(  "./img/retina_wood/retina_wood.png" );}
+    */
+
+
     
 
 .container{
@@ -10,8 +12,5 @@ background-image: url("./img/morocco/morocco.png" );}
 }
 
 .navbar {
-  background-image: url(
-      "./img/paven/paven.png"
-    /* "./img/retina_wood/retina_wood.png" */
-    );
+  background-image: url("./img/morocco/morocco.png"    );
 }

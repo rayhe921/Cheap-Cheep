@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Registration from "../components/Registration";
 import InfoCard from "../components/InfoCard";
+import {Container, Row, Col} from "../components/Grid";
 
 
 class Login extends Component {
@@ -13,20 +14,24 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
+      <Container>
+        <Row>
+          <Col size="6">
           <InfoCard
             listOne="Easy"
             listTwo="Organized"
             listThree="Cheap on your budget"
           ></InfoCard>
+          </Col>
+          <Col size="6">
           <Registration
             // <Link to={"/books/" + book._id}>
 
             onClick={this.handleFormSubmit}
           ></Registration>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
