@@ -3,7 +3,8 @@ import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
 import Modal from "../components/Modal";
-import Button from "../components/Button"
+import Button from "../components/Button";
+import Form from "../components/Form";
 
 class Display extends Component {
 
@@ -47,8 +48,8 @@ class Display extends Component {
           <Modal
             hideModal={this.hideModalTwo}
             showModalTwo={this.state.showModalTwo}
-            title="Is This What you Wanted?"
-            body="Body Two"
+            title="What would you like to name your new list?"
+            body={<Form></Form>}
           ></Modal>
         </div>
         <div className="col-9">

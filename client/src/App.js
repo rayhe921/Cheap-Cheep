@@ -11,6 +11,23 @@ import Login from "./pages/login";
 
 class App extends Component {
 
+  state = {
+    showLogin: true,
+    hideLogoutButton: true
+  }
+
+  handleLogin = (event) => {
+    event.preventDefault();
+    this.setState({ hideLogoutButton: false, showLogin: false })
+    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
+  }
+
+  handleLogout = (event) => {
+    event.preventDefault();
+    this.setState({ hideLogoutButton: true, showLogin: true })
+    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
+  }
+
   render() {
     return (
       <Router>
@@ -18,6 +35,11 @@ class App extends Component {
           title="Cheap Cheep"
           image={logo}
           buttonName="Login"
+          buttonNameTwo="Logout"
+          onClick={this.handleLogin}
+          showLogin={this.state.showLogin}
+          hideLogoutButton={this.state.hideLogoutButton}
+          onClickLogout={this.handleLogout}
         ></Navbar>
         <Switch>
           <Route exact path="/" component={Login} />
