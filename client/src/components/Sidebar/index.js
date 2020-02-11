@@ -5,7 +5,7 @@ function Sidebar(prop) {
     return (
         <div className="col-9 justify-content-center">
             <div className="col-8 text-center d-flex justify-content-between">
-                <table className="table table-hover table-sm m-7">
+                <table className="table table-lists table-hover table-sm m-7">
                     <thead>
                         <tr>
                             <th>Your Lists</th>

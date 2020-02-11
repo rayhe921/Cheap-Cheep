@@ -4,8 +4,8 @@ import "./style.css";
 function ShopList(prop) {
     return (
         <div>
-            <div className="col-8 text-center d-flex justify-content-between card">
-                <table className="table table-bordered table-hover table-sm m-7">
+            <div className="col-8 text-center d-flex justify-content-between">
+                <table className="table items-table table-dark-bordered table-hover table-sm m-7">
                     <thead>
                         <tr>
                             <th>Remove</th>
