@@ -9,7 +9,7 @@ class Registration extends Component {
 
     // Setting the component's initial state
     state = {
-        username: " ",
+        username: "",
         password: "",
         email: ""
     };
@@ -28,25 +28,24 @@ class Registration extends Component {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
 
-            if (this.state.username && this.state.password && this.state.email)  {
-              API.saveUser({
+        if (this.state.username && this.state.password && this.state.email) {
+            API.saveUser({
                 userName: this.state.username,
                 password: this.state.password,
-                email : this.state.email
-               
-              })
+                email: this.state.email
+
+            })
                 .catch(err => console.log(err));
 
-                console.log("this is working")
+            // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
+            alert(`Account Created: username: ${this.state.username} password: ${this.state.password} email: ${this.state.email}`);
+            this.setState({
+                username: "",
+                password: "",
+                email: ""
 
-                
-        alert(`Hello!! your have created an account with us. ${this.state.username} ${this.state.password} ${this.state.email}`);
-        this.setState({
-            username: " ",
-            password: "",
-            email: ""
             })
-    }
+        }
     };
 
     render() {

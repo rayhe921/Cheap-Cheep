@@ -4,7 +4,7 @@ const db = require("../models");
 // This file empties the user collection and inserts the books below
 
 mongoose.connect( process.env.MONGODB_URI ||"mongodb://localhost/CheapCheep" , () => {
-  console.log('connecting to database')
+  console.log('connecting Seed to database')
 })
 
 

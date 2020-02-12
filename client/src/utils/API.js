@@ -49,6 +49,10 @@ export default {
   getAllUsers: function () {
     return axios.get("/api/user");
   },
+  login: function (user) {
+    console.log(user);
+    return axios.post("/api/user/login", user);
+  },
   // Gets a user with the given id
   getOneUser: function (id) {
     return axios.get("/api/user/" + id);
