@@ -55,7 +55,9 @@ class Display extends Component {
           ></Modal>
         </div>
         <div className="col-9">
-          <Shoplist></Shoplist>
+          <Shoplist
+            title="List One"
+          ></Shoplist>
           <Input
             click={this.displayModalOne}
           ></Input>
