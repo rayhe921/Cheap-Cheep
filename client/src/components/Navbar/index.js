@@ -32,8 +32,17 @@ handleFormSubmit = event => {
 
       }).then( function(response) {
         console.log(response);
+
+        if (response.data.found === false){
+          console.log("User not found.")
+        } else if (response.data.userID === -1){
+          console.log("Password is incorrect");
+        } else {
+           localStorage.setItem("id", response.data.userID);
+           window.location.href = "/main";
+        }
       })
-          .catch(err => console.log(err));
+          .catch(err => console.log(err));  
 
       // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
   }
