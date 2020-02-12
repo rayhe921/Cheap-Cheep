@@ -80,9 +80,38 @@ db.User
 
 ]
 
+
 db.Item
     .remove({})
     .then(() => db.Item.collection.insertMany(ItemSeed))
+    .then(data => {
+        console.log(data.result.n + "  this records inserted!");
+    })
+    .catch(err => {
+        console.error(err);
+    });
+
+
+
+    const listSeed = [
+      {
+        listName: "List One"
+
+    
+    },
+    {
+      listName: "List Two"
+    
+    },
+    {
+      listName: "List Three"
+    
+    },
+    ]
+    db.List
+    .remove({})
+
+    .then(() => db.List.collection.insertMany(listSeed))
     .then(data => {
         console.log(data.result.n + "  this records inserted!");
     })

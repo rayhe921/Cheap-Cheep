@@ -5,7 +5,8 @@ export default {
   //Item API Methods
 
   // Gets all items
-  getAllItems: function () {
+  getItem: function () {
+    console.log("this is api.js getItem")
     return axios.get("/api/item");
   },
   // Gets a item with the given id
@@ -24,7 +25,8 @@ export default {
   //List API Methods
 
   // Gets all list
-  getAllLists: function () {
+  getList: function () {
+    console.log("this is from list item")
     return axios.get("/api/list");
   },
   // Gets a list with the given id

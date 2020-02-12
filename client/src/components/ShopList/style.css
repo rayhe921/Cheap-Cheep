@@ -1,7 +1,16 @@
 .delete{
+<<<<<<< HEAD
     width:50%;   
 }
 
 .list-button{
  float: left;
+=======
+    width:50%;
+    
+}
+tr {
+    width: 200%;
+
+>>>>>>> master
 }
