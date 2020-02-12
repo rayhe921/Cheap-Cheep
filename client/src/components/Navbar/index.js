@@ -12,7 +12,7 @@ function Navbar(props) {
       <span className="navbar-text text-center">
         <h1>
           {props.title}
-        </h1>``
+        </h1>
         </span>
       <div className={showLogout}>
         <form className="form-inline">

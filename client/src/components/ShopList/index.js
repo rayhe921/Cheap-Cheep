@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import "./style.css";
+import List from "../List";
 
 
 
@@ -26,14 +27,14 @@ class ShopList extends Component {
   render() {
     console.log(this.state.Items);
     return (
-      <div className="col-8 text-center d-flex justify-content-between">
-        <table className="table table-bordered table-hover table-sm m-7">
-          <thead>
-            <tr>
-              <th>Remove</th>
-              <th>Item Name</th>
-              <th>Lowest Price</th>
-              <th>Link</th>
+            <div className="col-8 text-center d-flex justify-content-between">
+                <table className="table table-bordered table-hover table-sm m-7">
+                    <thead>
+                        <tr>
+                            <th>Remove</th>
+                            <th>Item Name</th>
+                            <th>Lowest Price</th>
+                            <th>Link</th>
               <th>search Term</th>
 
             </tr>

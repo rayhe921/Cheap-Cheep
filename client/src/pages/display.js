@@ -50,6 +50,8 @@ class Display extends Component {
             showModalTwo={this.state.showModalTwo}
             title="What would you like to name your new list?"
             body={<Form></Form>}
+            buttonOne="Save"
+            buttonTwo="Cancel"
           ></Modal>
         </div>
         <div className="col-9">
@@ -62,6 +64,8 @@ class Display extends Component {
             showModalOne={this.state.showModalOne}
             title="Is This What you Wanted?"
             body="Body One"
+            buttonOne="Yes"
+            buttonTwo="No"
           ></Modal>
         </div>
       </div>

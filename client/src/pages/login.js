@@ -6,11 +6,7 @@ import InfoCard from "../components/InfoCard";
 
 class Login extends Component {
 
-
   // Handles updating component state when the user types into the input field
-
-
-
 
   render() {
     return (
