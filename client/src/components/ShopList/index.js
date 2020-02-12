@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import "./style.css";
+import List from "../List";
 
 
 
@@ -57,6 +58,7 @@ class ShopList extends Component {
             </tbody>
           </table>
         </div>
+
       </div>
     );
   }

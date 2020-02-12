@@ -13,6 +13,7 @@ function Navbar(props) {
         <h1 className="col-sm-8 text-center navbar-text">
           {props.title}
         </h1>
+
       </div>
       <div className={showLogout}>
         <form className="form-inline">

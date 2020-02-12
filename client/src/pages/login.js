@@ -8,11 +8,7 @@ import {Container, Row, Col} from "../components/Grid";
 
 class Login extends Component {
 
-
   // Handles updating component state when the user types into the input field
-
-
-
 
   render() {
     return (
