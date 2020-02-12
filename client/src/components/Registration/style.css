@@ -1,3 +1,22 @@
 .card{
-    float: right;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+
+.bubble{
+    margin:3%;
+}
+label{
+    margin: 0;
+}
+
+.inputForm{
+    padding-left: 17%;
+    width: 30vw;
+}
+
+.submit-btn{
+    margin-top: 5%;
+    padding-right: 25%;
 }

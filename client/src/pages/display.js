@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
 import Modal from "../components/Modal";
+import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
@@ -64,14 +65,15 @@ class Display extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-3">
-          <Sidebar></Sidebar>
-          <Button
-            click={this.displayModalTwo}
-            title="Add a List"
-          ></Button>
-          <Modal
+      <Container>
+        <Row>
+          <Col size="3">
+            <Sidebar></Sidebar>
+            <Button
+              click={this.displayModalTwo}
+              title="Add a List"
+            ></Button>
+            <Modal
             hideModal={this.hideModalTwo}
             showModalTwo={this.state.showModalTwo}
             title="What would you like to name your new list?"
@@ -79,6 +81,7 @@ class Display extends Component {
             buttonOne="Save"
             buttonTwo="Cancel"
           ></Modal>
+
         </div>
         <div className="col-9">
           <Shoplist></Shoplist>
@@ -95,8 +98,9 @@ class Display extends Component {
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
