@@ -3,6 +3,8 @@ import Registration from "../components/Registration";
 import InfoCard from "../components/InfoCard";
 import {Container, Row, Col} from "../components/Grid";
 
+// import Saved from "../pages/Saved"
+// import List from "../pages/list"
 
 class Login extends Component {
 
@@ -25,9 +27,8 @@ class Login extends Component {
           </Col>
           <Col size="6">
           <Registration
-            // <Link to={"/books/" + book._id}>
-
             onClick={this.handleFormSubmit}
+            
           ></Registration>
           </Col>
         </Row>
