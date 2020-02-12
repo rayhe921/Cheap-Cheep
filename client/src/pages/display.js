@@ -5,12 +5,17 @@ import Input from "../components/Input";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Form from "../components/Form";
+import API from "../utils/API";
 
 class Display extends Component {
 
   state = {
     showModalOne: false,
-    showModalTwo: false
+    showModalTwo: false,
+    searchTerm: "",
+    item : {
+
+    }
   };
 
   displayModalOne = (event) => {
@@ -19,6 +24,10 @@ class Display extends Component {
 
     console.log("showModalOne: " + this.state.showModalOne)
   };
+
+  searchForItem = () => {
+    console.log("searching for item");
+  }
 
   hideModalOne = () => {
     this.setState({ showModalOne: false })
@@ -34,6 +43,17 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
+
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
+    // Updating the input's state
+    this.setState({
+        [name]: value
+    });
+  
+    // console.log(this.state);
+  };
 
 
   render() {
@@ -57,7 +77,9 @@ class Display extends Component {
         <div className="col-9">
           <Shoplist></Shoplist>
           <Input
-            click={this.displayModalOne}
+            click={this.searchForItem}
+            handleInputChange={this.handleInputChange}
+            searchTerm={this.state.searchTerm}
           ></Input>
           <Modal
             hideModal={this.hideModalOne}
