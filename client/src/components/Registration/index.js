@@ -59,7 +59,7 @@ class Registration extends Component {
                         <h5 className="text-center">It's quick and easy</h5>
                     </Col>
                 </Row>
-<div className="bubble">
+                <div className="bubble">
                 </div>
                 {/* <p>
                     Hello {this.state.username} {this.state.password}
@@ -67,50 +67,50 @@ class Registration extends Component {
                 </p> */}
                 <Row>
                     <Col size="12">
-                    <form className="form align-content-center">
-                        <div className="inputForm">
-                            <Col size="md-6" className="form-group">
-                                <label htmlFor="username">Username</label>
-                                <input
-                                    value={this.state.username}
-                                    name="username"
-                                    onChange={this.handleInputChange}
-                                    type="text"
-                                    placeholder=""
-                                    className="form-control"
-                                />
-                            </Col>
-                            <Col size="md-6" className="form-group">
-                                <label htmlFor="inputPassword4">Password</label>
-                                <input
-                                    value={this.state.password}
-                                    name="password"
-                                    onChange={this.handleInputChange}
-                                    type="text"
-                                    placeholder=" "
-                                    className="form-control"
-                                />
-                            </Col>
-                            <Col size="md-6" className="form-group">
-                                <label htmlFor="inputemail">Email</label>
-                                <input
-                                    value={this.state.email}
-                                    name="email"
-                                    onChange={this.handleInputChange}
-                                    type="text"
-                                    placeholder=""
-                                    className="form-control"
-                                />
-                            </Col>
-                        </div>
-                        <div className="submit-btn">
-                            <button className="btn btn-success align-self-center" onClick={this.handleFormSubmit}>Submit</button>
-                        </div>
-                    </form>
+                        <form className="form align-content-center">
+                            <div className="inputForm">
+                                <Col size="md-6" className="form-group">
+                                    <label htmlFor="username">Username</label>
+                                    <input
+                                        value={this.state.username}
+                                        name="username"
+                                        onChange={this.handleInputChange}
+                                        type="text"
+                                        placeholder=""
+                                        className="form-control"
+                                    />
+                                </Col>
+                                <Col size="md-6" className="form-group">
+                                    <label htmlFor="inputPassword4">Password</label>
+                                    <input
+                                        value={this.state.password}
+                                        name="password"
+                                        onChange={this.handleInputChange}
+                                        type="text"
+                                        placeholder=" "
+                                        className="form-control"
+                                    />
+                                </Col>
+                                <Col size="md-6" className="form-group">
+                                    <label htmlFor="inputemail">Email</label>
+                                    <input
+                                        value={this.state.email}
+                                        name="email"
+                                        onChange={this.handleInputChange}
+                                        type="text"
+                                        placeholder=""
+                                        className="form-control"
+                                    />
+                                </Col>
+                            </div>
+                            <div className="submit-btn">
+                                <button className="btn btn-success align-self-center" onClick={this.handleFormSubmit}>Submit</button>
+                            </div>
+                        </form>
                     </Col>
                 </Row>
             </div>
-            
+
 
         );
     }
