@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Registration from "../components/Registration";
 import InfoCard from "../components/InfoCard";
-
+// import Saved from "../pages/Saved"
+// import List from "../pages/list"
 
 class Login extends Component {
 
@@ -20,10 +21,9 @@ class Login extends Component {
           listThree="Cheap on your budget"
         ></InfoCard>
         <Registration
-          // <Link to={"/books/" + book._id}>
 
           onClick={this.handleFormSubmit}
-          ></Registration>
+        ></Registration>
       </div>
     );
   }
