@@ -1,6 +1,9 @@
+const db = require("../models");
+
 module.exports = {
     findAll: function(req, res) {
-      db.list
+      console.log("this list controller")
+      db.List
         .find(req.query)
         .sort({ date: -1 })
         .then(dbModel => res.json(dbModel))
