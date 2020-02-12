@@ -37,17 +37,12 @@ class Saved extends Component {
                 <th>Your Lists</th>
               </tr>
             </thead>
-            <tbody>
-              <tr Lists={this.state.Lists} >
+            <tbody Lists={this.state.Lists} >
                 {this.state.Lists.map(List => (
-                  <tbody key={List._id}>
-                    <tr>
+                  <tr key={List._id}>
                       <td>{List.listName}</td>
-                    </tr>
-                  </tbody>
+                  </tr>
                 ))}
-
-              </tr>
             </tbody>
           </table>
         </div>

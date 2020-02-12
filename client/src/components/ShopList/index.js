@@ -38,22 +38,18 @@ class ShopList extends Component {
                 <th>search Term</th>
               </tr>
             </thead>
-            <tbody>
-              <tr Items={this.state.Item} >
-                {this.state.Items.map(Item => (
-                  <tbody key={Item._id}>
-                    <tr>
-                      <th className="">
-                        <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
-                      </th>
-                      <td>{Item.name}</td>
-                      <td>{Item.price}</td>
-                      <td>{Item.website}</td>
-                      <td>{Item.seacrhTerm}</td>
-                    </tr>
-                  </tbody>
-                ))}
-              </tr>
+            <tbody Items={this.state.Item} >
+              {this.state.Items.map(Item => (
+                <tr key={Item._id}>
+                  <th className="">
+                    <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                  </th>
+                  <td>{Item.name}</td>
+                  <td>{Item.price}</td>
+                  <td>{Item.website}</td>
+                  <td>{Item.seacrhTerm}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
