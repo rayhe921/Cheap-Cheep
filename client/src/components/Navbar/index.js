@@ -5,15 +5,16 @@ function Navbar(props) {
   const showLogout = props.showLogin ? "form-group" : "form-group display-none";
   const hideLogoutButton = props.hideLogoutButton ? "display-none" : "display-block";
   return (
-    <nav className="navbar navbar-light bg-light">
-      <a className="navbar-brand" href="/">
-        <img src={props.image} width="100" height="100" alt="logo" />
-      </a>
-      <span className="navbar-text text-center">
-        <h1>
+    <nav className="navbar navbar-light bg-light height">
+      <div className="row">
+        <a className="navbar-brand col-sm-3" href="/">
+          <img src={props.image} width="100" height="100" alt="logo" />
+        </a>
+        <h1 className="col-sm-8 text-center navbar-text">
           {props.title}
         </h1>
-        </span>
+
+      </div>
       <div className={showLogout}>
         <form className="form-inline">
           <input
