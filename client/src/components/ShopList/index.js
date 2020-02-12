@@ -27,14 +27,6 @@ class ShopList extends Component {
   render() {
     console.log(this.state.Items);
     return (
-<<<<<<< HEAD
-        <div>
-            <div className="row">
-                <h3>{prop.title}</h3>
-                <div className="list-button">
-                    <button type="button" className="btn-sm btn btn-outline-danger btn-dark">X</button>
-                </div>
-            </div>
             <div className="col-8 text-center d-flex justify-content-between">
                 <table className="table table-bordered table-hover table-sm m-7">
                     <thead>
@@ -43,26 +35,6 @@ class ShopList extends Component {
                             <th>Item Name</th>
                             <th>Lowest Price</th>
                             <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <List
-
-                        ></List>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    )
-=======
-      <div className="col-8 text-center d-flex justify-content-between">
-        <table className="table table-bordered table-hover table-sm m-7">
-          <thead>
-            <tr>
-              <th>Remove</th>
-              <th>Item Name</th>
-              <th>Lowest Price</th>
-              <th>Link</th>
               <th>search Term</th>
 
             </tr>
@@ -88,7 +60,6 @@ class ShopList extends Component {
       </div>
     );
   }
->>>>>>> master
 }
 
 export default ShopList;
