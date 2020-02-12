@@ -1,4 +1,7 @@
 .delete{
-    width:50%;
-    
+    width:50%;   
+}
+
+.list-button{
+ float: left;
 }
