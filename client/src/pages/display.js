@@ -82,7 +82,7 @@ class Display extends Component {
             buttonTwo="Cancel"
           ></Modal>
 
-        </div>
+        </Col>
         <div className="col-9">
           <Shoplist></Shoplist>
           <Input
@@ -98,7 +98,7 @@ class Display extends Component {
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
-          </Col>
+          </div>
         </Row>
       </Container>
     );
