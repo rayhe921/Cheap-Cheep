@@ -1,12 +1,13 @@
 import React from "react";
 import "./style.css";
+import {Contrainer, Row, Col} from "../Grid"
 
 function InfoCard(prop) {
     return (
-        <div className="col-6 infoCard">
-            <h1>Makes Shopping</h1>
-            <ul class="list">
-                <li>{prop.listOne}</li>
+        <div className="card">
+            <h2 className="font-weight-bold"><u>Makes Shopping</u></h2>
+            <ul className="list">
+                <li className="mt-3">{prop.listOne}</li>
                 <li>{prop.listTwo}</li>
                 <li>{prop.listThree}</li>
             </ul>

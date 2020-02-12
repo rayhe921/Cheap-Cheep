@@ -1,7 +1,7 @@
-#login-button{
-    float: right;
-    margin-right: 0.5rem;
-}
+
+.height{
+    height: 20%;
+} 
 
 .display-block {
     display: initial;
@@ -10,3 +10,4 @@
 .display-none {
     display: none;
   }
+

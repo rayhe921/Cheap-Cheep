@@ -98,7 +98,6 @@ class App extends Component {
           <Route exact path="/main" component={Display} />
 
         </Switch>
-
       </Router>
     );
   }
