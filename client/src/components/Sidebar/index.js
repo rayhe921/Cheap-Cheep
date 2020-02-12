@@ -26,7 +26,7 @@ class Saved extends Component {
 
 
   render() {
-    console.log(this.state.Lists);
+    // console.log(this.state.Lists);
     return (
       <div className="col-9 justify-content-center">
         <div className="col-8 text-center d-flex justify-content-between">
