@@ -6,12 +6,17 @@ import Modal from "../components/Modal";
 import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
+import API from "../utils/API";
 
 class Display extends Component {
 
   state = {
     showModalOne: false,
-    showModalTwo: false
+    showModalTwo: false,
+    searchTerm: "",
+    item : {
+
+    }
   };
 
   displayModalOne = (event) => {
@@ -20,6 +25,10 @@ class Display extends Component {
 
     console.log("showModalOne: " + this.state.showModalOne)
   };
+
+  searchForItem = () => {
+    console.log("searching for item");
+  }
 
   hideModalOne = () => {
     this.setState({ showModalOne: false })
@@ -35,6 +44,17 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
+
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
+    // Updating the input's state
+    this.setState({
+        [name]: value
+    });
+  
+    // console.log(this.state);
+  };
 
 
   render() {
@@ -52,18 +72,25 @@ class Display extends Component {
             showModalTwo={this.state.showModalTwo}
             title="What would you like to name your new list?"
             body={<Form></Form>}
+            buttonOne="Save"
+            buttonTwo="Cancel"
           ></Modal>
-          </Col>
-          <Col size="9">
-            <Shoplist></Shoplist>
-            <Input
-            click={this.displayModalOne}
+
+        </div>
+        <div className="col-9">
+          <Shoplist></Shoplist>
+          <Input
+            click={this.searchForItem}
+            handleInputChange={this.handleInputChange}
+            searchTerm={this.state.searchTerm}
           ></Input>
           <Modal
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
             title="Is This What you Wanted?"
             body="Body One"
+            buttonOne="Yes"
+            buttonTwo="No"
           ></Modal>
           </Col>
         </Row>
