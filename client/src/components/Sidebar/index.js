@@ -29,8 +29,6 @@ class Saved extends Component {
     console.log(this.state.Lists);
     return (
       <div>
-      <div className="col-9 justify-content-center">
-        <div className="col-8 text-center d-flex justify-content-between">
           <table className="table table-lists table-hover table-sm m-7">
             <thead>
               <tr>
@@ -45,15 +43,8 @@ class Saved extends Component {
                 ))}
             </tbody>
           </table>
-        </div>
-
       </div>
-      <div className="col-8 text-center d-flex justify-content-center">
-        <form>
-          <button type="submit" className="btn btn-primary col align-self-center">Add List</button>
-        </form>
-      </div>
-    </div>
+      
     )
   }
 }

@@ -14,7 +14,7 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-    item : {
+    item: {
 
     }
   };
@@ -50,9 +50,9 @@ class Display extends Component {
     const { name, value } = event.target;
     // Updating the input's state
     this.setState({
-        [name]: value
+      [name]: value
     });
-  
+
     // console.log(this.state);
   };
 
@@ -61,38 +61,39 @@ class Display extends Component {
     return (
       <Container>
         <Row>
-          <Col size="3">
+          <Col size="2">
+            <div class="align-content-ceneter">
             <Sidebar></Sidebar>
             <Button
               click={this.displayModalTwo}
-              title="Add a List"
+              title="+ List"
             ></Button>
+            </div>
             <Modal
-            hideModal={this.hideModalTwo}
-            showModalTwo={this.state.showModalTwo}
-            title="What would you like to name your new list?"
-            body={<Form></Form>}
-            buttonOne="Save"
-            buttonTwo="Cancel"
-          ></Modal>
-
-        </div>
-        <div className="col-9">
-          <Shoplist></Shoplist>
-          <Input
-            click={this.searchForItem}
-            handleInputChange={this.handleInputChange}
-            searchTerm={this.state.searchTerm}
-          ></Input>
-          <Modal
-            hideModal={this.hideModalOne}
-            showModalOne={this.state.showModalOne}
-            title="Is This What you Wanted?"
-            body="Body One"
-            buttonOne="Yes"
-            buttonTwo="No"
-          ></Modal>
-          </Col>
+              hideModal={this.hideModalTwo}
+              showModalTwo={this.state.showModalTwo}
+              title="What would you like to name your new list?"
+              body={<Form></Form>}
+              buttonOne="Save"
+              buttonTwo="Cancel"
+            ></Modal>
+            </Col>
+            <div className="col-10">
+              <Shoplist></Shoplist>
+              <Input
+                click={this.searchForItem}
+                handleInputChange={this.handleInputChange}
+                searchTerm={this.state.searchTerm}
+              ></Input>
+              <Modal
+                hideModal={this.hideModalOne}
+                showModalOne={this.state.showModalOne}
+                title="Is This What you Wanted?"
+                body="Body One"
+                buttonOne="Yes"
+                buttonTwo="No"
+              ></Modal>
+            </div>
         </Row>
       </Container>
     );
