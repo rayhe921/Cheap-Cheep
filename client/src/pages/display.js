@@ -26,8 +26,14 @@ class Display extends Component {
     console.log("showModalOne: " + this.state.showModalOne)
   };
 
-  searchForItem = () => {
+  searchForItem = (event) => {
+    event.preventDefault();
     console.log("searching for item");
+
+    API.scrapeWalmart(this.state.searchTerm).then( function (response) {
+      console.log(response);
+    })
+    .catch(err => console.log(err));
   }
 
   hideModalOne = () => {
@@ -76,7 +82,7 @@ class Display extends Component {
             buttonTwo="Cancel"
           ></Modal>
 
-        </div>
+        </Col>
         <div className="col-9">
           <Shoplist></Shoplist>
           <Input
@@ -92,7 +98,7 @@ class Display extends Component {
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
-          </Col>
+          </div>
         </Row>
       </Container>
     );
