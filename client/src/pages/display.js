@@ -75,9 +75,7 @@ class Display extends Component {
               buttonOne="Save"
               buttonTwo="Cancel"
             ></Modal>
-
-
-            <div className="col-9">
+            <Col size="9">
               <Shoplist></Shoplist>
               <Input
                 click={this.searchForItem}
@@ -92,7 +90,7 @@ class Display extends Component {
                 buttonOne="Yes"
                 buttonTwo="No"
               ></Modal>
-            </div>
+            </Col>
           </Col>
         </Row>
       </Container>

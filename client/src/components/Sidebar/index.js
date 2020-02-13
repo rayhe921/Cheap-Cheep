@@ -53,11 +53,11 @@ class Saved extends Component {
         </div>
 
       </div>
-      <div className="col-8 text-center d-flex justify-content-center">
+      {/* <div className="col-8 text-center d-flex justify-content-center">
         <form>
           <button type="submit" className="btn btn-primary col align-self-center">Add List</button>
         </form>
-      </div>
+      </div> */}
     </div>
     )
   }

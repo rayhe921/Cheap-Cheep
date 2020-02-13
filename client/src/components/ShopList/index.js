@@ -23,6 +23,7 @@ class ShopList extends Component {
 
     };
 
+
   render() {
     console.log(this.state.Items);
     return (
