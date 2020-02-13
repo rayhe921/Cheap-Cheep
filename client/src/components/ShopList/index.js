@@ -25,7 +25,7 @@ class ShopList extends Component {
 
 
   render() {
-    console.log(this.state.Items);
+    // console.log(this.state.Items);
     return (
       <div>
         <div className="col-8 text-center d-flex justify-content-between">
