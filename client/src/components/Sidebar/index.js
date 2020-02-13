@@ -38,7 +38,7 @@ class Saved extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr Lists={this.state.Lists} >
+              <tr>
                 {this.state.Lists.map(List => (
                   <tbody key={List._id}>
                     <tr>

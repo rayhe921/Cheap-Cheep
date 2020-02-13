@@ -40,7 +40,7 @@ class ShopList extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr Items={this.state.Item} >
+              <tr>
                 {this.state.Items.map(Item => (
                   <tbody key={Item._id}>
                     <tr>

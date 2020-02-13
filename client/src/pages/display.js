@@ -74,32 +74,6 @@ class Display extends Component {
               title="Add a List"
             ></Button>
             <Modal
-<<<<<<< HEAD
-              hideModal={this.hideModalTwo}
-              showModalTwo={this.state.showModalTwo}
-              title="What would you like to name your new list?"
-              body={<Form></Form>}
-              buttonOne="Save"
-              buttonTwo="Cancel"
-            ></Modal>
-            <Col size="9">
-              <Shoplist></Shoplist>
-              <Input
-                click={this.searchForItem}
-                handleInputChange={this.handleInputChange}
-                searchTerm={this.state.searchTerm}
-              ></Input>
-              <Modal
-                hideModal={this.hideModalOne}
-                showModalOne={this.state.showModalOne}
-                title="Is This What you Wanted?"
-                body="Body One"
-                buttonOne="Yes"
-                buttonTwo="No"
-              ></Modal>
-            </Col>
-          </Col>
-=======
             hideModal={this.hideModalTwo}
             showModalTwo={this.state.showModalTwo}
             title="What would you like to name your new list?"
@@ -125,7 +99,6 @@ class Display extends Component {
             buttonTwo="No"
           ></Modal>
           </div>
->>>>>>> master
         </Row>
       </Container>
     );
