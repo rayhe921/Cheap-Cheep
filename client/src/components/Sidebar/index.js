@@ -12,12 +12,9 @@ function Sidebar(props) {
 
     // console.log(this.state.Lists);
     return (
-      <div>
-      <div className="col-9 justify-content-center">
-        <div className="col-8 text-center d-flex justify-content-between">
-          <table className="table table-lists table-hover table-sm m-7">
+          <table className="table table-success table-lists table-hover table-sm">
             <thead>
-              <tr>
+              <tr className="table-light">
                 <th>Your Lists</th>
               </tr>
             </thead>
@@ -25,10 +22,6 @@ function Sidebar(props) {
               {props.tbody}
             </tbody>
           </table>
-        </div>
-
-      </div>
-    </div>
     )
   }
 

@@ -31,10 +31,10 @@ class Display extends Component {
     event.preventDefault();
     console.log("searching for item");
 
-    API.scrapeWalmart(this.state.searchTerm).then( function (response) {
+    API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       console.log(response);
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   hideModalOne = () => {
@@ -94,7 +94,7 @@ class Display extends Component {
 
   render() {
     return (
-      <Container>
+      <Container items="floatie">
         <Row>
           <Col size="3">
             <Sidebar
@@ -129,14 +129,28 @@ class Display extends Component {
             submit={this.submitListModal}
           ></Modal>
 
-        </Col>
-        <div className="col-9">
-          <Shoplist></Shoplist>
-          <Input
-            click={this.searchForItem}
-            handleInputChange={this.handleInputChange}
-            searchTerm={this.state.searchTerm}
-          ></Input>
+            <Modal
+              hideModal={this.hideModalTwo}
+              showModalTwo={this.state.showModalTwo}
+              title="What would you like to name your new list?"
+              body={<Form></Form>}
+              buttonOne="Save"
+              buttonTwo="Cancel"
+            ></Modal>
+          </Col>
+          <Col size="8">
+
+            <Shoplist></Shoplist>
+
+            <div className="row d-flex justifiy-content-center">
+              <Input
+                click={this.searchForItem}
+                handleInputChange={this.handleInputChange}
+                searchTerm={this.state.searchTerm}
+              ></Input>
+
+            </div>
+          </Col>
           <Modal
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
@@ -145,9 +159,8 @@ class Display extends Component {
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
-          </div>
-        </Row>
-      </Container>
+        </Row >
+      </Container >
     );
   }
 }
