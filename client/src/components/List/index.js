@@ -1,17 +1,14 @@
 import React from "react";
 import "./style.css";
 
-function List(prop) {
+function usersList(props) {
     return (
         <tr>
-            <th className="">
-                <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
-            </th>
-            <td>{prop.itemName}</td>
-            <td>{prop.itemPrice}</td>
-            <td>{prop.itemLink}</td>
+            <td onClick={props.buttonClick} id={props.id}>
+                {props.name}
+                </td>
         </tr>
     )
 }
 
-export default List;
+export default usersList;

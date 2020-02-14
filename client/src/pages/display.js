@@ -7,6 +7,7 @@ import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
+import usersList from "../components/List"
 
 class Display extends Component {
 
@@ -14,9 +15,14 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
+<<<<<<< HEAD
     item: {
 
     }
+=======
+    item: {},
+    lists: []
+>>>>>>> master
   };
 
   displayModalOne = (event) => {
@@ -30,10 +36,10 @@ class Display extends Component {
     event.preventDefault();
     console.log("searching for item");
 
-    API.scrapeWalmart(this.state.searchTerm).then( function (response) {
+    API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       console.log(response);
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   hideModalOne = () => {
@@ -62,19 +68,34 @@ class Display extends Component {
     // console.log(this.state);
   };
 
+  clickList = event => {
+    event.preventDefault();
+    console.log("Hello World")
+  }
+
 
   render() {
     return (
       <Container items="floatie">
         <Row>
           <Col size="4">
-              <div class="float-left paper-this table-success align-content-center">
-                <Sidebar></Sidebar>
-                <Button
-                  click={this.displayModalTwo}
-                  title="+ List"
-                ></Button>
-              </div>
+            <div class="float-left paper-this table-success align-content-center">
+              <Sidebar>
+                {this.state.lists.map(listOb => (
+                  <usersList
+                    name={listOb.name}
+                    id={listOb.id}
+                    key={listOb.id}
+                    buttonClick={this.clickList}
+                  />
+                ))
+                }</Sidebar>
+              <Button
+                click={this.displayModalTwo}
+                title="+ List"
+              ></Button>
+            </div>
+
             <Modal
               hideModal={this.hideModalTwo}
               showModalTwo={this.state.showModalTwo}
@@ -86,29 +107,30 @@ class Display extends Component {
           </Col>
           <Col size="8">
 
-                <Shoplist></Shoplist>
+            <Shoplist></Shoplist>
 
-              <div className="row d-flex justifiy-content-center">
-                  <Input
-                    click={this.searchForItem}
-                    handleInputChange={this.handleInputChange}
-                    searchTerm={this.state.searchTerm}
-                  ></Input>
+            <div className="row d-flex justifiy-content-center">
+              <Input
+                click={this.searchForItem}
+                handleInputChange={this.handleInputChange}
+                searchTerm={this.state.searchTerm}
+              ></Input>
 
-              </div>
+            </div>
           </Col>
           <Modal
-              hideModal={this.hideModalOne}
-              showModalOne={this.state.showModalOne}
-              title="Is This What you Wanted?"
-              body="Body One"
-              buttonOne="Yes"
-              buttonTwo="No"
-            ></Modal>
+            hideModal={this.hideModalOne}
+            showModalOne={this.state.showModalOne}
+            title="Is This What you Wanted?"
+            body="Body One"
+            buttonOne="Yes"
+            buttonTwo="No"
+          ></Modal>
         </Row >
       </Container >
     );
   }
 }
+
 
 export default Display;

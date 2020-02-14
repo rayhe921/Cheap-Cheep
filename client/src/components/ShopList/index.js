@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import "./style.css";
-import List from "../List";
+// import List from "../List";
 
 
 
 
 class ShopList extends Component {
-  state = {
-    Items: []
-  };
+    state = {
+        Items: []
+    };
 
-  componentDidMount() {
-    this.loaditem();
-  }
+    componentDidMount() {
+        this.loaditem();
+    }
 
-  loaditem = () => {
-    API.getItem()
-      .then(res => this.setState({ Items: res.data }))
+    loaditem = () => {
+        API.getItem()
+            .then(res => this.setState({ Items: res.data }))
 
-      .catch(err => console.log(err));
+            .catch(err => console.log(err));
 
-  };
+    };
 
 
   render() {
