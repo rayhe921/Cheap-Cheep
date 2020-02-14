@@ -27,8 +27,8 @@ class ShopList extends Component {
   render() {
     // console.log(this.state.Items);
     return (
-        <div className="text-center d-flex justify-content-between">
-          <table className="m-4 table items items-table table-bordered table-hover table-sm m-7">
+        <div className="cork-board text-center d-flex justify-content-between">
+          <table className="m-4 table table-dark items items-table table-bordered table-hover table-sm m-7">
             <thead>
               <tr>
                 <th>Remove</th>
@@ -40,7 +40,7 @@ class ShopList extends Component {
             </thead>
             <tbody Items={this.state.Item} >
               {this.state.Items.map(Item => (
-                <tr key={Item._id}>
+                <tr className="table-dark" key={Item._id}>
                   <th className="">
                     <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
                   </th>

@@ -28,7 +28,6 @@ class Saved extends Component {
   render() {
     // console.log(this.state.Lists);
     return (
-      <div className="">
           <table className="table table-lists table-hover table-sm m-7">
             <thead>
               <tr>
@@ -43,7 +42,6 @@ class Saved extends Component {
                 ))}
             </tbody>
           </table>
-      </div>
       
     )
   }
