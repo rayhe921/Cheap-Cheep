@@ -7,6 +7,7 @@ import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
+import usersList from "../components/List"
 
 class Display extends Component {
 
@@ -14,9 +15,8 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-    item : {
-
-    }
+    item: {},
+    lists: []
   };
 
   displayModalOne = (event) => {
@@ -56,11 +56,16 @@ class Display extends Component {
     const { name, value } = event.target;
     // Updating the input's state
     this.setState({
-        [name]: value
+      [name]: value
     });
-  
+
     // console.log(this.state);
   };
+
+  clickList = event => {
+    event.preventDefault();
+    console.log("Hello World")
+  }
 
 
   render() {
@@ -68,7 +73,17 @@ class Display extends Component {
       <Container>
         <Row>
           <Col size="3">
-            <Sidebar></Sidebar>
+            <Sidebar>
+              {this.state.lists.map(listOb => (
+                <usersList
+                  name={listOb.name}
+                  id={listOb.id}
+                  key={listOb.id}
+                  buttonClick={this.clickList}
+              />
+              ))
+              }
+              </Sidebar>
             <Button
               click={this.displayModalTwo}
               title="Add a List"
@@ -104,5 +119,6 @@ class Display extends Component {
     );
   }
 }
+
 
 export default Display;
