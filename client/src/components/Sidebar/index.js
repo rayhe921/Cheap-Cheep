@@ -28,9 +28,9 @@ class Saved extends Component {
   render() {
     // console.log(this.state.Lists);
     return (
-          <table className="table table-lists table-hover table-sm m-7">
+          <table className="table table-success table-lists table-hover table-sm">
             <thead>
-              <tr>
+              <tr className="table-light">
                 <th>Your Lists</th>
               </tr>
             </thead>

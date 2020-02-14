@@ -65,18 +65,16 @@ class Display extends Component {
 
   render() {
     return (
-      <Container>
+      <Container items="floatie">
         <Row>
           <Col size="4">
-            <Col size="2">
-              <div class="align-content-ceneter">
+              <div class="float-left paper-this table-success align-content-center">
                 <Sidebar></Sidebar>
                 <Button
                   click={this.displayModalTwo}
                   title="+ List"
                 ></Button>
               </div>
-            </Col>
             <Modal
               hideModal={this.hideModalTwo}
               showModalTwo={this.state.showModalTwo}

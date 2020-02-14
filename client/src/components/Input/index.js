@@ -13,7 +13,7 @@ function Input(props) {
                     className="form-control mr-sm-2"
                     type="text">
                     </input>
-                    <button type="submit" className="btn btn-primary align-self-center" onClick={props.click}>Add Item</button>
+                    <button type="submit" className="btn btn-success btn-outline-light align-self-center" onClick={props.click}>Add Item</button>
                 </form>
             </div>
     )

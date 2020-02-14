@@ -7,6 +7,8 @@ tr {
 
 }
 
-.cork-board{
-    background-image: url(./img/cork-board/cork-board.png);
+.items-table {
+    border: 5px dashed rgb(117, 198, 176);
 }
+
+
