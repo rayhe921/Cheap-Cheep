@@ -7,6 +7,7 @@ import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
+import usersList from "../components/List"
 
 class Display extends Component {
 
@@ -14,9 +15,8 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-    item: {
-
-    }
+    item: {},
+    listDb:""
   };
 
   displayModalOne = (event) => {
@@ -68,7 +68,10 @@ class Display extends Component {
       <Container>
         <Row>
           <Col size="3">
-            <Sidebar></Sidebar>
+            <Sidebar>
+              <usersList>
+              </usersList>
+              </Sidebar>
             <Button
               click={this.displayModalTwo}
               title="Add a List"

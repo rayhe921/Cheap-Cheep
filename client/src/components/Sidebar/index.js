@@ -1,31 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import API from "../../utils/API";
 import "./style.css";
 // import InfoCard from "../components/InfoCard"
 // import Shoplist from "../components/ShopList";
+import usersList from "../List";
 
 
 
 
-class Saved extends Component {
-  state = {
-    Lists: []
-  };
+function Sidebar(props) {
 
-  componentDidMount() {
-    this.loadlist();
-  }
-
-  loadlist = () => {
-    API.getList()
-      .then(res => this.setState({ Lists: res.data }))
-
-      .catch(err => console.log(err));
-
-  };
-
-
-  render() {
     // console.log(this.state.Lists);
     return (
       <div>
@@ -38,29 +22,15 @@ class Saved extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                {this.state.Lists.map(List => (
-                  <tbody key={List._id}>
-                    <tr>
-                      <td>{List.listName}</td>
-                    </tr>
-                  </tbody>
-                ))}
-
-              </tr>
+              {props.tbody}
             </tbody>
           </table>
         </div>
 
       </div>
-      {/* <div className="col-8 text-center d-flex justify-content-center">
-        <form>
-          <button type="submit" className="btn btn-primary col align-self-center">Add List</button>
-        </form>
-      </div> */}
     </div>
     )
   }
-}
 
-export default Saved;
+
+export default Sidebar;
