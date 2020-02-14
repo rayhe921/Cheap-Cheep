@@ -25,7 +25,7 @@ class ShopList extends Component {
 
 
   render() {
-    console.log(this.state.Items);
+    // console.log(this.state.Items);
     return (
         <div className="text-center d-flex justify-content-between">
           <table className="m-4 table items items-table table-bordered table-hover table-sm m-7">
