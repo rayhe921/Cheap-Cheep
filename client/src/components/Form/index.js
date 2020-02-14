@@ -4,8 +4,8 @@ import "./style.css";
 function Form(prop) {
     return (
         <div>
-            <label htmlFor={prop.idName}>{prop.name}</label>
-            <input type={prop.type} placeholder={prop.placeholder} 
+            <label htmlFor={prop.idName}></label>
+            <input type={prop.type} name={prop.name} onChange={prop.onChange} placeholder={prop.placeholder} 
             className="form-control" id={prop.idName} value={prop.value} />
         </div>
     )

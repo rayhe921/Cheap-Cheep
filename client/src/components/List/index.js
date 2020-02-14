@@ -4,7 +4,7 @@ import "./style.css";
 function usersList(props) {
     return (
         <tr>
-            <td onClick={props.buttonClick} id={props.id}>
+            <td onClick={props.buttonClick} key={props.key} id={props.id}>
                 {props.name}
                 </td>
         </tr>

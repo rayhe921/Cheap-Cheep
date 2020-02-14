@@ -16,7 +16,8 @@ class Display extends Component {
     showModalTwo: false,
     searchTerm: "",
     item: {},
-    lists: []
+    lists: [],
+    listInputText: ""
   };
 
   displayModalOne = (event) => {
@@ -50,6 +51,29 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
+  
+  handleListInsert = (listOb) => {
+    this.state.lists.push(listOb)
+  }
+
+  submitListModal = (event) => {
+    const handleListInsert = (listOb) => {
+      this.state.lists.push(listOb)
+    }
+    event.preventDefault();
+    API.saveList({
+     listName: this.state.listInputText
+    }).then(function(response){
+      // console.log(response)
+      const newList = {
+        listName: response.listName,
+        id: response._id
+      }
+      handleListInsert(newList)
+    })
+    // this.setState({ showModalTwo: false })
+    console.log(this.state.listInputText)
+  }
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -73,16 +97,19 @@ class Display extends Component {
       <Container>
         <Row>
           <Col size="3">
-            <Sidebar>
-              {this.state.lists.map(listOb => (
-                <usersList
-                  name={listOb.name}
-                  id={listOb.id}
-                  key={listOb.id}
-                  buttonClick={this.clickList}
-              />
-              ))
-              }
+            <Sidebar
+              // tbody={this.state.lists.map(listOb => {
+              //   <usersList
+              //     name={listOb.name}
+              //     id={listOb.id}
+              //     key={listOb.id}
+              //     buttonClick={this.clickList}
+              //   />
+                  
+              // })
+              // }
+            >
+              
               </Sidebar>
             <Button
               click={this.displayModalTwo}
@@ -92,9 +119,14 @@ class Display extends Component {
             hideModal={this.hideModalTwo}
             showModalTwo={this.state.showModalTwo}
             title="What would you like to name your new list?"
-            body={<Form></Form>}
+            body={<Form
+                    name="listInputText"
+                    onChange={this.handleInputChange}
+                    value={this.state.listInputText}
+            ></Form>}
             buttonOne="Save"
             buttonTwo="Cancel"
+            submit={this.submitListModal}
           ></Modal>
 
         </Col>
