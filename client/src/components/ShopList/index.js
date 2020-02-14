@@ -27,9 +27,8 @@ class ShopList extends Component {
   render() {
     console.log(this.state.Items);
     return (
-      <div>
-        <div className="col-8 text-center d-flex justify-content-between">
-          <table className="table items-table table-dark-bordered table-hover table-sm m-7">
+        <div className="text-center d-flex justify-content-between">
+          <table className="m-4 table items items-table table-bordered table-hover table-sm m-7">
             <thead>
               <tr>
                 <th>Remove</th>
@@ -53,9 +52,8 @@ class ShopList extends Component {
               ))}
             </tbody>
           </table>
+          
         </div>
-
-      </div>
     );
   }
 }

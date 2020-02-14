@@ -61,14 +61,16 @@ class Display extends Component {
     return (
       <Container>
         <Row>
-          <Col size="2">
-            <div class="align-content-ceneter">
-            <Sidebar></Sidebar>
-            <Button
-              click={this.displayModalTwo}
-              title="+ List"
-            ></Button>
-            </div>
+          <Col size="4">
+            <Col size="2">
+              <div class="align-content-ceneter">
+                <Sidebar></Sidebar>
+                <Button
+                  click={this.displayModalTwo}
+                  title="+ List"
+                ></Button>
+              </div>
+            </Col>
             <Modal
               hideModal={this.hideModalTwo}
               showModalTwo={this.state.showModalTwo}
@@ -77,25 +79,35 @@ class Display extends Component {
               buttonOne="Save"
               buttonTwo="Cancel"
             ></Modal>
-            </Col>
-            <div className="col-10">
-              <Shoplist></Shoplist>
-              <Input
-                click={this.searchForItem}
-                handleInputChange={this.handleInputChange}
-                searchTerm={this.state.searchTerm}
-              ></Input>
-              <Modal
-                hideModal={this.hideModalOne}
-                showModalOne={this.state.showModalOne}
-                title="Is This What you Wanted?"
-                body="Body One"
-                buttonOne="Yes"
-                buttonTwo="No"
-              ></Modal>
+          </Col>
+          <div className="col-8 align-content-center">
+            <div className="col-9 mr-3 border border-dark rounded">
+              <Row>
+                <Shoplist></Shoplist>
+              </Row>
+
+              <Row>
+                <div className="mr-2">
+                  <Input
+                    click={this.searchForItem}
+                    handleInputChange={this.handleInputChange}
+                    searchTerm={this.state.searchTerm}
+                  ></Input>
+                </div>
+              </Row>
+
             </div>
-        </Row>
-      </Container>
+            <Modal
+              hideModal={this.hideModalOne}
+              showModalOne={this.state.showModalOne}
+              title="Is This What you Wanted?"
+              body="Body One"
+              buttonOne="Yes"
+              buttonTwo="No"
+            ></Modal>
+          </div>
+        </Row >
+      </Container >
     );
   }
 }
