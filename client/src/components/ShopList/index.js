@@ -27,7 +27,7 @@ class ShopList extends Component {
   render() {
     // console.log(this.state.Items);
     return (
-        <div className="cork-board text-center d-flex justify-content-between">
+        <div className="row mt-4 cork-board text-center d-flex justify-content-between">
           <table className="m-4 table table-dark items items-table table-bordered table-hover table-sm m-7">
             <thead>
               <tr>
@@ -35,7 +35,7 @@ class ShopList extends Component {
                 <th>Item Name</th>
                 <th>Lowest Price</th>
                 <th>Link</th>
-                <th>search Term</th>
+                <th>Search Term</th>
               </tr>
             </thead>
             <tbody Items={this.state.Item} >

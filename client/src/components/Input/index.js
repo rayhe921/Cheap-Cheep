@@ -3,7 +3,7 @@ import "./style.css";
 
 function Input(props) {
     return (
-            <div className="mb-4 mx-auto text-center d-flex align-content-center">
+            <div className="col-12 pb-3 cork-board text-center d-flex justify-content-center">
                 <form className="form-inline">
                     <input 
                     name="searchTerm"

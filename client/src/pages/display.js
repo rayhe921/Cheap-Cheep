@@ -86,21 +86,19 @@ class Display extends Component {
               buttonTwo="Cancel"
             ></Modal>
           </Col>
-          <div className="col-8 align-content-center">
-              <Row>
-                <Shoplist></Shoplist>
-              </Row>
+          <Col size="8">
 
-              <Row>
-                <div className="align-center">
+                <Shoplist></Shoplist>
+
+              <div className="row d-flex justifiy-content-center">
                   <Input
                     click={this.searchForItem}
                     handleInputChange={this.handleInputChange}
                     searchTerm={this.state.searchTerm}
                   ></Input>
-                </div>
-              </Row>
-          </div>
+
+              </div>
+          </Col>
           <Modal
               hideModal={this.hideModalOne}
               showModalOne={this.state.showModalOne}
