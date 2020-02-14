@@ -15,14 +15,8 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-<<<<<<< HEAD
-    item: {
-
-    }
-=======
     item: {},
     lists: []
->>>>>>> master
   };
 
   displayModalOne = (event) => {
