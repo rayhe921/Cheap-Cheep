@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
 
-function usersList(prop) {
+function usersList(props) {
     return (
         <tr>
-            <td>{prop.listName}</td>
+            <td onClick={props.buttonClick} id={props.id}>
+                {props.name}
+                </td>
         </tr>
     )
 }

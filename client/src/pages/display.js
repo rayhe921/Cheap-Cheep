@@ -16,7 +16,7 @@ class Display extends Component {
     showModalTwo: false,
     searchTerm: "",
     item: {},
-    listDb:""
+    lists: []
   };
 
   displayModalOne = (event) => {
@@ -62,6 +62,11 @@ class Display extends Component {
     // console.log(this.state);
   };
 
+  clickList = event => {
+    event.preventDefault();
+    console.log("Hello World")
+  }
+
 
   render() {
     return (
@@ -69,8 +74,15 @@ class Display extends Component {
         <Row>
           <Col size="3">
             <Sidebar>
-              <usersList>
-              </usersList>
+              {this.state.lists.map(listOb => (
+                <usersList
+                  name={listOb.name}
+                  id={listOb.id}
+                  key={listOb.id}
+                  buttonClick={this.clickList}
+              />
+              ))
+              }
               </Sidebar>
             <Button
               click={this.displayModalTwo}
