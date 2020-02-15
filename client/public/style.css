@@ -1,7 +1,7 @@
 
 body{
-background-image: url(  "./img/retina_wood/retina_wood.png" );}
-    */
+background-image: url(  "./img/retina_wood/retina_wood.png" );
+}
 
 
     
@@ -12,5 +12,11 @@ background-image: url(  "./img/retina_wood/retina_wood.png" );}
 }
 
 .navbar {
-  background-image: url("./img/morocco/morocco.png"    );
+  background-image: url("./img/congruent_pentagon/congruent_pentagon.png"    );
+}
+
+.floatie{
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 0;
 }
