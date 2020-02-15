@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import {Contrainer, Row, Col} from "../Grid"
+
 
 function InfoCard(prop) {
     return (

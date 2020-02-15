@@ -38,7 +38,7 @@ class ShopList extends Component {
                 <th>Search Term</th>
               </tr>
             </thead>
-            <tbody Items={this.state.Item} >
+            <tbody>
               {this.state.Items.map(Item => (
                 <tr className="table-success" key={Item._id}>
                   <th className="">

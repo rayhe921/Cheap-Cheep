@@ -7,7 +7,7 @@ import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
-import usersList from "../components/List"
+import UsersList from "../components/List"
 
 class Display extends Component {
 
@@ -51,28 +51,28 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
-  
-  handleListInsert = (listOb) => {
-    this.state.lists.push(listOb)
-  }
 
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
-      this.state.lists.push(listOb)
+      this.state.lists.push(listOb);
+      console.log("this.state.lists: " + JSON.stringify(this.state.lists))
+      this.setState({ listInputText: "" })
     }
     event.preventDefault();
     API.saveList({
-     listName: this.state.listInputText
-    }).then(function(response){
-      // console.log(response)
+      listName: this.state.listInputText
+    }).then(function (response) {
+      console.log("response " + JSON.stringify(response))
       const newList = {
-        listName: response.listName,
-        id: response._id
+        listName: response.data.listName,
+        id: response.data._id
       }
       handleListInsert(newList)
+      console.log("newList: " + JSON.stringify(newList))
     })
-    // this.setState({ showModalTwo: false })
-    console.log(this.state.listInputText)
+    this.setState({ showModalTwo: false })
+    console.log("this.state.listInputText: " + this.state.listInputText)
+    console.log("this.state.lists: " + JSON.stringify(this.state.lists))
   }
 
   handleInputChange = event => {
@@ -97,45 +97,32 @@ class Display extends Component {
       <Container items="floatie">
         <Row>
           <Col size="3">
-            <Sidebar
-              // tbody={this.state.lists.map(listOb => {
-              //   <usersList
-              //     name={listOb.name}
-              //     id={listOb.id}
-              //     key={listOb.id}
-              //     buttonClick={this.clickList}
-              //   />
-                  
-              // })
-              // }
-            >
-              
-              </Sidebar>
+            <Sidebar>
+              {this.state.lists.map(listOb => (
+                <UsersList
+                  name={listOb.listName}
+                  id={listOb.id}
+                  key={listOb.id}
+                  buttonClick={this.clickList}
+                ></UsersList>
+              ))}
+            </Sidebar>
             <Button
               click={this.displayModalTwo}
               title="Add a List"
             ></Button>
             <Modal
-            hideModal={this.hideModalTwo}
-            showModalTwo={this.state.showModalTwo}
-            title="What would you like to name your new list?"
-            body={<Form
-                    name="listInputText"
-                    onChange={this.handleInputChange}
-                    value={this.state.listInputText}
-            ></Form>}
-            buttonOne="Save"
-            buttonTwo="Cancel"
-            submit={this.submitListModal}
-          ></Modal>
-
-            <Modal
               hideModal={this.hideModalTwo}
               showModalTwo={this.state.showModalTwo}
               title="What would you like to name your new list?"
-              body={<Form></Form>}
+              body={<Form
+                name="listInputText"
+                onChange={this.handleInputChange}
+                value={this.state.listInputText}
+              ></Form>}
               buttonOne="Save"
               buttonTwo="Cancel"
+              submit={this.submitListModal}
             ></Modal>
           </Col>
           <Col size="8">
