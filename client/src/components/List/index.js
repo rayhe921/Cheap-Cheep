@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function usersList(props) {
+function UsersList(props) {
     return (
         <tr>
             <td onClick={props.buttonClick} id={props.id}>
@@ -11,4 +11,4 @@ function usersList(props) {
     )
 }
 
-export default usersList;
+export default UsersList;
