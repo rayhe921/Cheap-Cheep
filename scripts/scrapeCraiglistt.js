@@ -1,14 +1,7 @@
 var cheerio = require("cheerio");
 var axios = require("axios");
 
-const express = require('express')
-const app = express()
-
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
-
-function scrapeTarget(searchTerm) {
+function scrapeCraiglist(searchTerm) {
   var searchTerm = "watch"
   var firstMatch = {};
 
@@ -53,6 +46,4 @@ function scrapeTarget(searchTerm) {
   })
 }
 
-scrapeTarget()
-
-app.listen(3000)
+exports.scrapeCraiglist = scrapeCraiglist;
