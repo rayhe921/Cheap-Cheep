@@ -20,17 +20,17 @@ class Display extends Component {
     listInputText: ""
   };
 
-  displayModalOne = (event) => {
-    event.preventDefault();
-    this.setState({ showModalOne: true })
+  // displayModalOne = (event) => {
+  //   event.preventDefault();
+  //   this.setState({ showModalOne: true })
 
-    console.log("showModalOne: " + this.state.showModalOne)
-  };
+  //   console.log("showModalOne: " + this.state.showModalOne)
+  // };
 
   searchForItem = (event) => {
     event.preventDefault();
     console.log("searching for item");
-
+    this.setState({ showModalOne: true })
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       console.log(response);
     })
