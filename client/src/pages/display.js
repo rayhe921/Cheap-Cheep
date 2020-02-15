@@ -18,7 +18,8 @@ class Display extends Component {
     item: {},
     lists: [],
     listInputText: "",
-    scrapForModal: {}
+    scrapForModal: {},
+    loading: false
   };
 
   // displayModalOne = (event) => {
