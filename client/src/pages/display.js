@@ -17,7 +17,8 @@ class Display extends Component {
     searchTerm: "",
     item: {},
     lists: [],
-    listInputText: ""
+    listInputText: "",
+    scrapForModal: {}
   };
 
   // displayModalOne = (event) => {
@@ -28,11 +29,23 @@ class Display extends Component {
   // };
 
   searchForItem = (event) => {
+    const handleModalInsert = (scrapedData) => {
+      this.setState({ scrapForModal: scrapedData });
+      console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+    }
     event.preventDefault();
     console.log("searching for item");
     this.setState({ showModalOne: true })
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-      console.log(response);
+      // console.log(response);
+      const scrapedData = {
+        name: response.data.name,
+        price: response.data.price,
+        link: response.data.link,
+        image: response.data.image
+      }
+      console.log("scrapedData: " + JSON.stringify(scrapedData))
+      handleModalInsert(scrapedData)
     })
       .catch(err => console.log(err));
   }
@@ -142,7 +155,16 @@ class Display extends Component {
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
             title="Is This What you Wanted?"
-            body="Body One"
+            body={
+              <div>
+                <h3>{this.state.scrapForModal.name}</h3>
+                <img
+                  className="float-center"
+                  src={this.state.scrapForModal.image}
+                  alt={this.state.scrapForModal.name}
+                />
+              </div>
+            }
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
