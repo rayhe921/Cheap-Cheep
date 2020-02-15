@@ -6,3 +6,9 @@ tr {
     width: 200%;
 
 }
+
+.items-table {
+    border: 5px dashed rgb(117, 198, 176);
+}
+
+

@@ -1,8 +1,5 @@
-.infoCard{
-    float: left;
-    text-align: center;
-    line-height: 2rem;
-    padding-left: 8rem;
-    padding-right: 8rem;
-    padding-top: 2rem;
+.card{
+    margin-top: 10vh;
+    border: 5px dashed rgb(117, 198, 176);
+    background-image: url(./imgs/paper-img.jpg);
 }

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const ItemSchema = new Schema({
     name:{
         type: String,
-        reuired: true,
+        required: true,
         trim :true,
     },
     price: {
@@ -15,12 +15,12 @@ const ItemSchema = new Schema({
     },
     website:{
         type: String,
-        reuired: true,
+        required: true,
 
     },
     link :{
         type: Boolean,
-        reuired: true,
+        required: true,
 
     },
     searchTerm:{

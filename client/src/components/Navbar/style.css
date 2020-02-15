@@ -1,7 +1,7 @@
-#login-button{
-    float: right;
-    margin-right: 0.5rem;
-}
+
+.height{
+    height: 20%;
+} 
 
 .display-block {
     display: initial;
@@ -9,4 +9,9 @@
   
 .display-none {
     display: none;
+  }
+
+
+  .navbar{
+    border-bottom: 5px solid rgb(117, 198, 176);
   }

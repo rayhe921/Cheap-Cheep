@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./style.css";
 // import Form from "../Form";
 import API from "../../utils/API";
+import { Row, Col } from "../Grid";
 // import { Link } from "react-router-dom";
 
 
@@ -51,59 +52,66 @@ class Registration extends Component {
     render() {
         // Notice how each input has a `value`, `name`, and `onChange` prop
         return (
-            <div className="col-6 card">
-                <h2 className="text-center">Sign Up Here</h2>
-                <h5 className="text-center">It's quick and easy</h5>
-                <hr />
-
+            <div className="card">
+                <Row>
+                    <Col size="12">
+                        <h2 className="font-weight-bold">Sign Up Here</h2>
+                        <h5 className="text-center">It's quick and easy</h5>
+                    </Col>
+                </Row>
+<div className="bubble">
+                </div>
                 {/* <p>
                     Hello {this.state.username} {this.state.password}
                     {this.state.email}
                 </p> */}
-                <form className="form">
-                    <div>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="username">Username</label>
-                            <input
-                                value={this.state.username}
-                                name="username"
-                                onChange={this.handleInputChange}
-                                type="text"
-                                placeholder=""
-                                className="form-control"
-                            />
+                <Row>
+                    <Col size="12">
+                    <form className="form align-content-center">
+                        <div className="inputForm">
+                            <Col size="md-6" className="form-group">
+                                <label htmlFor="username">Username</label>
+                                <input
+                                    value={this.state.username}
+                                    name="username"
+                                    onChange={this.handleInputChange}
+                                    type="text"
+                                    placeholder=""
+                                    className="form-control"
+                                />
+                            </Col>
+                            <Col size="md-6" className="form-group">
+                                <label htmlFor="inputPassword4">Password</label>
+                                <input
+                                    value={this.state.password}
+                                    name="password"
+                                    onChange={this.handleInputChange}
+                                    type="text"
+                                    placeholder=" "
+                                    className="form-control"
+                                />
+                            </Col>
+                            <Col size="md-6" className="form-group">
+                                <label htmlFor="inputemail">Email</label>
+                                <input
+                                    value={this.state.email}
+                                    name="email"
+                                    onChange={this.handleInputChange}
+                                    type="text"
+                                    placeholder=""
+                                    className="form-control"
+                                />
+                            </Col>
                         </div>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="inputPassword4">Password</label>
-                            <input
-                                value={this.state.password}
-                                name="password"
-                                onChange={this.handleInputChange}
-                                type="text"
-                                placeholder=" "
-                                className="form-control"
-                            />
+                        <div className="submit-btn">
+                            <button className="btn btn-success align-self-center" onClick={this.handleFormSubmit}>Submit</button>
                         </div>
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="inputemail">Email</label>
-                        <input
-                            value={this.state.email}
-                            name="email"
-                            onChange={this.handleInputChange}
-                            type="text"
-                            placeholder=""
-                            className="form-control"
-                        />
-                    </div>
-
-
-
-
-
-                    <button className="btn btn-primary col align-self-center" onClick={this.handleFormSubmit}>Submit</button>
-                </form>
+                    </form>
+                    </Col>
+                </Row>
             </div>
+            
+
         );
     }
 }

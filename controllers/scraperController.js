@@ -5,7 +5,7 @@ module.exports = {
     scrapeWalmart: function (req, res) {
 
         //Set up the URL to search on walmart by adding the search term. Puppeteer is smart and will understand spaces.
-        var url = "https://www.walmart.com/search/?query=" + req.searchTerm;
+        var url = "https://www.walmart.com/search/?query=" + req.params.searchTerm;
         var firstMatch = {};
 
         //Launch puppeteer
@@ -22,6 +22,17 @@ module.exports = {
                 var productNames = [];
                 var productPrices = [];
                 var productLinks = [];
+                var imageLinks = [];
+
+                $(".search-result-productimage").each(function (i, element) {
+
+                    var image = $(element).children().first().next().children().first().attr("src");
+                    //var image = $(element).children().first().next().children().first().text();
+                    console.log(image);
+
+                    // push each price into the productPrices array
+                    imageLinks.push(image);
+                });
 
                 $(".price-main").each(function (i, element) {
                     var price = $(element).children().first().text();
@@ -49,6 +60,7 @@ module.exports = {
                 firstMatch.name = productNames[0];
                 firstMatch.price = productPrices[0];
                 firstMatch.link = productLinks[0];
+                firstMatch.image = imageLinks[0];
             })
             .then(function () {
                 res.json(firstMatch);

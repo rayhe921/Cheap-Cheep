@@ -20,24 +20,28 @@ class App extends Component {
     loginPass: ""
   }
 
-  // handleLogin = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ hideLogoutButton: false, showLogin: false })
-  //   console.log("hideLogoutButton: " + this.state.hideLogoutButton)
+  // handleLoginButton = () => {
+  //   // event.preventDefault();
+  //   // this.setState({ hideLogoutButton: false, showLogin: false })
+  //   // console.log("hideLogoutButton: " + this.state.hideLogoutButton)
+  //   console.log("handleloginbutton")
   // }
 
   handleLogout = (event) => {
     event.preventDefault();
     this.setState({ hideLogoutButton: true, showLogin: true })
-    console.log("hideLogoutButton: " + this.state.hideLogoutButton)
   }
 
   handleLogin = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    console.log("hello.");
-  
+
     if (this.state.loginName && this.state.loginPass) {
+      const handleLoginButton = () => {
+        this.setState({ hideLogoutButton: false, showLogin: false })
+        console.log("hideLogoutButton: " + this.state.hideLogoutButton)
+        // console.log("handleloginbutton", this.state)
+      }
         API.login({
             userName: this.state.loginName,
             password: this.state.loginPass,
@@ -52,6 +56,8 @@ class App extends Component {
           } else {
              localStorage.setItem("id", response.data.userID);
              window.location.href = "/main";
+             handleLoginButton()
+             
           }
         })
             .catch(err => console.log(err));  
@@ -92,7 +98,6 @@ class App extends Component {
           <Route exact path="/main" component={Display} />
 
         </Switch>
-
       </Router>
     );
   }
