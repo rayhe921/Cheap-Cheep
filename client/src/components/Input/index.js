@@ -13,7 +13,8 @@ function Input(props) {
                     className="form-control mr-sm-2"
                     type="text">
                     </input>
-                    <button type="submit" className="btn btn-success btn-outline-light align-self-center" onClick={props.click}>Add Item</button>
+                    <button type="submit" className="btn btn-primary btn-outline-light align-self-center" onClick={props.click}>Add Item from Walmart</button>
+                    <button type="submit" className="btn btn-success btn-outline-light align-self-center" onClick={props.click}>Add Item from Craigslist</button>
                 </form>
             </div>
     )
