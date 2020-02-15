@@ -71,6 +71,10 @@ export default {
 
   //Scrapes walmart for the first product with the search term
   scrapeWalmart: function (searchTerm) {
-    return axios.get("/api/scraper/walmart/" + searchTerm);
+    return axios.get("/api/walmart/" + searchTerm);
+  },
+  scrapeCraiglist: function (searchTerm) {
+    return axios.get("/api/Craiglist/" + searchTerm);
   }
+
 };
