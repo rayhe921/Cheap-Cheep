@@ -17,22 +17,36 @@ class Display extends Component {
     searchTerm: "",
     item: {},
     lists: [],
-    listInputText: ""
+    listInputText: "",
+    scrapForModal: {},
+    loading: false
   };
 
-  displayModalOne = (event) => {
-    event.preventDefault();
-    this.setState({ showModalOne: true })
+  // displayModalOne = (event) => {
+  //   event.preventDefault();
+  //   this.setState({ showModalOne: true })
 
-    console.log("showModalOne: " + this.state.showModalOne)
-  };
+  //   console.log("showModalOne: " + this.state.showModalOne)
+  // };
 
   searchForItem = (event) => {
+    const handleModalInsert = (scrapedData) => {
+      this.setState({ scrapForModal: scrapedData, loading: false });
+      console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+    }
     event.preventDefault();
     console.log("searching for item");
-
+    this.setState({ showModalOne: true, loading: true })
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-      console.log(response);
+      // console.log(response);
+      const scrapedData = {
+        name: response.data.name,
+        price: response.data.price,
+        link: response.data.link,
+        image: response.data.image
+      }
+      console.log("scrapedData: " + JSON.stringify(scrapedData))
+      handleModalInsert(scrapedData)
     })
       .catch(err => console.log(err));
   }
@@ -139,10 +153,20 @@ class Display extends Component {
             </div>
           </Col>
           <Modal
+            loading={this.state.loading}
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
             title="Is This What you Wanted?"
-            body="Body One"
+            body={
+              <div>
+                <h3>{this.state.scrapForModal.name}</h3>
+                <img
+                  className="float-center"
+                  src={this.state.scrapForModal.image}
+                  alt={this.state.scrapForModal.name}
+                />
+              </div>
+            }
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
