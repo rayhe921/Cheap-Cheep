@@ -1,0 +1,22 @@
+
+body{
+background-image: url(  "./img/retina_wood/retina_wood.png" );
+}
+
+
+    
+
+.container{
+  margin-top:2%;
+  margin: 2% 12vw 2%;
+}
+
+.navbar {
+  background-image: url("./img/congruent_pentagon/congruent_pentagon.png"    );
+}
+
+.floatie{
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
