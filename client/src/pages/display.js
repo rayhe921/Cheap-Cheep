@@ -31,12 +31,12 @@ class Display extends Component {
 
   searchForItem = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapForModal: scrapedData });
+      this.setState({ scrapForModal: scrapedData, loading: false });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
     console.log("searching for item");
-    this.setState({ showModalOne: true })
+    this.setState({ showModalOne: true, loading: true })
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       // console.log(response);
       const scrapedData = {
@@ -153,6 +153,7 @@ class Display extends Component {
             </div>
           </Col>
           <Modal
+            loading={this.state.loading}
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
             title="Is This What you Wanted?"
