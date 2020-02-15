@@ -20,12 +20,6 @@ class App extends Component {
     loginPass: ""
   }
 
-  // handleLoginButton = () => {
-  //   // event.preventDefault();
-  //   // this.setState({ hideLogoutButton: false, showLogin: false })
-  //   // console.log("hideLogoutButton: " + this.state.hideLogoutButton)
-  //   console.log("handleloginbutton")
-  // }
 
   handleLogout = (event) => {
     event.preventDefault();
@@ -40,6 +34,7 @@ class App extends Component {
       const handleLoginButton = () => {
         this.setState({ hideLogoutButton: false, showLogin: false })
         console.log("hideLogoutButton: " + this.state.hideLogoutButton)
+        console.log("showLogin: " + this.state.showLogin)
         // console.log("handleloginbutton", this.state)
       }
         API.login({
@@ -51,13 +46,15 @@ class App extends Component {
   
           if (response.data.found === false){
             console.log("User not found.")
+            alert("User not found")
           } else if (response.data.userID === -1){
             console.log("Password is incorrect");
+            alert("Password is incorrect")
           } else {
              localStorage.setItem("id", response.data.userID);
-             window.location.href = "/main";
+             console.log("Switch to main")
              handleLoginButton()
-             
+             window.location.href = "/main";
           }
         })
             .catch(err => console.log(err));  
