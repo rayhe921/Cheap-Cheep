@@ -20,7 +20,7 @@ function Modal(prop) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={prop.submit} className="btn btn-primary">{prop.buttonOne}</button>
-    <button type="button" className="btn btn-secondary" onClick={prop.hideModal} data-dismiss="modal">{prop.buttonTwo}</button>
+                        <button type="button" className="btn btn-secondary" onClick={prop.hideModal} data-dismiss="modal">{prop.buttonTwo}</button>
                     </div>
                 </div>
             </div>

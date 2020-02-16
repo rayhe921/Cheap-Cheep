@@ -74,7 +74,7 @@ export default {
     return axios.get("/api/scraper/walmart/" + searchTerm);
   },
   scrapeCraiglist: function (searchTerm) {
-    return axios.get("/api/craiglist/" + searchTerm);
+    return axios.get("/api/scraper/craiglist/" + searchTerm);
   }
 
 };

@@ -28,7 +28,29 @@ class Display extends Component {
 
   //   console.log("showModalOne: " + this.state.showModalOne)
   // };
+  searchForCraiglist = (event) => {
+    const handleModalInsert = (scrapedata) => {
+      this.setState({ scrapeForModal: scrapedata, loading: false})
+      console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
+    }
+    event.preventDefault();
+    console.log("searching for item");
+    this.setState({ showModalOne: true, loading: true })
+    API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+      console.log("this is working scrapecraiglist")
+      const scrapedData = {
+        name: response.data.name,
+        price: response.data.price,
+        link: response.data.link,
+        image: response.data.image
+      }
+      console.log("scrapedData: " + JSON.stringify(scrapedData))
+      handleModalInsert(scrapedData)
 
+    })
+    .catch(err => console.log(err)); 
+
+  }
   searchForItem = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, loading: false });
@@ -48,7 +70,7 @@ class Display extends Component {
       console.log("scrapedData: " + JSON.stringify(scrapedData))
       handleModalInsert(scrapedData)
     })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err)); 
   }
 
   hideModalOne = () => {
@@ -106,6 +128,7 @@ class Display extends Component {
   }
 
 
+
   render() {
     return (
       <Container items="floatie">
@@ -146,6 +169,7 @@ class Display extends Component {
             <div className="row d-flex justifiy-content-center">
               <Input
                 click={this.searchForItem}
+                handleClick = {this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>

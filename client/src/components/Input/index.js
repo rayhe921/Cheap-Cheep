@@ -14,7 +14,7 @@ function Input(props) {
                     type="text">
                     </input>
                     <button type="submit" className="btn btn-primary btn-outline-light align-self-center" onClick={props.click}>Add Item from Walmart</button>
-                    <button type="submit" className="btn btn-success btn-outline-light align-self-center" onClick={props.click}>Add Item from Craigslist</button>
+                    <button type="submit" className="btn btn-success btn-outline-light align-self-center" onClick={props.handleclick}>Add Item from Craigslist</button>
                 </form>
             </div>
     )
