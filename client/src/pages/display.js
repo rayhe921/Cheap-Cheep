@@ -34,16 +34,11 @@ class Display extends Component {
       console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("searching for item");
+    console.log("craiglist search");
     this.setState({ showModalOne: true, loading: true })
     API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
       console.log("this is working scrapecraiglist")
-      const scrapedData = {
-        name: response.data.name,
-        price: response.data.price,
-        link: response.data.link,
-        image: response.data.image
-      }
+      const scrapedData = {}
       console.log("scrapedData: " + JSON.stringify(scrapedData))
       handleModalInsert(scrapedData)
 
@@ -53,14 +48,14 @@ class Display extends Component {
   }
   searchForItem = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapForModal: scrapedData, loading: false });
+      this.setState({ scrapForModal: scrapedData, loading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("searching for item");
+    console.log("craiglist searching");
     this.setState({ showModalOne: true, loading: true })
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-      // console.log(response);
+      console.log(response);
       const scrapedData = {
         name: response.data.name,
         price: response.data.price,
@@ -169,7 +164,7 @@ class Display extends Component {
             <div className="row d-flex justifiy-content-center">
               <Input
                 click={this.searchForItem}
-                handleClick = {this.searchForCraiglist}
+                handleclick = {this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>

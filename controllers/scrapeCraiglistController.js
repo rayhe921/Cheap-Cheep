@@ -44,7 +44,7 @@ module.exports = {
                     // console.log(element)
                     Image = $(element).attr("src")
                     imageLinks.push(Image)
-                    console.log(Image)
+                    // console.log(Image)
                 })
     
                 //console.log(image);
