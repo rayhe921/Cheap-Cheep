@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import './style.scss';
 
 function Navbar(props) {
   const showLogout = props.showLogin ? "form-group" : "form-group display-none";

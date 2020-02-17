@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import "./style.css";
+import Delete from "../Delete"
 // import List from "../List";
 
 
@@ -20,8 +21,12 @@ class ShopList extends Component {
             .then(res => this.setState({ Items: res.data }))
 
             .catch(err => console.log(err));
-
     };
+
+    delete = event => {
+      event.preventDefault();
+      console.log("Delete Item")
+    }
 
 
   render() {
@@ -41,9 +46,10 @@ class ShopList extends Component {
             <tbody>
               {this.state.Items.map(Item => (
                 <tr className="table-success" key={Item._id}>
-                  <th className="">
-                    <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
-                  </th>
+                  <Delete 
+                  id={Item.id}
+                  buttonClick={this.delete}
+                  ></Delete>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
                   <td>{Item.website}</td>
