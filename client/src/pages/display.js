@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
 import UsersList from "../components/List"
+import LoadingGif from "../components/Modal/imgs/loadingChick.gif"
 
 class Display extends Component {
 
@@ -31,12 +32,13 @@ class Display extends Component {
 
   searchForItem = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapForModal: scrapedData, loading: false });
+      this.setState({ scrapForModal: scrapedData, loading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
     console.log("searching for item");
-    this.setState({ showModalOne: true, loading: true })
+    this.setState({ showModalOne: true, loading: false })
+    console.log("state.loading " + this.state.loading)
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       // console.log(response);
       const scrapedData = {
@@ -107,6 +109,12 @@ class Display extends Component {
 
 
   render() {
+
+    const loadingStyle = {
+      width: "30rem",
+      height: "auto"
+    };
+
     return (
       <Container items="floatie">
         <Row>
@@ -152,12 +160,12 @@ class Display extends Component {
 
             </div>
           </Col>
+
           <Modal
-            loading={this.state.loading}
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title="Is This What you Wanted?"
-            body={
+            title= {this.state.loading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            body={this.state.loading ? 
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>
                 <img
@@ -165,8 +173,17 @@ class Display extends Component {
                   src={this.state.scrapForModal.image}
                   alt={this.state.scrapForModal.name}
                 />
-              </div>
+              </div> 
+              :
+              <div>
+              <img
+                style={loadingStyle}
+                src={LoadingGif}
+                alt="LoadingGif"
+              />
+            </div> 
             }
+            footerClass={this.state.loading}
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
