@@ -17,19 +17,29 @@ class App extends Component {
     showLogin: true,
     hideLogoutButton: true,
     loginName: "",
-    loginPass: ""
+    loginPass: "",
+    isLoggedIn: false
   }
 
-  // handleLoginButton = () => {
-  //   // event.preventDefault();
-  //   // this.setState({ hideLogoutButton: false, showLogin: false })
-  //   // console.log("hideLogoutButton: " + this.state.hideLogoutButton)
-  //   console.log("handleloginbutton")
-  // }
+  componentDidMount() {
+    console.log("app js is calling componentDidMount");
+
+    if (localStorage.getItem("isLoggedIn")) {
+      console.log(localStorage.getItem("isLoggedIn"));
+      this.setState({ hideLogoutButton: false, showLogin: false });
+      console.log(this.state);
+
+      console.log(window.location.href);
+      
+    }
+    //window.location.href = "/main";
+  }
 
   handleLogout = (event) => {
     event.preventDefault();
-    this.setState({ hideLogoutButton: true, showLogin: true })
+    localStorage.removeItem("id");
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "/";
   }
 
   handleLogin = event => {
@@ -37,11 +47,7 @@ class App extends Component {
     event.preventDefault();
 
     if (this.state.loginName && this.state.loginPass) {
-      const handleLoginButton = () => {
-        this.setState({ hideLogoutButton: false, showLogin: false })
-        console.log("hideLogoutButton: " + this.state.hideLogoutButton)
-        // console.log("handleloginbutton", this.state)
-      }
+      
         API.login({
             userName: this.state.loginName,
             password: this.state.loginPass,
@@ -55,9 +61,8 @@ class App extends Component {
             console.log("Password is incorrect");
           } else {
              localStorage.setItem("id", response.data.userID);
-             window.location.href = "/main";
-             handleLoginButton()
-             
+             localStorage.setItem("isLoggedIn", true);
+             window.location.href = "/main";         
           }
         })
             .catch(err => console.log(err));  

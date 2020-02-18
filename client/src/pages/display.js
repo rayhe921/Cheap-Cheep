@@ -39,6 +39,7 @@ class Display extends Component {
       }
       console.log(listOb);
       this.state.lists.push(listOb);
+      this.forceUpdate();
       console.log(this.state.lists);
     }
 
@@ -46,7 +47,9 @@ class Display extends Component {
       .then(function (response) {
         console.log(response.data);
         response.data.forEach(handleListInsert)
-      })
+      });
+
+    console.log("end of componentDidMount");
   };
 
   getUserLists = (userid) => {
