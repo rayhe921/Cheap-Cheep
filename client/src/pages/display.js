@@ -20,25 +20,21 @@ class Display extends Component {
     lists: [],
     listInputText: "",
     scrapForModal: {},
-    loading: false
+    notLoading: false
   };
-
-  // displayModalOne = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ showModalOne: true })
-
-  //   console.log("showModalOne: " + this.state.showModalOne)
-  // };
 
   searchForItem = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapForModal: scrapedData, loading: true });
+      this.setState({ scrapForModal: scrapedData, notLoading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
+    if(!this.state.searchTerm){
+      alert("Please enter search term!")
+    }else{
     console.log("searching for item");
-    this.setState({ showModalOne: true, loading: false })
-    console.log("state.loading " + this.state.loading)
+    this.setState({ showModalOne: true, notLoading: false })
+    console.log("state.notLoading " + this.state.notLoading)
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       // console.log(response);
       const scrapedData = {
@@ -51,7 +47,7 @@ class Display extends Component {
       handleModalInsert(scrapedData)
     })
       .catch(err => console.log(err));
-  }
+  }}
 
   hideModalOne = () => {
     this.setState({ showModalOne: false })
@@ -142,6 +138,7 @@ class Display extends Component {
                 onChange={this.handleInputChange}
                 value={this.state.listInputText}
               ></Form>}
+              footerClass={true}
               buttonOne="Save"
               buttonTwo="Cancel"
               submit={this.submitListModal}
@@ -164,8 +161,8 @@ class Display extends Component {
           <Modal
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title= {this.state.loading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
-            body={this.state.loading ? 
+            title= {this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            body={this.state.notLoading ? 
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>
                 <img
@@ -183,7 +180,7 @@ class Display extends Component {
               />
             </div> 
             }
-            footerClass={this.state.loading}
+            footerClass={this.state.notLoading}
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
