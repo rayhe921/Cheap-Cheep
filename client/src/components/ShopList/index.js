@@ -23,9 +23,10 @@ class ShopList extends Component {
             .catch(err => console.log(err));
     };
 
-    delete = event => {
-      event.preventDefault();
-      console.log("Delete Item")
+    delete = (i) => {
+      console.log("Delete Item");
+      API.deleteItem(i.target.id);
+      window.location.href = "/main"
     }
 
 
@@ -47,8 +48,8 @@ class ShopList extends Component {
               {this.state.Items.map(Item => (
                 <tr className="table-success" key={Item._id}>
                   <Delete 
-                  id={Item.id}
-                  buttonClick={this.delete}
+                  id={Item._id}
+                  buttonClick={this.delete.bind(Item._id)}
                   ></Delete>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
