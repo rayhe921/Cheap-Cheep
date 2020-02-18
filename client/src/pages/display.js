@@ -34,7 +34,7 @@ class Display extends Component {
     }else{
     console.log("searching for item");
     this.setState({ showModalOne: true, notLoading: false })
-    console.log("state.notLoading " + this.state.notLoading)
+    // console.log("state.notLoading " + this.state.notLoading)
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       // console.log(response);
       const scrapedData = {
