@@ -43,6 +43,7 @@ class Display extends Component {
       //console.log(listOb);
       this.state.lists.push(listOb);
       this.setState({ currentList: this.state.lists[0] })
+      this.populateItems();
       this.forceUpdate();
       console.log(this.state.lists);
       console.log(this.state.currentList);
@@ -63,25 +64,31 @@ class Display extends Component {
   };
 
 
-  // componentDidMount() {
-  //   this.loaditem();
-  // }
-
   populateItems = () => {
-    API.getItem()
-      .then(res => this.setState({ Items: res.data }))
 
+    const pushItem = (ItemData) => {
+      this.state.items.push(ItemData);
+    }
+
+    API.getOneList(this.state.currentList.id)
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data.Items);
+        response.data.Items.forEach(ItemID => function () {
+          console.log(ItemID);
+          API.getOneItem(ItemID).then(function (itemData) {
+            console.log("GetOneItem console log.");
+            pushItem(itemData);
+          })
+        });
+      })
       .catch(err => console.log(err));
 
   };
 
-
   addNewItem = (event) => {
     event.preventDefault();
 
-    console.log("help me");
-
-    
     const newItem = {
       name: this.state.scrapForModal.name,
       price: this.state.scrapForModal.price,
@@ -94,6 +101,9 @@ class Display extends Component {
       console.log("In addItemToList Scraped Data is: " + JSON.stringify(scrapedData));
       console.log("In addItemToList current list is: " + JSON.stringify(this.state.currentList));
 
+      this.state.items.push(scrapedData);
+      this.forceUpdate();
+
       API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
         console.log("this is the callback to adding an item to a list: " + response);
       });
@@ -104,10 +114,6 @@ class Display extends Component {
       console.log("response.data is: " + JSON.stringify(response))
       addItemToList(response.data);
     });
-    //add the item to the items collection in the db
-
-    //add that newly added item to the list in the db
-    //add that newly added item to state in items.
 
   }
 
@@ -215,10 +221,6 @@ class Display extends Component {
     // console.log(this.state);
   };
 
-  clickList = event => {
-    event.preventDefault();
-    console.log("Hello World")
-  }
 
 
   render() {
@@ -238,7 +240,20 @@ class Display extends Component {
                   name={listOb.listName}
                   id={listOb.id}
                   key={listOb.id}
-                  buttonClick={this.clickList}
+                  buttonClick={
+                    this.clickList = event => {
+                      event.preventDefault();
+                      console.log("Hello World")
+                      console.log(listOb.id);
+
+                      var nextList = {
+                        listname: listOb.listName,
+                        id: listOb.id
+                      }
+
+                      this.setState({ currentList: nextList });
+                    }
+                  }
                 ></UsersList>
               ))}
             </Sidebar>
