@@ -81,6 +81,7 @@ class Display extends Component {
 
     console.log("help me");
 
+    
     const newItem = {
       name: this.state.scrapForModal.name,
       price: this.state.scrapForModal.price,
@@ -89,9 +90,19 @@ class Display extends Component {
       image: this.state.scrapForModal.image
     }
 
+    const addItemToList = (scrapedData) => {
+      console.log("In addItemToList Scraped Data is: " + JSON.stringify(scrapedData));
+      console.log("In addItemToList current list is: " + JSON.stringify(this.state.currentList));
+
+      API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
+        console.log("this is the callback to adding an item to a list: " + response);
+      });
+    }
+
     console.log("newItem is: " + newItem)
     API.saveItem(newItem).then(function (response) {
-      console.log("response.data is: " + response)
+      console.log("response.data is: " + JSON.stringify(response))
+      addItemToList(response.data);
     });
     //add the item to the items collection in the db
 

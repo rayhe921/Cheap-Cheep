@@ -2,7 +2,6 @@ const db = require("../models");
 
 module.exports = {
     findAll: function(req, res) {
-      console.log("this list controller")
       db.List
         .find(req.query)
         .sort({ date: -1 })
@@ -22,8 +21,11 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
+      console.log("Hello, this is update in ListController");
+      console.log(req.body);
+      console.log(JSON.stringify(req.params));
       db.List
-        .findOneAndUpdate({ _id: req.params.id }, req.body)
+        .findOneAndUpdate({ _id: req.params.id }, {$push: { Items : req.body._id} }, {new : true})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },

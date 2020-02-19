@@ -4,7 +4,7 @@ const ListController = require("../../controllers/listController");
 // Matches with "/api/item"
 router.route("/")
   .get(ListController.findAll)
-  .post(ListController.create);
+  .post(ListController.create)
 
 // Matches with "/api/item/:id"
 router
