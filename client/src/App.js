@@ -8,9 +8,6 @@ import Login from "./pages/login";
 import API from "./utils/API";
 
 
-
-
-
 class App extends Component {
 
   state = {
@@ -22,17 +19,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("app js is calling componentDidMount");
 
+    //grabbing the current route
+    var currentRoute = window.location.href.split("/");
+    var currentRoute = currentRoute[currentRoute.length-1]
+
+
+    //make sure that if we're logged in state is correct and we're on the correct route
     if (localStorage.getItem("isLoggedIn")) {
       console.log(localStorage.getItem("isLoggedIn"));
       this.setState({ hideLogoutButton: false, showLogin: false });
-      console.log(this.state);
 
-      console.log(window.location.href);
-      
+      if (currentRoute === ""){
+        window.location.href= "/main";
+      }
+
+    } else if (currentRoute === "main"){
+      window.location.href= "/";
     }
-    //window.location.href = "/main";
+
   }
 
   handleLogout = (event) => {
