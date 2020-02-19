@@ -20,7 +20,42 @@ class Display extends Component {
     lists: [],
     listInputText: "",
     scrapForModal: {},
+    loading: false,
+    userid: "",
+    isLoggedIn: false,
     notLoading: false
+  };
+
+  componentDidMount() {
+    const id = localStorage.getItem("id");
+    this.setState({
+      userid: id,
+      isLoggedIn: true
+    });
+    console.log(this.state.userid);
+
+    const handleListInsert = (item) => {
+      const listOb = {
+        listName: item.listName,
+        id: item._id
+      }
+      console.log(listOb);
+      this.state.lists.push(listOb);
+      this.forceUpdate();
+      console.log(this.state.lists);
+    }
+
+    API.getList({ user: id })
+      .then(function (response) {
+        console.log(response.data);
+        response.data.forEach(handleListInsert)
+      });
+
+    console.log("end of componentDidMount");
+  };
+
+  getUserLists = (userid) => {
+    console.log("hello from getUserLists" + userid);
   };
 
   searchCraigs = (event) => {
