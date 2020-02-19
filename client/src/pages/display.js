@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
 import UsersList from "../components/List"
+import LoadingGif from "../components/Modal/imgs/loadingChick.gif"
 
 class Display extends Component {
 
@@ -19,36 +20,61 @@ class Display extends Component {
     lists: [],
     listInputText: "",
     scrapForModal: {},
-    loading: false
+    notLoading: false
   };
 
-  // displayModalOne = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ showModalOne: true })
+  searchCraigs = (event) => {
+    // const handleModalInsert = (scrapedData) => {
+    //   this.setState({ scrapForModal: scrapedData, notLoading: true });
+    //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+    // }
+    event.preventDefault();
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!")
+    } else {
+      console.log("searching for item");
+      this.setState({ showModalOne: true, notLoading: false })
+      // console.log("state.notLoading " + this.state.notLoading)
+        API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+          console.log(response);
+          // const scrapedData = {
+          //   name: response.data.name,
+          //   price: response.data.price,
+          //   link: response.data.link,
+          //   image: response.data.image
+          // }
+          // console.log("scrapedData: " + JSON.stringify(scrapedData))
+          // handleModalInsert(scrapedData)
+        })
+          .catch(err => console.log(err));
+    }
+  }
 
-  //   console.log("showModalOne: " + this.state.showModalOne)
-  // };
-
-  searchForItem = (event) => {
+  searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapForModal: scrapedData, loading: false });
+      this.setState({ scrapForModal: scrapedData, notLoading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("searching for item");
-    this.setState({ showModalOne: true, loading: true })
-    API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-      // console.log(response);
-      const scrapedData = {
-        name: response.data.name,
-        price: response.data.price,
-        link: response.data.link,
-        image: response.data.image
-      }
-      console.log("scrapedData: " + JSON.stringify(scrapedData))
-      handleModalInsert(scrapedData)
-    })
-      .catch(err => console.log(err));
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!")
+    } else {
+      console.log("searching for item");
+      this.setState({ showModalOne: true, notLoading: false })
+      // console.log("state.notLoading " + this.state.notLoading)
+        API.scrapeWalmart(this.state.searchTerm).then(function (response) {
+          // console.log(response);
+          const scrapedData = {
+            name: response.data.name,
+            price: response.data.price,
+            link: response.data.link,
+            image: response.data.image
+          }
+          console.log("scrapedData: " + JSON.stringify(scrapedData))
+          handleModalInsert(scrapedData)
+        })
+          .catch(err => console.log(err));
+    }
   }
 
   hideModalOne = () => {
@@ -107,6 +133,12 @@ class Display extends Component {
 
 
   render() {
+
+    const loadingStyle = {
+      width: "30rem",
+      height: "auto"
+    };
+
     return (
       <Container items="floatie">
         <Row>
@@ -134,6 +166,7 @@ class Display extends Component {
                 onChange={this.handleInputChange}
                 value={this.state.listInputText}
               ></Form>}
+              footerClass={true}
               buttonOne="Save"
               buttonTwo="Cancel"
               submit={this.submitListModal}
@@ -145,19 +178,20 @@ class Display extends Component {
 
             <div className="row d-flex justifiy-content-center">
               <Input
-                click={this.searchForItem}
+                clickWall={this.searchWall}
+                clickCraigs={this.searchCraigs}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>
 
             </div>
           </Col>
+
           <Modal
-            loading={this.state.loading}
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title="Is This What you Wanted?"
-            body={
+            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            body={this.state.notLoading ?
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>
                 <img
@@ -166,7 +200,16 @@ class Display extends Component {
                   alt={this.state.scrapForModal.name}
                 />
               </div>
+              :
+              <div>
+                <img
+                  style={loadingStyle}
+                  src={LoadingGif}
+                  alt="LoadingGif"
+                />
+              </div>
             }
+            footerClass={this.state.notLoading}
             buttonOne="Yes"
             buttonTwo="No"
           ></Modal>
