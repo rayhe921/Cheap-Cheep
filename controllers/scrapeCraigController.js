@@ -3,7 +3,6 @@ var axios = require("axios");
 
 
 function scrapeCraiglist(searchTerm) {
-  var searchTerm = "watch"
   var firstMatch = {};
 
   var url = "https://seattle.craigslist.org/search/sss?query=" + searchTerm + "&sort=rel";

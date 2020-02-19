@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const scraperController = require("../../controllers/scrapeCraigController");
+const scraperCraigController = require("../../controllers/scrapeCraigController");
 
 router
     .route("/Craiglist/:searchTerm")
-    .get(scrapeCraigController.scrapeCraiglist);
+    .get(scraperCraigController.scrapeCraiglist);
 
 module.exports = router; 

@@ -23,31 +23,59 @@ class Display extends Component {
     notLoading: false
   };
 
-  searchForItem = (event) => {
+  searchCraigs = (event) => {
+    // const handleModalInsert = (scrapedData) => {
+    //   this.setState({ scrapForModal: scrapedData, notLoading: true });
+    //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+    // }
+    event.preventDefault();
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!")
+    } else {
+      console.log("searching for item");
+      this.setState({ showModalOne: true, notLoading: false })
+      // console.log("state.notLoading " + this.state.notLoading)
+        API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+          console.log(response);
+          // const scrapedData = {
+          //   name: response.data.name,
+          //   price: response.data.price,
+          //   link: response.data.link,
+          //   image: response.data.image
+          // }
+          // console.log("scrapedData: " + JSON.stringify(scrapedData))
+          // handleModalInsert(scrapedData)
+        })
+          .catch(err => console.log(err));
+    }
+  }
+
+  searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    if(!this.state.searchTerm){
+    if (!this.state.searchTerm) {
       alert("Please enter search term!")
-    }else{
-    console.log("searching for item");
-    this.setState({ showModalOne: true, notLoading: false })
-    // console.log("state.notLoading " + this.state.notLoading)
-    API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-      // console.log(response);
-      const scrapedData = {
-        name: response.data.name,
-        price: response.data.price,
-        link: response.data.link,
-        image: response.data.image
-      }
-      console.log("scrapedData: " + JSON.stringify(scrapedData))
-      handleModalInsert(scrapedData)
-    })
-      .catch(err => console.log(err));
-  }}
+    } else {
+      console.log("searching for item");
+      this.setState({ showModalOne: true, notLoading: false })
+      // console.log("state.notLoading " + this.state.notLoading)
+        API.scrapeWalmart(this.state.searchTerm).then(function (response) {
+          // console.log(response);
+          const scrapedData = {
+            name: response.data.name,
+            price: response.data.price,
+            link: response.data.link,
+            image: response.data.image
+          }
+          console.log("scrapedData: " + JSON.stringify(scrapedData))
+          handleModalInsert(scrapedData)
+        })
+          .catch(err => console.log(err));
+    }
+  }
 
   hideModalOne = () => {
     this.setState({ showModalOne: false })
@@ -150,7 +178,8 @@ class Display extends Component {
 
             <div className="row d-flex justifiy-content-center">
               <Input
-                click={this.searchForItem}
+                clickWall={this.searchWall}
+                clickCraigs={this.searchCraigs}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>
@@ -161,8 +190,8 @@ class Display extends Component {
           <Modal
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title= {this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
-            body={this.state.notLoading ? 
+            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            body={this.state.notLoading ?
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>
                 <img
@@ -170,15 +199,15 @@ class Display extends Component {
                   src={this.state.scrapForModal.image}
                   alt={this.state.scrapForModal.name}
                 />
-              </div> 
+              </div>
               :
               <div>
-              <img
-                style={loadingStyle}
-                src={LoadingGif}
-                alt="LoadingGif"
-              />
-            </div> 
+                <img
+                  style={loadingStyle}
+                  src={LoadingGif}
+                  alt="LoadingGif"
+                />
+              </div>
             }
             footerClass={this.state.notLoading}
             buttonOne="Yes"
