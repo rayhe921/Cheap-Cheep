@@ -22,7 +22,7 @@ class App extends Component {
 
     //grabbing the current route
     var currentRoute = window.location.href.split("/");
-    var currentRoute = currentRoute[currentRoute.length-1]
+    currentRoute = currentRoute[currentRoute.length-1]
 
 
     //make sure that if we're logged in state is correct and we're on the correct route
