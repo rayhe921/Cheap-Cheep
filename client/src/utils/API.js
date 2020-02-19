@@ -73,10 +73,10 @@ export default {
   scrapeWalmart: function (searchTerm) {
     return axios.get("/api/scraper/walmart/" + searchTerm);
   },
-  scrapeCraiglist: function (searchTerm) {
+  scrapecraiglist: function (searchTerm) {
     console.log("this is my router")
     console.log(searchTerm)
-    return axios.get("/api/scraper/craiglist/" + searchTerm);
+    return axios.get("/api/scraper/Craiglist/" + searchTerm);
   }
 
 };

@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
 import UsersList from "../components/List"
+import LoadingGif from "../components/Modal/imgs/loadingChick.gif"
 
 class Display extends Component {
 
@@ -20,47 +21,60 @@ class Display extends Component {
     listInputText: "",
     scrapForModal: {},
     loading: false,
+    userid: "",
+    isLoggedIn: false,
+    notLoading: false
   };
 
-  // displayModalOne = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ showModalOne: true })
-
-  //   console.log("showModalOne: " + this.state.showModalOne)
-  // };
   componentDidMount() {
-    this.loadBooks()  
+    const id = localStorage.getItem("id");
+    this.setState({
+      userid: id,
+      isLoggedIn: true
+    });
+    console.log(this.state.userid);
 
-  }
-  loadBooks = () => {
+    const handleListInsert = (item) => {
+      const listOb = {
+        listName: item.listName,
+        id: item._id
+      }
+      console.log(listOb);
+      this.state.lists.push(listOb);
+      this.forceUpdate();
+      console.log(this.state.lists);
+    }
+
+    console.log("showModalOne: " + this.state.showModalOne)
+  };
+
+  addCraigItem = (event) => {
+    event.preventDefault();
+
     console.log("this is working save item")
     API.saveItem()
-      .then(res => this.setState({ Item: res.data }))
-      .then(function (response) {
-        console.log("response " + JSON.stringify(response))
-        const newItem = {
-          name: response.data.name,
-          price: response.data.price,
-          link: response.data.link,
-          searchTerm: response.data.searchTerm,
-          image: response.data.image
-        }
-      })
-      .catch(err => console.log(err));
-  };
-
-
-
+    const newItem = {
+      name: this.state.scrapForModal.name,
+      price: this.state.scrapForModal.price,
+      website: this.state.scrapForModal.website,
+      link: this.state.scrapForModal.link,
+      image: this.state.scrapForModal.image
+    }
+    console.log("newItem is: " + newItem)
+    API.saveItem(newItem).then(function (response) {
+      console.log("response.data is: " + response)
+    });
+  }
 
   searchForCraiglist = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapeForModal: scrapedData, loading: false })
+      this.setState({ scrapeForModal: scrapedData, loading: true })
       console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
     console.log("craiglist searching");
     this.setState({ showModalOne: true, loading: true })
-    API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+    API.scrapecraiglist(this.state.searchTerm).then(function (response) {
       console.log(response);
       const scrapedData = {
         name: response.data.name,
@@ -74,33 +88,54 @@ class Display extends Component {
     })
 
       .catch(err => console.log(err))
-  
-  
-}
-  
+
+
+  }
 
 
 
 
-  searchForItem = (event) => {
+  //   API.getList({ user: id })
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       response.data.forEach(handleListInsert)
+  //     });
+
+  //   console.log("end of componentDidMount");
+  // };
+
+
+
+  getUserLists = (userid) => {
+    console.log("hello from getUserLists" + userid);
+  };
+
+
+  searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapForModal: scrapedData, loading: true });
+      this.setState({ scrapForModal: scrapedData, notLoading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    this.setState({ showModalOne: true, loading: true })
-    API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-      console.log(response);
-      const scrapedData = {
-        name: response.data.name,
-        price: response.data.price,
-        link: response.data.link,
-        image: response.data.image
-      }
-      console.log("scrapedData: " + JSON.stringify(scrapedData))
-      handleModalInsert(scrapedData)
-    })
-      .catch(err => console.log(err));
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!")
+    } else {
+      console.log("searching for item");
+      this.setState({ showModalOne: true, notLoading: false })
+      // console.log("state.notLoading " + this.state.notLoading)
+      API.scrapeWalmart(this.state.searchTerm).then(function (response) {
+        // console.log(response);
+        const scrapedData = {
+          name: response.data.name,
+          price: response.data.price,
+          link: response.data.link,
+          image: response.data.image
+        }
+        console.log("scrapedData: " + JSON.stringify(scrapedData))
+        handleModalInsert(scrapedData)
+      })
+        .catch(err => console.log(err));
+    }
   }
 
   hideModalOne = () => {
@@ -117,43 +152,7 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
-
-  // saveItemToDataBase = (event) => {
-  //   // Preventing the default behavior of the form submit (which is to refresh the page)
-  //   const handleitemInsert = (scrapeForModal) => {
-  //     this.state.newItem.push(scrapeForModal);
-  //     console.log("this.state.lists: " + JSON.stringify(this.state.newItem))
-  //     this.setState({ Item: scrapeForModal })
-  //   }
-
-  //   console.log("save item ")
-  //   API.saveItem (this.scrapForModal) (reaponse)({
-  //     name: this.data.name,
-  //     price: this.scrapForModal.data.dataprice,
-  //     link: this.scrapForModal.data.link,
-  //     searchTerm: this.state.searchTerm,
-  //     image: this.scrapForModal.data.image
-  //   })
-  //     .then(function (response) {
-  //       console.log("response " + JSON.stringify(response))
-  //       const newItem = {
-  //         name: response.data.name,
-  //         price: response.data.price,
-  //         link: response.data.link,
-  //         searchTerm: response.data.searchTerm,
-  //         image: response.data.image
-  //       }
-  //       handleitemInsert(newItem)
-  //       console.log("newitem: " + JSON.stringify(newItem))
-
-
-
-  //     })
-
-
-
-
-  // };
+  
 
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
@@ -197,6 +196,12 @@ class Display extends Component {
 
 
   render() {
+
+    const loadingStyle = {
+      width: "30rem",
+      height: "auto"
+    };
+
     return (
       <Container items="floatie">
         <Row>
@@ -224,6 +229,7 @@ class Display extends Component {
                 onChange={this.handleInputChange}
                 value={this.state.listInputText}
               ></Form>}
+              footerClass={true}
               buttonOne="Save"
               buttonTwo="Cancel"
               submit={this.submitListModal}
@@ -235,20 +241,20 @@ class Display extends Component {
 
             <div className="row d-flex justifiy-content-center">
               <Input
-                click={this.searchForItem}
-                handleclick={this.searchForCraiglist}
+                clickWall={this.searchWall}
+                clickCraigs={this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>
 
             </div>
           </Col>
+
           <Modal
-            loading={this.state.loading}
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title="Is This What you Wanted?"
-            body={
+            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            body={this.state.notLoading ?
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>
                 <img
@@ -257,9 +263,20 @@ class Display extends Component {
                   alt={this.state.scrapForModal.name}
                 />
               </div>
+              :
+              <div>
+                <img
+                  style={loadingStyle}
+                  src={LoadingGif}
+                  alt="LoadingGif"
+                />
+              </div>
             }
-           buttonOne ={this.state.saveItemToDataBase, " Yes"}
+            footerClass={this.state.notLoading}
+            buttonOne="Yes"
             buttonTwo="No"
+            submit={this.newItem}
+            submit1={this.newItem}
 
           ></Modal>
         </Row >
