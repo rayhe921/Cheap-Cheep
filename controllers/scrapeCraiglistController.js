@@ -54,10 +54,9 @@ module.exports = {
                 firstMatch.image = imageLinks[0];
     
             })
-            .then(function () {
-                console.log(firstMatch);
-                return firstMatch
-            })
+                .then(function () {
+                    res.json(firstMatch);
+                })
     
     }
 };

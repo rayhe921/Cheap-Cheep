@@ -15,11 +15,11 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-    item: {},
+    Item: [],
     lists: [],
     listInputText: "",
     scrapForModal: {},
-    loading: false
+    loading: false,
   };
 
   // displayModalOne = (event) => {
@@ -28,31 +28,66 @@ class Display extends Component {
 
   //   console.log("showModalOne: " + this.state.showModalOne)
   // };
+  componentDidMount() {
+    this.loadBooks()  
+
+  }
+  loadBooks = () => {
+    console.log("this is working save item")
+    API.saveItem()
+      .then(res => this.setState({ Item: res.data }))
+      .then(function (response) {
+        console.log("response " + JSON.stringify(response))
+        const newItem = {
+          name: response.data.name,
+          price: response.data.price,
+          link: response.data.link,
+          searchTerm: response.data.searchTerm,
+          image: response.data.image
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+
+
+
   searchForCraiglist = (event) => {
-    const handleModalInsert = (scrapedata) => {
-      this.setState({ scrapeForModal: scrapedata, loading: false})
+    const handleModalInsert = (scrapedData) => {
+      this.setState({ scrapeForModal: scrapedData, loading: false })
       console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("craiglist search");
+    console.log("craiglist searching");
     this.setState({ showModalOne: true, loading: true })
     API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
-      console.log("this is working scrapecraiglist")
-      const scrapedData = {}
+      console.log(response);
+      const scrapedData = {
+        name: response.data.name,
+        price: response.data.price,
+        link: response.data.link,
+        image: response.data.image
+      }
       console.log("scrapedData: " + JSON.stringify(scrapedData))
       handleModalInsert(scrapedData)
 
     })
-    .catch(err => console.log(err)); 
 
-  }
+      .catch(err => console.log(err))
+  
+  
+}
+  
+
+
+
+
   searchForItem = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, loading: true });
       console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("craiglist searching");
     this.setState({ showModalOne: true, loading: true })
     API.scrapeWalmart(this.state.searchTerm).then(function (response) {
       console.log(response);
@@ -65,7 +100,7 @@ class Display extends Component {
       console.log("scrapedData: " + JSON.stringify(scrapedData))
       handleModalInsert(scrapedData)
     })
-      .catch(err => console.log(err)); 
+      .catch(err => console.log(err));
   }
 
   hideModalOne = () => {
@@ -82,6 +117,43 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
+
+  // saveItemToDataBase = (event) => {
+  //   // Preventing the default behavior of the form submit (which is to refresh the page)
+  //   const handleitemInsert = (scrapeForModal) => {
+  //     this.state.newItem.push(scrapeForModal);
+  //     console.log("this.state.lists: " + JSON.stringify(this.state.newItem))
+  //     this.setState({ Item: scrapeForModal })
+  //   }
+
+  //   console.log("save item ")
+  //   API.saveItem (this.scrapForModal) (reaponse)({
+  //     name: this.data.name,
+  //     price: this.scrapForModal.data.dataprice,
+  //     link: this.scrapForModal.data.link,
+  //     searchTerm: this.state.searchTerm,
+  //     image: this.scrapForModal.data.image
+  //   })
+  //     .then(function (response) {
+  //       console.log("response " + JSON.stringify(response))
+  //       const newItem = {
+  //         name: response.data.name,
+  //         price: response.data.price,
+  //         link: response.data.link,
+  //         searchTerm: response.data.searchTerm,
+  //         image: response.data.image
+  //       }
+  //       handleitemInsert(newItem)
+  //       console.log("newitem: " + JSON.stringify(newItem))
+
+
+
+  //     })
+
+
+
+
+  // };
 
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
@@ -120,7 +192,7 @@ class Display extends Component {
   clickList = event => {
     event.preventDefault();
     console.log("Hello World")
-  }
+  };
 
 
 
@@ -164,7 +236,7 @@ class Display extends Component {
             <div className="row d-flex justifiy-content-center">
               <Input
                 click={this.searchForItem}
-                handleclick = {this.searchForCraiglist}
+                handleclick={this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>
@@ -186,8 +258,9 @@ class Display extends Component {
                 />
               </div>
             }
-            buttonOne="Yes"
+           buttonOne ={this.state.saveItemToDataBase, " Yes"}
             buttonTwo="No"
+
           ></Modal>
         </Row >
       </Container >
