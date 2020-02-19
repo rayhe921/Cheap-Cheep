@@ -28,7 +28,6 @@ module.exports = {
 
                     var image = $(element).children().first().next().children().first().attr("src");
                     //var image = $(element).children().first().next().children().first().text();
-                    console.log(image);
 
                     // push each price into the productPrices array
                     imageLinks.push(image);

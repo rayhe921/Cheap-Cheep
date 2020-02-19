@@ -18,17 +18,13 @@ const ItemSchema = new Schema({
         required: true,
 
     },
-    link :{
+    link: {
         type: String,
         required: true,
 
     },
-    searchTerm:{
-        type:String,
-
     image: {
         type:String
-    }
     }
 })
   const Item = mongoose.model("Item", ItemSchema)

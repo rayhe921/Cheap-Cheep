@@ -16,12 +16,89 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-    item: {},
+    items: [],
     lists: [],
+    currentList: {},
     listInputText: "",
     scrapForModal: {},
+    loading: false,
+    userid: "",
+    isLoggedIn: false,
     notLoading: false
   };
+
+  componentDidMount() {
+    const id = localStorage.getItem("id");
+    this.setState({
+      userid: id,
+      isLoggedIn: true
+    });
+    console.log(this.state.userid);
+
+    const handleListInsert = (item) => {
+      const listOb = {
+        listName: item.listName,
+        id: item._id
+      }
+      //console.log(listOb);
+      this.state.lists.push(listOb);
+      this.setState({ currentList: this.state.lists[0] })
+      this.forceUpdate();
+      console.log(this.state.lists);
+      console.log(this.state.currentList);
+    }
+
+    API.getList({ user: id })
+      .then(function (response) {
+        console.log(response.data);
+        response.data.forEach(handleListInsert)
+      });
+
+    console.log("end of componentDidMount");
+    console.log(this.state.currentList);
+  };
+
+  getUserLists = (userid) => {
+    console.log("hello from getUserLists" + userid);
+  };
+
+
+  // componentDidMount() {
+  //   this.loaditem();
+  // }
+
+  populateItems = () => {
+    API.getItem()
+      .then(res => this.setState({ Items: res.data }))
+
+      .catch(err => console.log(err));
+
+  };
+
+
+  addNewItem = (event) => {
+    event.preventDefault();
+
+    console.log("help me");
+
+    const newItem = {
+      name: this.state.scrapForModal.name,
+      price: this.state.scrapForModal.price,
+      website: this.state.scrapForModal.website,
+      link: this.state.scrapForModal.link,
+      image: this.state.scrapForModal.image
+    }
+
+    console.log("newItem is: " + newItem)
+    API.saveItem(newItem).then(function (response) {
+      console.log("response.data is: " + response)
+    });
+    //add the item to the items collection in the db
+
+    //add that newly added item to the list in the db
+    //add that newly added item to state in items.
+
+  }
 
   searchCraigs = (event) => {
     // const handleModalInsert = (scrapedData) => {
@@ -35,18 +112,18 @@ class Display extends Component {
       console.log("searching for item");
       this.setState({ showModalOne: true, notLoading: false })
       // console.log("state.notLoading " + this.state.notLoading)
-        API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
-          console.log(response);
-          // const scrapedData = {
-          //   name: response.data.name,
-          //   price: response.data.price,
-          //   link: response.data.link,
-          //   image: response.data.image
-          // }
-          // console.log("scrapedData: " + JSON.stringify(scrapedData))
-          // handleModalInsert(scrapedData)
-        })
-          .catch(err => console.log(err));
+      API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+        console.log(response);
+        // const scrapedData = {
+        //   name: response.data.name,
+        //   price: response.data.price,
+        //   link: response.data.link,
+        //   image: response.data.image
+        // }
+        // console.log("scrapedData: " + JSON.stringify(scrapedData))
+        // handleModalInsert(scrapedData)
+      })
+        .catch(err => console.log(err));
     }
   }
 
@@ -62,18 +139,19 @@ class Display extends Component {
       console.log("searching for item");
       this.setState({ showModalOne: true, notLoading: false })
       // console.log("state.notLoading " + this.state.notLoading)
-        API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-          // console.log(response);
-          const scrapedData = {
-            name: response.data.name,
-            price: response.data.price,
-            link: response.data.link,
-            image: response.data.image
-          }
-          console.log("scrapedData: " + JSON.stringify(scrapedData))
-          handleModalInsert(scrapedData)
-        })
-          .catch(err => console.log(err));
+      API.scrapeWalmart(this.state.searchTerm).then(function (response) {
+        // console.log(response);
+        const scrapedData = {
+          name: response.data.name,
+          price: response.data.price,
+          link: response.data.link,
+          image: response.data.image,
+          website: "Walmart"
+        }
+        console.log("scrapedData: " + JSON.stringify(scrapedData))
+        handleModalInsert(scrapedData)
+      })
+        .catch(err => console.log(err));
     }
   }
 
@@ -174,7 +252,19 @@ class Display extends Component {
           </Col>
           <Col size="8">
 
-            <Shoplist></Shoplist>
+            <Shoplist>
+              {this.state.items.map(Item => (
+                <tr className="table-success" key={Item._id}>
+                  <th className="">
+                    <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                  </th>
+                  <td>{Item.name}</td>
+                  <td>{Item.price}</td>
+                  <td>{Item.website}</td>
+                  <td>{Item.seacrhTerm}</td>
+                </tr>
+              ))}
+            </Shoplist>
 
             <div className="row d-flex justifiy-content-center">
               <Input
@@ -212,6 +302,7 @@ class Display extends Component {
             footerClass={this.state.notLoading}
             buttonOne="Yes"
             buttonTwo="No"
+            submit={this.addNewItem}
           ></Modal>
         </Row >
       </Container >
