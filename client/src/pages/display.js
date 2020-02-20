@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
@@ -86,32 +87,35 @@ class Display extends Component {
 
   searchForCraiglist = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapeForModal: scrapedData, loading: true })
+      this.setState({ scrapForModal: scrapedData, notLoading: true });
+      console.log("notLoading: " + this.state.notLoading);
       console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("craiglist searching");
-    this.setState({ showModalOne: true, loading: true })
-    API.scrapecraiglist(this.state.searchTerm).then(function (response) {
-      console.log(response);
-      const scrapedData = {
-        name: response.data.name,
-        price: response.data.price,
-        link: response.data.link,
-        image: response.data.image
-      }
-      console.log("scrapedData: " + JSON.stringify(scrapedData))
-      handleModalInsert(scrapedData)
-
-    })
-
-      .catch(err => console.log(err))
-
-
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!");
+    } else {
+      console.log("craiglist searching");
+      this.setState({ showModalOne: true, notloading: false })
+      API.scrapecraiglist(this.state.searchTerm).then(function (response) {
+        console.log(response);
+        const scrapedData = {
+          name: response.data.name,
+          price: response.data.price,
+          link: response.data.link,
+          image: response.data.image,
+          website: "Craigslist"
+        }
+        console.log("scrapedData: " + JSON.stringify(scrapedData))
+        handleModalInsert(scrapedData)
+      })
+        .catch(err => console.log(err))
+    }
   }
 
 
 
+<<<<<<< HEAD
 
   //   API.getList({ user: id })
   //     .then(function (response) {
@@ -124,6 +128,13 @@ class Display extends Component {
 
 
 
+=======
+  getUserLists = (userid) => {
+    console.log("hello from getUserLists" + userid);
+  };
+
+  populateItems = () => {
+>>>>>>> master
 
   populateItems = (nextList) => {
     const pushItem = (ItemData) => {
@@ -175,7 +186,7 @@ class Display extends Component {
         console.log("this is the callback to adding an item to a list: " + response);
       });
     }
-
+    this.setState({ showModalOne: false })
     console.log("newItem is: " + newItem)
     API.saveItem(newItem).then(function (response) {
       console.log("response.data is: " + JSON.stringify(response))
@@ -184,32 +195,32 @@ class Display extends Component {
 
   }
 
-  searchCraigs = (event) => {
-    // const handleModalInsert = (scrapedData) => {
-    //   this.setState({ scrapForModal: scrapedData, notLoading: true });
-    //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
-    // }
-    event.preventDefault();
-    if (!this.state.searchTerm) {
-      alert("Please enter search term!")
-    } else {
-      console.log("searching for item");
-      this.setState({ showModalOne: true, notLoading: false })
-      // console.log("state.notLoading " + this.state.notLoading)
-      API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
-        console.log(response);
-        // const scrapedData = {
-        //   name: response.data.name,
-        //   price: response.data.price,
-        //   link: response.data.link,
-        //   image: response.data.image
-        // }
-        // console.log("scrapedData: " + JSON.stringify(scrapedData))
-        // handleModalInsert(scrapedData)
-      })
-        .catch(err => console.log(err));
-    }
-  }
+  // searchCraigs = (event) => {
+  //   // const handleModalInsert = (scrapedData) => {
+  //   //   this.setState({ scrapForModal: scrapedData, notLoading: true });
+  //   //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+  //   // }
+  //   event.preventDefault();
+  //   if (!this.state.searchTerm) {
+  //     alert("Please enter search term!")
+  //   } else {
+  //     console.log("searching for item");
+  //     this.setState({ showModalOne: true, notLoading: false })
+  //     // console.log("state.notLoading " + this.state.notLoading)
+  //     API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+  //       console.log(response);
+  //       // const scrapedData = {
+  //       //   name: response.data.name,
+  //       //   price: response.data.price,
+  //       //   link: response.data.link,
+  //       //   image: response.data.image
+  //       // }
+  //       // console.log("scrapedData: " + JSON.stringify(scrapedData))
+  //       // handleModalInsert(scrapedData)
+  //     })
+  //       .catch(err => console.log(err));
+  //   }
+  // }
 
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
@@ -253,7 +264,7 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
-  
+
 
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
@@ -346,7 +357,6 @@ class Display extends Component {
                       //   this.populateItems()
                       // );
                       console.log("incoming list is: " + JSON.stringify(this.state.currentList))
-                      //this.populateItems();
                     }
                   }
                 ></UsersList>
@@ -381,7 +391,7 @@ class Display extends Component {
                   </th>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
-                  <td>{Item.website}</td>
+                  <td><a href={"http://www." + Item.link} target="_blank">Link</a></td>
                   <td>{Item.seacrhTerm}</td>
                 </tr>
               ))}
