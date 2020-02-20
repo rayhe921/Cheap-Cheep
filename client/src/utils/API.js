@@ -33,6 +33,9 @@ export default {
   getOneList: function (id) {
     return axios.get("/api/list/" + id);
   },
+  getUserLists: function (id) {
+    return axios.get("/api/list/user/" + id);
+  },
   // Deletes a list with the given id
   deleteList: function (id) {
     return axios.delete("/api/list/" + id);

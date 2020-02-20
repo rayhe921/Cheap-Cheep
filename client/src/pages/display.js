@@ -54,7 +54,7 @@ class Display extends Component {
       this.populateItems(this.state.currentList);
     }
 
-    API.getList({ user: id })
+    API.getUserLists(id)
       .then(function (response) {
         console.log(response.data);
         response.data.forEach(handleListInsert);
@@ -80,8 +80,8 @@ class Display extends Component {
       })
     }
 
-    // console.log(this.state.currentList.listName);
-    // console.log("On the next line, I will get the items for this list: " + JSON.stringify(this.state.currentList));
+    console.log(this.state.currentList.listName);
+    console.log("On the next line, I will get the items for this list: " + JSON.stringify(nextList));
     // console.log("the nextList vairable is: " + JSON.stringify(nextList));
 
     API.getOneList(nextList.id)
@@ -199,11 +199,17 @@ class Display extends Component {
     const handleListInsert = (listOb) => {
       this.state.lists.push(listOb);
       console.log("this.state.lists: " + JSON.stringify(this.state.lists))
-      this.setState({ listInputText: "" })
+      this.setState({
+        listInputText: "",
+        currentList: listOb,
+        items: []
+      });
+      this.populateItems(listOb);
     }
     event.preventDefault();
     API.saveList({
-      listName: this.state.listInputText
+      listName: this.state.listInputText,
+      user: this.state.userid
     }).then(function (response) {
       console.log("response " + JSON.stringify(response))
       const newList = {

@@ -8,6 +8,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findAllByUser: function (req, res) {
+    db.List
+      .find({ user : req.params.id})
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findById: function (req, res) {
     db.List
       .findById(req.params.id)
