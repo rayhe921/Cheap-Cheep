@@ -166,32 +166,32 @@ class Display extends Component {
 
   }
 
-  searchCraigs = (event) => {
-    // const handleModalInsert = (scrapedData) => {
-    //   this.setState({ scrapForModal: scrapedData, notLoading: true });
-    //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
-    // }
-    event.preventDefault();
-    if (!this.state.searchTerm) {
-      alert("Please enter search term!")
-    } else {
-      console.log("searching for item");
-      this.setState({ showModalOne: true, notLoading: false })
-      // console.log("state.notLoading " + this.state.notLoading)
-      API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
-        console.log(response);
-        // const scrapedData = {
-        //   name: response.data.name,
-        //   price: response.data.price,
-        //   link: response.data.link,
-        //   image: response.data.image
-        // }
-        // console.log("scrapedData: " + JSON.stringify(scrapedData))
-        // handleModalInsert(scrapedData)
-      })
-        .catch(err => console.log(err));
-    }
-  }
+  // searchCraigs = (event) => {
+  //   // const handleModalInsert = (scrapedData) => {
+  //   //   this.setState({ scrapForModal: scrapedData, notLoading: true });
+  //   //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+  //   // }
+  //   event.preventDefault();
+  //   if (!this.state.searchTerm) {
+  //     alert("Please enter search term!")
+  //   } else {
+  //     console.log("searching for item");
+  //     this.setState({ showModalOne: true, notLoading: false })
+  //     // console.log("state.notLoading " + this.state.notLoading)
+  //     API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+  //       console.log(response);
+  //       // const scrapedData = {
+  //       //   name: response.data.name,
+  //       //   price: response.data.price,
+  //       //   link: response.data.link,
+  //       //   image: response.data.image
+  //       // }
+  //       // console.log("scrapedData: " + JSON.stringify(scrapedData))
+  //       // handleModalInsert(scrapedData)
+  //     })
+  //       .catch(err => console.log(err));
+  //   }
+  // }
 
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
@@ -331,7 +331,7 @@ class Display extends Component {
                   </th>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
-                  <td><Link to={Item.link}>Link</Link></td>
+                  <td><a href={"http://www." + Item.link} target="_blank">Link</a></td>
                   <td>{Item.seacrhTerm}</td>
                 </tr>
               ))}
