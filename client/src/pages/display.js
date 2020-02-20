@@ -42,8 +42,9 @@ class Display extends Component {
       }
       //console.log(listOb);
       this.state.lists.push(listOb);
+      console.log("swapping list to: " + JSON.stringify(this.state.lists[0]))
       this.setState({ currentList: this.state.lists[0] })
-      this.populateItems();
+      console.log("set current list to be: " + JSON.stringify(this.state.currentList));
       this.forceUpdate();
       console.log(this.state.lists);
       console.log(this.state.currentList);
@@ -64,23 +65,41 @@ class Display extends Component {
   };
 
 
+  // clearItems = () => {
+  //   console.log('clearing out items from state');
+  //   this.setState({
+  //     items: []
+  //   }, () => { console.log('items are now clear.'); })
+  // }
+
   populateItems = () => {
+
+    //this.clearItems();
+
+    this.setState(
+      { items: [] },
+      () => console.log('items are now clear.'));
 
     const pushItem = (ItemData) => {
       this.state.items.push(ItemData);
+      this.forceUpdate();
     }
 
+    const findItem = (ItemID) => {
+      API.getOneItem(ItemID).then(function (itemData) {
+        console.log("GetOneItem console log.");
+        //console.log(itemData.data);
+        pushItem(itemData.data);
+      })
+    }
+
+    console.log(this.state.currentList.listName)
+    console.log("On the next line, I will get the items for this list: " + JSON.stringify(this.state.currentList))
     API.getOneList(this.state.currentList.id)
       .then(function (response) {
         console.log(response);
         console.log(response.data.Items);
-        response.data.Items.forEach(ItemID => function () {
-          console.log(ItemID);
-          API.getOneItem(ItemID).then(function (itemData) {
-            console.log("GetOneItem console log.");
-            pushItem(itemData);
-          })
-        });
+        response.data.Items.forEach(findItem);
       })
       .catch(err => console.log(err));
 
@@ -222,6 +241,12 @@ class Display extends Component {
   };
 
 
+  switchList = (nextList) => {
+    console.log('changing list');
+    this.setState({
+      currentList: nextList
+    }, () => { console.log('new state', JSON.stringify(this.state.currentList)); })
+  }
 
   render() {
 
@@ -243,15 +268,26 @@ class Display extends Component {
                   buttonClick={
                     this.clickList = event => {
                       event.preventDefault();
-                      console.log("Hello World")
-                      console.log(listOb.id);
+                      console.log("You clicked on a list!")
+                      // console.log("State is: " + JSON.stringify(this.state));
+                      console.log("listOb is: " + JSON.stringify(listOb));
 
+                      console.log("current list is: " + JSON.stringify(this.state.currentList));
                       var nextList = {
-                        listname: listOb.listName,
+                        listName: listOb.listName,
                         id: listOb.id
                       }
 
-                      this.setState({ currentList: nextList });
+                      console.log("nextList item is: " + JSON.stringify(nextList));
+                      //this.setState({ currentList: nextList });
+                      // this.switchList(nextList);  
+
+                      this.setState(
+                        { currentList: nextList },
+                        this.populateItems()
+                      );
+                      console.log("incoming list is: " + JSON.stringify(this.state.currentList))
+                      //this.populateItems();
                     }
                   }
                 ></UsersList>
