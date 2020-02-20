@@ -44,17 +44,23 @@ class Display extends Component {
       }
       //console.log(listOb);
       this.state.lists.push(listOb);
+      console.log("swapping list to: " + JSON.stringify(this.state.lists[0]))
       this.setState({ currentList: this.state.lists[0] })
-      this.populateItems();
+      console.log("set current list to be: " + JSON.stringify(this.state.currentList));
       this.forceUpdate();
       console.log(this.state.lists);
       console.log(this.state.currentList);
     }
 
-    API.getList({ user: id })
+    const callPopulate = () => {
+      this.populateItems(this.state.currentList);
+    }
+
+    API.getUserLists(id)
       .then(function (response) {
         console.log(response.data);
-        response.data.forEach(handleListInsert)
+        response.data.forEach(handleListInsert);
+        callPopulate();
       });
 
     console.log("end of componentDidMount");
@@ -107,29 +113,35 @@ class Display extends Component {
     }
   }
 
+  //   API.getList({ user: id })
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       response.data.forEach(handleListInsert)
+  //     });
 
-
-  getUserLists = (userid) => {
-    console.log("hello from getUserLists" + userid);
-  };
-
-  populateItems = () => {
-
+  populateItems = (nextList) => {
     const pushItem = (ItemData) => {
       this.state.items.push(ItemData);
+      this.forceUpdate();
     }
 
-    API.getOneList(this.state.currentList.id)
+    const findItem = (ItemID) => {
+      API.getOneItem(ItemID).then(function (itemData) {
+        // console.log("GetOneItem console log.");
+        //console.log(itemData.data);
+        pushItem(itemData.data);
+      })
+    }
+
+    console.log(this.state.currentList.listName);
+    console.log("On the next line, I will get the items for this list: " + JSON.stringify(nextList));
+    // console.log("the nextList vairable is: " + JSON.stringify(nextList));
+
+    API.getOneList(nextList.id)
       .then(function (response) {
-        console.log(response);
-        console.log(response.data.Items);
-        response.data.Items.forEach(ItemID => function () {
-          console.log(ItemID);
-          API.getOneItem(ItemID).then(function (itemData) {
-            console.log("GetOneItem console log.");
-            pushItem(itemData);
-          })
-        });
+        // console.log(response);
+        // console.log(response.data.Items);
+        response.data.Items.forEach(findItem);
       })
       .catch(err => console.log(err));
 
@@ -214,11 +226,17 @@ class Display extends Component {
     const handleListInsert = (listOb) => {
       this.state.lists.push(listOb);
       console.log("this.state.lists: " + JSON.stringify(this.state.lists))
-      this.setState({ listInputText: "" })
+      this.setState({
+        listInputText: "",
+        currentList: listOb,
+        items: []
+      });
+      this.populateItems(listOb);
     }
     event.preventDefault();
     API.saveList({
-      listName: this.state.listInputText
+      listName: this.state.listInputText,
+      user: this.state.userid
     }).then(function (response) {
       console.log("response " + JSON.stringify(response))
       const newList = {
@@ -245,6 +263,18 @@ class Display extends Component {
   };
 
 
+  switchList = (nextList) => {
+    console.log('changing list');
+    console.log("In switchList, the nextList object is: " + JSON.stringify(nextList));
+    this.setState(
+      {
+        currentList: nextList,
+        items: []
+      },
+      this.populateItems(nextList)
+    );
+  }
+
   render() {
 
     const loadingStyle = {
@@ -265,11 +295,24 @@ class Display extends Component {
                   buttonClick={
                     this.clickList = event => {
                       event.preventDefault();
+                      console.log("You clicked on a list!")
+                      // console.log("State is: " + JSON.stringify(this.state));
+                      console.log("listOb is: " + JSON.stringify(listOb));
+                      console.log("current list is: " + JSON.stringify(this.state.currentList));
                       var nextList = {
-                        listname: listOb.listName,
+                        listName: listOb.listName,
                         id: listOb.id
                       }
-                      this.setState({ currentList: nextList });
+
+                      console.log("nextList item is: " + JSON.stringify(nextList));
+                      //this.setState({ currentList: nextList });
+                      this.switchList(nextList);
+
+                      // this.setState(
+                      //   { currentList: nextList, items: [] },
+                      //   this.populateItems()
+                      // );
+                      console.log("incoming list is: " + JSON.stringify(this.state.currentList))
                     }
                   }
                 ></UsersList>
