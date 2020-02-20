@@ -27,6 +27,7 @@ class Display extends Component {
     notLoading: false
   };
 
+
   componentDidMount() {
     const id = localStorage.getItem("id");
     this.setState({
@@ -43,6 +44,7 @@ class Display extends Component {
       //console.log(listOb);
       this.state.lists.push(listOb);
       this.setState({ currentList: this.state.lists[0] })
+      this.populateItems();
       this.forceUpdate();
       console.log(this.state.lists);
       console.log(this.state.currentList);
@@ -58,30 +60,93 @@ class Display extends Component {
     console.log(this.state.currentList);
   };
 
+  addCraigItem = (event) => {
+    event.preventDefault();
+
+    console.log("this is working save item")
+    API.saveItem()
+    const newItem = {
+      name: this.state.scrapForModal.name,
+      price: this.state.scrapForModal.price,
+      website: this.state.scrapForModal.website,
+      link: this.state.scrapForModal.link,
+      image: this.state.scrapForModal.image
+    }
+    console.log("newItem is: " + newItem)
+    API.saveItem(newItem).then(function (response) {
+      console.log("response.data is: " + response)
+    });
+  }
+
+  searchForCraiglist = (event) => {
+    const handleModalInsert = (scrapedData) => {
+      this.setState({ scrapeForModal: scrapedData, loading: true })
+      console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
+    }
+    event.preventDefault();
+    console.log("craiglist searching");
+    this.setState({ showModalOne: true, loading: true })
+    API.scrapecraiglist(this.state.searchTerm).then(function (response) {
+      console.log(response);
+      const scrapedData = {
+        name: response.data.name,
+        price: response.data.price,
+        link: response.data.link,
+        image: response.data.image
+      }
+      console.log("scrapedData: " + JSON.stringify(scrapedData))
+      handleModalInsert(scrapedData)
+
+    })
+
+      .catch(err => console.log(err))
+
+
+  }
+
+
+
+
+  //   API.getList({ user: id })
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       response.data.forEach(handleListInsert)
+  //     });
+
+  //   console.log("end of componentDidMount");
+  // };
+
+
+
   getUserLists = (userid) => {
     console.log("hello from getUserLists" + userid);
   };
 
-
-  // componentDidMount() {
-  //   this.loaditem();
-  // }
-
   populateItems = () => {
-    API.getItem()
-      .then(res => this.setState({ Items: res.data }))
 
+    const pushItem = (ItemData) => {
+      this.state.items.push(ItemData);
+    }
+
+    API.getOneList(this.state.currentList.id)
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data.Items);
+        response.data.Items.forEach(ItemID => function () {
+          console.log(ItemID);
+          API.getOneItem(ItemID).then(function (itemData) {
+            console.log("GetOneItem console log.");
+            pushItem(itemData);
+          })
+        });
+      })
       .catch(err => console.log(err));
 
   };
 
-
   addNewItem = (event) => {
     event.preventDefault();
 
-    console.log("help me");
-
-    
     const newItem = {
       name: this.state.scrapForModal.name,
       price: this.state.scrapForModal.price,
@@ -94,6 +159,9 @@ class Display extends Component {
       console.log("In addItemToList Scraped Data is: " + JSON.stringify(scrapedData));
       console.log("In addItemToList current list is: " + JSON.stringify(this.state.currentList));
 
+      this.state.items.push(scrapedData);
+      this.forceUpdate();
+
       API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
         console.log("this is the callback to adding an item to a list: " + response);
       });
@@ -104,10 +172,6 @@ class Display extends Component {
       console.log("response.data is: " + JSON.stringify(response))
       addItemToList(response.data);
     });
-    //add the item to the items collection in the db
-
-    //add that newly added item to the list in the db
-    //add that newly added item to state in items.
 
   }
 
@@ -180,6 +244,7 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
+  
 
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
@@ -215,11 +280,6 @@ class Display extends Component {
     // console.log(this.state);
   };
 
-  clickList = event => {
-    event.preventDefault();
-    console.log("Hello World")
-  }
-
 
   render() {
 
@@ -238,7 +298,20 @@ class Display extends Component {
                   name={listOb.listName}
                   id={listOb.id}
                   key={listOb.id}
-                  buttonClick={this.clickList}
+                  buttonClick={
+                    this.clickList = event => {
+                      event.preventDefault();
+                      console.log("Hello World")
+                      console.log(listOb.id);
+
+                      var nextList = {
+                        listname: listOb.listName,
+                        id: listOb.id
+                      }
+
+                      this.setState({ currentList: nextList });
+                    }
+                  }
                 ></UsersList>
               ))}
             </Sidebar>
@@ -280,7 +353,7 @@ class Display extends Component {
             <div className="row d-flex justifiy-content-center">
               <Input
                 clickWall={this.searchWall}
-                clickCraigs={this.searchCraigs}
+                clickCraigs={this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
                 searchTerm={this.state.searchTerm}
               ></Input>
