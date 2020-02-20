@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
@@ -8,8 +7,9 @@ import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
-import UsersList from "../components/List"
-import LoadingGif from "../components/Modal/imgs/loadingChick.gif"
+import UsersList from "../components/List";
+import LoadingGif from "../components/Modal/imgs/loadingChick.gif";
+import notFoundPic from "../components/Modal/imgs/notFound.jpg";
 
 class Display extends Component {
 
@@ -87,7 +87,7 @@ class Display extends Component {
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
-      alert("Please enter search term!");
+      alert("Please enter a search term!");
     } else {
       console.log("craiglist searching");
       this.setState({ showModalOne: true, notloading: false })
@@ -166,33 +166,6 @@ class Display extends Component {
 
   }
 
-  // searchCraigs = (event) => {
-  //   // const handleModalInsert = (scrapedData) => {
-  //   //   this.setState({ scrapForModal: scrapedData, notLoading: true });
-  //   //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
-  //   // }
-  //   event.preventDefault();
-  //   if (!this.state.searchTerm) {
-  //     alert("Please enter search term!")
-  //   } else {
-  //     console.log("searching for item");
-  //     this.setState({ showModalOne: true, notLoading: false })
-  //     // console.log("state.notLoading " + this.state.notLoading)
-  //     API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
-  //       console.log(response);
-  //       // const scrapedData = {
-  //       //   name: response.data.name,
-  //       //   price: response.data.price,
-  //       //   link: response.data.link,
-  //       //   image: response.data.image
-  //       // }
-  //       // console.log("scrapedData: " + JSON.stringify(scrapedData))
-  //       // handleModalInsert(scrapedData)
-  //     })
-  //       .catch(err => console.log(err));
-  //   }
-  // }
-
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
@@ -200,7 +173,7 @@ class Display extends Component {
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
-      alert("Please enter search term!")
+      alert("Please enter a search term!")
     } else {
       console.log("searching for item");
       this.setState({ showModalOne: true, notLoading: false })
@@ -275,7 +248,7 @@ class Display extends Component {
   render() {
 
     const loadingStyle = {
-      width: "30rem",
+      width: "29.25rem",
       height: "auto"
     };
 
@@ -331,7 +304,7 @@ class Display extends Component {
                   </th>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
-                  <td><a href={"http://www." + Item.link} target="_blank">Link</a></td>
+                  <td><a href={Item.link} target="_blank" rel="noopener noreferrer">Link</a></td>
                   <td>{Item.seacrhTerm}</td>
                 </tr>
               ))}
@@ -380,6 +353,5 @@ class Display extends Component {
     );
   }
 }
-
 
 export default Display;
