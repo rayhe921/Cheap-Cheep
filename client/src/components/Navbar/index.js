@@ -35,7 +35,7 @@ function Navbar(props) {
             aria-label="Password" />
         </form>
         <div>
-          <button id="login-button" onClick={props.onClick} className="btn btn-outline-success my-2" type="submit">login</button>
+          <button  id="login-button" onClick={props.onClick} className="btn btn-outline-success my-2" type="submit">login</button>
         </div>
       </div>
       <div className={hideLogoutButton}>

@@ -5,4 +5,5 @@ router
     .route("/walmart/:searchTerm")
     .get(scraperController.scrapeWalmart);
 
+
 module.exports = router;
