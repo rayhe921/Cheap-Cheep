@@ -9,7 +9,7 @@ import Form from "../components/Form";
 import API from "../utils/API";
 import UsersList from "../components/List";
 import LoadingGif from "../components/Modal/imgs/loadingChick.gif";
-import notFoundPic from "../components/Modal/imgs/notFound.jpg";
+// import notFoundPic from "../components/Modal/imgs/notFound.jpg";
 
 class Display extends Component {
 
@@ -25,7 +25,8 @@ class Display extends Component {
     loading: false,
     userid: "",
     isLoggedIn: false,
-    notLoading: false
+    notLoading: false,
+    hideForm: false
   };
 
 
@@ -47,6 +48,7 @@ class Display extends Component {
       this.setState({ currentList: this.state.lists[0] })
       this.populateItems();
       this.forceUpdate();
+      this.hideForm();
       console.log(this.state.lists);
       console.log(this.state.currentList);
     }
@@ -217,6 +219,7 @@ class Display extends Component {
       this.setState({ listInputText: "" })
     }
     event.preventDefault();
+    this.hideForm();
     API.saveList({
       listName: this.state.listInputText
     }).then(function (response) {
@@ -243,6 +246,10 @@ class Display extends Component {
 
     // console.log(this.state);
   };
+
+  hideForm = () => {
+    this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true}) 
+  }
 
 
   render() {
@@ -312,6 +319,7 @@ class Display extends Component {
 
             <div className="row d-flex justifiy-content-center">
               <Input
+                hideform={this.state.hideForm}
                 clickWall={this.searchWall}
                 clickCraigs={this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
