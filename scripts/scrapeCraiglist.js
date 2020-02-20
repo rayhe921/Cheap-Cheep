@@ -7,35 +7,33 @@ function scrapeCraiglist(searchTerm) {
   var url = "https://seattle.craigslist.org/search/sss?query=" + searchTerm + "&sort=rel";
   console.log("this is working")
   axios.get(url).then(function (response) {
+    console.log(response.data);
     var $ = cheerio.load(response.data);
     var productNames = [];
     var productPrices = [];
     var productLinks = [];
-   var image =[];
   
 
     $(".result-title").each(function (i, element) {
-      productLinks = $(element).attr("href");
-      productNames= $(element).text();
-      // console.log(productLinks)
-      // console.log(productNames)
-
-
+      Link = $(element).attr("href");
+      Name= $(element).text();
+      // console.log(Link)
+      // console.log(Name)
+      productLinks.push(Link);
+      productNames.push(Name);
     })
     $(".result-price").each(function (i, element) {
-      productPrices = $(element).text();
-      // console.log(productPrices)
+      Prices = $(element).text();
+      //console.log(productPrices)
+      productPrices.push(Prices);
 
     })
-    $("img").each(function (i, element) {
-      image =$(element).attr("src")
-      // console.log(image)
-
-    })
-    firstMatch.name = productNames;
-    firstMatch.price = productPrices;
-    firstMatch.link = productLinks;
-    firstMatch.image = image;
+      
+ 
+    //console.log(image);
+    firstMatch.name = productNames[0];
+    firstMatch.price = productPrices[0];
+    firstMatch.link = productLinks[0];
 
 
   })
@@ -45,4 +43,4 @@ function scrapeCraiglist(searchTerm) {
   })
 }
 
-exports.scrapeCraiglist = scrapeCraiglist;
+
