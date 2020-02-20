@@ -305,7 +305,7 @@ class Display extends Component {
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
                   <td><a href={Item.link} target="_blank" rel="noopener noreferrer">Link</a></td>
-                  <td>{Item.seacrhTerm}</td>
+                  <td>{Item.website}</td>
                 </tr>
               ))}
             </Shoplist>
