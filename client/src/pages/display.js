@@ -166,7 +166,7 @@ class Display extends Component {
         console.log("this is the callback to adding an item to a list: " + response);
       });
     }
-
+    this.setState({ showModalOne: false })
     console.log("newItem is: " + newItem)
     API.saveItem(newItem).then(function (response) {
       console.log("response.data is: " + JSON.stringify(response))
@@ -244,7 +244,7 @@ class Display extends Component {
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
-  
+
 
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
