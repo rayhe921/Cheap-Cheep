@@ -113,28 +113,11 @@ class Display extends Component {
     }
   }
 
-
-
-<<<<<<< HEAD
-
   //   API.getList({ user: id })
   //     .then(function (response) {
   //       console.log(response.data);
   //       response.data.forEach(handleListInsert)
   //     });
-
-  //   console.log("end of componentDidMount");
-  // };
-
-
-
-=======
-  getUserLists = (userid) => {
-    console.log("hello from getUserLists" + userid);
-  };
-
-  populateItems = () => {
->>>>>>> master
 
   populateItems = (nextList) => {
     const pushItem = (ItemData) => {
