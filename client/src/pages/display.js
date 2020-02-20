@@ -16,8 +16,9 @@ class Display extends Component {
     showModalOne: false,
     showModalTwo: false,
     searchTerm: "",
-    Item: [],
+    items: [],
     lists: [],
+    currentList: {},
     listInputText: "",
     scrapForModal: {},
     loading: false,
@@ -25,6 +26,7 @@ class Display extends Component {
     isLoggedIn: false,
     notLoading: false
   };
+
 
   componentDidMount() {
     const id = localStorage.getItem("id");
@@ -39,13 +41,23 @@ class Display extends Component {
         listName: item.listName,
         id: item._id
       }
-      console.log(listOb);
+      //console.log(listOb);
       this.state.lists.push(listOb);
+      this.setState({ currentList: this.state.lists[0] })
+      this.populateItems();
       this.forceUpdate();
       console.log(this.state.lists);
+      console.log(this.state.currentList);
     }
 
-    console.log("showModalOne: " + this.state.showModalOne)
+    API.getList({ user: id })
+      .then(function (response) {
+        console.log(response.data);
+        response.data.forEach(handleListInsert)
+      });
+
+    console.log("end of componentDidMount");
+    console.log(this.state.currentList);
   };
 
   addCraigItem = (event) => {
@@ -110,6 +122,85 @@ class Display extends Component {
     console.log("hello from getUserLists" + userid);
   };
 
+  populateItems = () => {
+
+    const pushItem = (ItemData) => {
+      this.state.items.push(ItemData);
+    }
+
+    API.getOneList(this.state.currentList.id)
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data.Items);
+        response.data.Items.forEach(ItemID => function () {
+          console.log(ItemID);
+          API.getOneItem(ItemID).then(function (itemData) {
+            console.log("GetOneItem console log.");
+            pushItem(itemData);
+          })
+        });
+      })
+      .catch(err => console.log(err));
+
+  };
+
+  addNewItem = (event) => {
+    event.preventDefault();
+
+    const newItem = {
+      name: this.state.scrapForModal.name,
+      price: this.state.scrapForModal.price,
+      website: this.state.scrapForModal.website,
+      link: this.state.scrapForModal.link,
+      image: this.state.scrapForModal.image
+    }
+
+    const addItemToList = (scrapedData) => {
+      console.log("In addItemToList Scraped Data is: " + JSON.stringify(scrapedData));
+      console.log("In addItemToList current list is: " + JSON.stringify(this.state.currentList));
+
+      this.state.items.push(scrapedData);
+      this.forceUpdate();
+
+      API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
+        console.log("this is the callback to adding an item to a list: " + response);
+      });
+    }
+
+    console.log("newItem is: " + newItem)
+    API.saveItem(newItem).then(function (response) {
+      console.log("response.data is: " + JSON.stringify(response))
+      addItemToList(response.data);
+    });
+
+  }
+
+  searchCraigs = (event) => {
+    // const handleModalInsert = (scrapedData) => {
+    //   this.setState({ scrapForModal: scrapedData, notLoading: true });
+    //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
+    // }
+    event.preventDefault();
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!")
+    } else {
+      console.log("searching for item");
+      this.setState({ showModalOne: true, notLoading: false })
+      // console.log("state.notLoading " + this.state.notLoading)
+      API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
+        console.log(response);
+        // const scrapedData = {
+        //   name: response.data.name,
+        //   price: response.data.price,
+        //   link: response.data.link,
+        //   image: response.data.image
+        // }
+        // console.log("scrapedData: " + JSON.stringify(scrapedData))
+        // handleModalInsert(scrapedData)
+      })
+        .catch(err => console.log(err));
+    }
+  }
 
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
@@ -129,7 +220,8 @@ class Display extends Component {
           name: response.data.name,
           price: response.data.price,
           link: response.data.link,
-          image: response.data.image
+          image: response.data.image,
+          website: "Walmart"
         }
         console.log("scrapedData: " + JSON.stringify(scrapedData))
         handleModalInsert(scrapedData)
@@ -188,12 +280,6 @@ class Display extends Component {
     // console.log(this.state);
   };
 
-  clickList = event => {
-    event.preventDefault();
-    console.log("Hello World")
-  };
-
-
 
   render() {
 
@@ -212,7 +298,20 @@ class Display extends Component {
                   name={listOb.listName}
                   id={listOb.id}
                   key={listOb.id}
-                  buttonClick={this.clickList}
+                  buttonClick={
+                    this.clickList = event => {
+                      event.preventDefault();
+                      console.log("Hello World")
+                      console.log(listOb.id);
+
+                      var nextList = {
+                        listname: listOb.listName,
+                        id: listOb.id
+                      }
+
+                      this.setState({ currentList: nextList });
+                    }
+                  }
                 ></UsersList>
               ))}
             </Sidebar>
@@ -237,7 +336,19 @@ class Display extends Component {
           </Col>
           <Col size="8">
 
-            <Shoplist></Shoplist>
+            <Shoplist>
+              {this.state.items.map(Item => (
+                <tr className="table-success" key={Item._id}>
+                  <th className="">
+                    <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                  </th>
+                  <td>{Item.name}</td>
+                  <td>{Item.price}</td>
+                  <td>{Item.website}</td>
+                  <td>{Item.seacrhTerm}</td>
+                </tr>
+              ))}
+            </Shoplist>
 
             <div className="row d-flex justifiy-content-center">
               <Input
@@ -275,9 +386,7 @@ class Display extends Component {
             footerClass={this.state.notLoading}
             buttonOne="Yes"
             buttonTwo="No"
-            submit={this.newItem}
-            submit1={this.newItem}
-
+            submit={this.addNewItem}
           ></Modal>
         </Row >
       </Container >

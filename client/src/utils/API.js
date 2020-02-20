@@ -41,7 +41,10 @@ export default {
   saveList: function (listData) {
     return axios.post("/api/list", listData);
   },
-
+  //add an item to a specific list
+  addItemToList: function (currentList, itemData) {
+    return axios.put("/api/list/" + currentList, itemData);
+  },
   //User API Methods
 
   // Gets all user

@@ -9,26 +9,20 @@ const ItemSchema = new Schema({
         trim :true,
     },
     price: {
-      type: Number,
-       min:[1, "price is require"] ,
-       max : [255]
+      type: String,
+      required: true
     },
     website:{
         type: String,
         required: true,
 
     },
-    link :{
+    link: {
         type: String,
         required: true,
-
     },
-    searchTerm:{
-        type:String,
-
     image: {
         type:String
-    }
     }
 })
   const Item = mongoose.model("Item", ItemSchema)
