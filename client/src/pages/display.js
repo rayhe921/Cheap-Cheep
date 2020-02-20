@@ -50,35 +50,22 @@ class Display extends Component {
       console.log(this.state.currentList);
     }
 
+    const callPopulate = () => {
+      this.populateItems(this.state.currentList);
+    }
+
     API.getList({ user: id })
       .then(function (response) {
         console.log(response.data);
-        response.data.forEach(handleListInsert)
+        response.data.forEach(handleListInsert);
+        callPopulate();
       });
 
     console.log("end of componentDidMount");
     console.log(this.state.currentList);
   };
 
-  getUserLists = (userid) => {
-    console.log("hello from getUserLists" + userid);
-  };
-
-
-  // clearItems = () => {
-  //   console.log('clearing out items from state');
-  //   this.setState({
-  //     items: []
-  //   }, () => { console.log('items are now clear.'); })
-  // }
-
-  populateItems = () => {
-
-    //this.clearItems();
-
-    this.setState(
-      { items: [] },
-      () => console.log('items are now clear.'));
+  populateItems = (nextList) => {
 
     const pushItem = (ItemData) => {
       this.state.items.push(ItemData);
@@ -87,18 +74,20 @@ class Display extends Component {
 
     const findItem = (ItemID) => {
       API.getOneItem(ItemID).then(function (itemData) {
-        console.log("GetOneItem console log.");
+        // console.log("GetOneItem console log.");
         //console.log(itemData.data);
         pushItem(itemData.data);
       })
     }
 
-    console.log(this.state.currentList.listName)
-    console.log("On the next line, I will get the items for this list: " + JSON.stringify(this.state.currentList))
-    API.getOneList(this.state.currentList.id)
+    // console.log(this.state.currentList.listName);
+    // console.log("On the next line, I will get the items for this list: " + JSON.stringify(this.state.currentList));
+    // console.log("the nextList vairable is: " + JSON.stringify(nextList));
+
+    API.getOneList(nextList.id)
       .then(function (response) {
-        console.log(response);
-        console.log(response.data.Items);
+        // console.log(response);
+        // console.log(response.data.Items);
         response.data.Items.forEach(findItem);
       })
       .catch(err => console.log(err));
@@ -243,133 +232,137 @@ class Display extends Component {
 
   switchList = (nextList) => {
     console.log('changing list');
-    this.setState({
-      currentList: nextList
-    }, () => { console.log('new state', JSON.stringify(this.state.currentList)); })
-  }
-
-  render() {
-
-    const loadingStyle = {
-      width: "30rem",
-      height: "auto"
-    };
-
-    return (
-      <Container items="floatie">
-        <Row>
-          <Col size="3">
-            <Sidebar>
-              {this.state.lists.map(listOb => (
-                <UsersList
-                  name={listOb.listName}
-                  id={listOb.id}
-                  key={listOb.id}
-                  buttonClick={
-                    this.clickList = event => {
-                      event.preventDefault();
-                      console.log("You clicked on a list!")
-                      // console.log("State is: " + JSON.stringify(this.state));
-                      console.log("listOb is: " + JSON.stringify(listOb));
-
-                      console.log("current list is: " + JSON.stringify(this.state.currentList));
-                      var nextList = {
-                        listName: listOb.listName,
-                        id: listOb.id
-                      }
-
-                      console.log("nextList item is: " + JSON.stringify(nextList));
-                      //this.setState({ currentList: nextList });
-                      // this.switchList(nextList);  
-
-                      this.setState(
-                        { currentList: nextList },
-                        this.populateItems()
-                      );
-                      console.log("incoming list is: " + JSON.stringify(this.state.currentList))
-                      //this.populateItems();
-                    }
-                  }
-                ></UsersList>
-              ))}
-            </Sidebar>
-            <Button
-              click={this.displayModalTwo}
-              title="Add a List"
-            ></Button>
-            <Modal
-              hideModal={this.hideModalTwo}
-              showModalTwo={this.state.showModalTwo}
-              title="What would you like to name your new list?"
-              body={<Form
-                name="listInputText"
-                onChange={this.handleInputChange}
-                value={this.state.listInputText}
-              ></Form>}
-              footerClass={true}
-              buttonOne="Save"
-              buttonTwo="Cancel"
-              submit={this.submitListModal}
-            ></Modal>
-          </Col>
-          <Col size="8">
-
-            <Shoplist>
-              {this.state.items.map(Item => (
-                <tr className="table-success" key={Item._id}>
-                  <th className="">
-                    <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
-                  </th>
-                  <td>{Item.name}</td>
-                  <td>{Item.price}</td>
-                  <td>{Item.website}</td>
-                  <td>{Item.seacrhTerm}</td>
-                </tr>
-              ))}
-            </Shoplist>
-
-            <div className="row d-flex justifiy-content-center">
-              <Input
-                clickWall={this.searchWall}
-                clickCraigs={this.searchCraigs}
-                handleInputChange={this.handleInputChange}
-                searchTerm={this.state.searchTerm}
-              ></Input>
-
-            </div>
-          </Col>
-
-          <Modal
-            hideModal={this.hideModalOne}
-            showModalOne={this.state.showModalOne}
-            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
-            body={this.state.notLoading ?
-              <div>
-                <h3>{this.state.scrapForModal.name}</h3>
-                <img
-                  className="float-center"
-                  src={this.state.scrapForModal.image}
-                  alt={this.state.scrapForModal.name}
-                />
-              </div>
-              :
-              <div>
-                <img
-                  style={loadingStyle}
-                  src={LoadingGif}
-                  alt="LoadingGif"
-                />
-              </div>
-            }
-            footerClass={this.state.notLoading}
-            buttonOne="Yes"
-            buttonTwo="No"
-            submit={this.addNewItem}
-          ></Modal>
-        </Row >
-      </Container >
+    console.log("In switchList, the nextList object is: " + JSON.stringify(nextList));
+    this.setState(
+      {
+        currentList: nextList,
+        items: []
+      },
+      this.populateItems(nextList)
     );
   }
+
+render() {
+
+  const loadingStyle = {
+    width: "30rem",
+    height: "auto"
+  };
+
+  return (
+    <Container items="floatie">
+      <Row>
+        <Col size="3">
+          <Sidebar>
+            {this.state.lists.map(listOb => (
+              <UsersList
+                name={listOb.listName}
+                id={listOb.id}
+                key={listOb.id}
+                buttonClick={
+                  this.clickList = event => {
+                    event.preventDefault();
+                    console.log("You clicked on a list!")
+                    // console.log("State is: " + JSON.stringify(this.state));
+                    console.log("listOb is: " + JSON.stringify(listOb));
+                    console.log("current list is: " + JSON.stringify(this.state.currentList));
+                    var nextList = {
+                      listName: listOb.listName,
+                      id: listOb.id
+                    }
+
+                    console.log("nextList item is: " + JSON.stringify(nextList));
+                    //this.setState({ currentList: nextList });
+                    this.switchList(nextList);  
+
+                    // this.setState(
+                    //   { currentList: nextList, items: [] },
+                    //   this.populateItems()
+                    // );
+                    console.log("incoming list is: " + JSON.stringify(this.state.currentList))
+                    //this.populateItems();
+                  }
+                }
+              ></UsersList>
+            ))}
+          </Sidebar>
+          <Button
+            click={this.displayModalTwo}
+            title="Add a List"
+          ></Button>
+          <Modal
+            hideModal={this.hideModalTwo}
+            showModalTwo={this.state.showModalTwo}
+            title="What would you like to name your new list?"
+            body={<Form
+              name="listInputText"
+              onChange={this.handleInputChange}
+              value={this.state.listInputText}
+            ></Form>}
+            footerClass={true}
+            buttonOne="Save"
+            buttonTwo="Cancel"
+            submit={this.submitListModal}
+          ></Modal>
+        </Col>
+        <Col size="8">
+
+          <Shoplist>
+            {this.state.items.map(Item => (
+              <tr className="table-success" key={Item._id}>
+                <th className="">
+                  <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                </th>
+                <td>{Item.name}</td>
+                <td>{Item.price}</td>
+                <td>{Item.website}</td>
+                <td>{Item.seacrhTerm}</td>
+              </tr>
+            ))}
+          </Shoplist>
+
+          <div className="row d-flex justifiy-content-center">
+            <Input
+              clickWall={this.searchWall}
+              clickCraigs={this.searchCraigs}
+              handleInputChange={this.handleInputChange}
+              searchTerm={this.state.searchTerm}
+            ></Input>
+
+          </div>
+        </Col>
+
+        <Modal
+          hideModal={this.hideModalOne}
+          showModalOne={this.state.showModalOne}
+          title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+          body={this.state.notLoading ?
+            <div>
+              <h3>{this.state.scrapForModal.name}</h3>
+              <img
+                className="float-center"
+                src={this.state.scrapForModal.image}
+                alt={this.state.scrapForModal.name}
+              />
+            </div>
+            :
+            <div>
+              <img
+                style={loadingStyle}
+                src={LoadingGif}
+                alt="LoadingGif"
+              />
+            </div>
+          }
+          footerClass={this.state.notLoading}
+          buttonOne="Yes"
+          buttonTwo="No"
+          submit={this.addNewItem}
+        ></Modal>
+      </Row >
+    </Container >
+  );
+}
 }
 
 
