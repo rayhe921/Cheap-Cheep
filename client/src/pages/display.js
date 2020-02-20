@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
@@ -80,41 +81,31 @@ class Display extends Component {
 
   searchForCraiglist = (event) => {
     const handleModalInsert = (scrapedData) => {
-      this.setState({ scrapeForModal: scrapedData, loading: true })
+      this.setState({ scrapForModal: scrapedData, notLoading: true });
+      console.log("notLoading: " + this.state.notLoading);
       console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
-    console.log("craiglist searching");
-    this.setState({ showModalOne: true, loading: true })
-    API.scrapecraiglist(this.state.searchTerm).then(function (response) {
-      console.log(response);
-      const scrapedData = {
-        name: response.data.name,
-        price: response.data.price,
-        link: response.data.link,
-        image: response.data.image
-      }
-      console.log("scrapedData: " + JSON.stringify(scrapedData))
-      handleModalInsert(scrapedData)
-
-    })
-
-      .catch(err => console.log(err))
-
-
+    if (!this.state.searchTerm) {
+      alert("Please enter search term!");
+    } else {
+      console.log("craiglist searching");
+      this.setState({ showModalOne: true, notloading: false })
+      API.scrapecraiglist(this.state.searchTerm).then(function (response) {
+        console.log(response);
+        const scrapedData = {
+          name: response.data.name,
+          price: response.data.price,
+          link: response.data.link,
+          image: response.data.image,
+          website: "Craigslist"
+        }
+        console.log("scrapedData: " + JSON.stringify(scrapedData))
+        handleModalInsert(scrapedData)
+      })
+        .catch(err => console.log(err))
+    }
   }
-
-
-
-
-  //   API.getList({ user: id })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //       response.data.forEach(handleListInsert)
-  //     });
-
-  //   console.log("end of componentDidMount");
-  // };
 
 
 
@@ -301,14 +292,10 @@ class Display extends Component {
                   buttonClick={
                     this.clickList = event => {
                       event.preventDefault();
-                      console.log("Hello World")
-                      console.log(listOb.id);
-
                       var nextList = {
                         listname: listOb.listName,
                         id: listOb.id
                       }
-
                       this.setState({ currentList: nextList });
                     }
                   }
@@ -344,7 +331,7 @@ class Display extends Component {
                   </th>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
-                  <td>{Item.website}</td>
+                  <td><Link to={Item.link}>Link</Link></td>
                   <td>{Item.seacrhTerm}</td>
                 </tr>
               ))}
