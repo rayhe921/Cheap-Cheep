@@ -18,6 +18,8 @@ module.exports = {
                 })
             })
             .then(function (html) {
+
+                //We only actually need the first result for each value, I grabbed all of the relevant ones to make the design extensible.
                 var $ = cheerio.load(html);
                 var productNames = [];
                 var productPrices = [];
@@ -27,9 +29,6 @@ module.exports = {
                 $(".search-result-productimage").each(function (i, element) {
 
                     var image = $(element).children().first().next().children().first().attr("src");
-                    //var image = $(element).children().first().next().children().first().text();
-
-                    // push each price into the productPrices array
                     imageLinks.push(image);
                 });
 
@@ -51,11 +50,12 @@ module.exports = {
                         name = $(element).children().first().text();
                     }
 
-                    // push each link into the productLinks array
+                    // push each link and name into the productLinks array
                     productLinks.push(link);
                     productNames.push(name);
                 });
 
+                //The returned object is the first match for each item
                 firstMatch.name = productNames[0];
                 firstMatch.price = productPrices[0];
                 firstMatch.link = productLinks[0];
