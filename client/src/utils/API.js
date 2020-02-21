@@ -48,16 +48,17 @@ export default {
   addItemToList: function (currentList, itemData) {
     return axios.put("/api/list/" + currentList, itemData);
   },
+  //deletes an item from a specific list
   deleteItemFromList: function (currentList, itemData) {
     return axios.put("/api/list/delete/" + currentList, itemData);
   },
   //User API Methods
 
   // Gets all user
-
   getAllUsers: function () {
     return axios.get("/api/user");
   },
+  //login route
   login: function (user) {
     console.log(user);
     return axios.post("/api/user/login", user);
@@ -82,6 +83,7 @@ export default {
   scrapeWalmart: function (searchTerm) {
     return axios.get("/api/scraper/walmart/" + searchTerm);
   },
+  //Scrapes craigslist for the first product with the search term
   scrapecraiglist: function (searchTerm) {
     console.log("this is my router")
     console.log(searchTerm)

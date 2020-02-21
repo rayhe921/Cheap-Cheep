@@ -51,7 +51,7 @@ class Display extends Component {
       this.forceUpdate();
       this.hideForm();
     }
-    
+
     //once we find the lists for the user, we want to populate the current list
     const callPopulate = () => {
       this.populateItems(this.state.currentList);
@@ -112,7 +112,7 @@ class Display extends Component {
       const priceNum = ItemData.price.slice(1);
       console.log(priceNum);
       this.setState((state) => {
-        return {totalPrice: state.totalPrice + parseFloat(priceNum)};
+        return { totalPrice: state.totalPrice + parseFloat(priceNum) };
       });
       this.forceUpdate();
       console.log("totalPrice is: " + this.state.totalPrice)
@@ -148,11 +148,11 @@ class Display extends Component {
 
       this.state.items.push(scrapedData);
       const priceNum = scrapedData.price.slice(1);
-      console.log(priceNum);
+
       this.setState((state) => {
-        return {totalPrice: state.totalPrice + parseFloat(priceNum)};
+        return { totalPrice: state.totalPrice + parseFloat(priceNum) };
       });
-      console.log("totalPrice is: " + this.state.totalPrice)
+
       this.forceUpdate();
 
       API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
@@ -203,11 +203,12 @@ class Display extends Component {
 
   };
 
+  //this is used to help the modal display
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
 
-
+  // this is the event for adding an item searched for to a list
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
       this.state.lists.push(listOb);
@@ -245,9 +246,10 @@ class Display extends Component {
   };
 
   hideForm = () => {
-    this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true})
+    this.state.lists === [] ? this.setState({ hideForm: false }) : this.setState({ hideForm: true })
   }
 
+  //Helps swap between lists
   switchList = (nextList) => {
     this.setState(
       {
@@ -277,6 +279,7 @@ class Display extends Component {
                   id={listOb.id}
                   key={listOb.id}
                   buttonClick={
+                    //swaps to the clicked list
                     this.clickList = event => {
                       event.preventDefault();
 
@@ -317,25 +320,26 @@ class Display extends Component {
               {this.state.items.map(Item => (
                 <tr className="table-success" key={Item._id}>
                   <th className="">
-                    <button 
-                    type="button" 
-                    className=" btn-sm btn btn-outline-danger btn-dark"
-                    onClick={
-                      this.clickDelete = event => {
-                        event.preventDefault();
+                    <button
+                      type="button"
+                      className=" btn-sm btn btn-outline-danger btn-dark"
+                      onClick={
+                        //this is the functionality for deleting an item from a list
+                        this.clickDelete = event => {
+                          event.preventDefault();
 
-                        const callPopulate = () => {
-                          this.setState({items : [], totalPrice: 0});
-                          this.populateItems(this.state.currentList);
+                          const callPopulate = () => {
+                            this.setState({ items: [], totalPrice: 0 });
+                            this.populateItems(this.state.currentList);
+                          }
+
+                          API.deleteItemFromList(this.state.currentList.id, Item).then(function (response) {
+                            callPopulate();
+                          });
+
+                          API.deleteItem(Item._id);
                         }
-
-                        API.deleteItemFromList(this.state.currentList.id, Item).then(function (response) {
-                          callPopulate();
-                        });
-
-                        API.deleteItem(Item._id);
                       }
-                    }
                     >X</button>
                   </th>
                   <td>{Item.name}</td>
