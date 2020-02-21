@@ -62,7 +62,7 @@ adding a budgeting component where user can input a total budget and prioritize 
 
 
 ## Step and Screenshort
- ![item iformatiom page](/../client/public/imag/image3.png)
+ ![item iformatiom page](../client/public/img/login.jpg)
 
  ![login page](/client/public/img/jpg.image2.jpg)
 
