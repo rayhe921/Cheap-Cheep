@@ -302,12 +302,6 @@ class Display extends Component {
     );
   }
 
-  deleteItem = (event) => {
-    event.preventDefault();
-    console.log("DELETE DELETE DELETE");
-    console.log(event);
-  }
-
   render() {
 
     const loadingStyle = {
@@ -385,9 +379,20 @@ class Display extends Component {
                         console.log("Delete!")
                         console.log("Item name is: " + Item.name + " and Item id is: " + Item._id);
 
+                        const callPopulate = () => {
+                          this.setState({items : []});
+                          this.populateItems(this.state.currentList);
+                        }
+
                         API.deleteItemFromList(this.state.currentList.id, Item).then(function (response) {
+                          callPopulate();
+                        });
+
+                        API.deleteItem(Item._id).then(function (response) {
                           console.log("this is the callback to adding an item to a list: " + JSON.stringify(response));
                         });
+
+
                       }
                     }
                     >X</button>
