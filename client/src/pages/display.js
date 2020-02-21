@@ -46,7 +46,6 @@ class Display extends Component {
       //console.log(listOb);
       this.state.lists.push(listOb);
       this.setState({ currentList: this.state.lists[0] })
-      this.populateItems();
       this.forceUpdate();
       this.hideForm();
       console.log(this.state.lists);
