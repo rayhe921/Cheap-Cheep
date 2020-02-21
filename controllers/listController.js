@@ -39,6 +39,15 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  removeItem: function (req, res) {
+    console.log("Hello, this is removeItem in ListController");
+    console.log(req.body._id);
+    console.log(JSON.stringify(req.params));
+    db.List
+      .findOneAndUpdate({ _id: req.params.id }, { $pull: { Items: req.body._id } })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   remove: function (req, res) {
     db.list
       .findById({ _id: req.params.id })
