@@ -10,7 +10,7 @@ function Navbar(props) {
         <a className="navbar-brand col-sm-3" href="/">
           <img src={props.image} width="100" height="100" alt="logo" />
         </a>
-        <h1 className="col-sm-8 text-center navbar-text">
+        <h1 className="title-font col-sm-8 text-center navbar-text">
           {props.title}
         </h1>
 

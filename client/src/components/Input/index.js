@@ -2,9 +2,10 @@ import React from "react";
 import "./style.css";
 
 function Input(props) {
+    const hideForm = props.hideform ?  "form-inline display-block" : "form-inline display-none"
     return (
             <div className="col-12 pb-3 cork-board text-center d-flex justify-content-center">
-                <form className="form-inline">
+                <form className={hideForm}>
                     <input 
                     name="searchTerm"
                     placeholder="Add an item!" 
