@@ -29,7 +29,6 @@ class Display extends Component {
     hideform: false
   };
 
-
   componentDidMount() {
     const id = localStorage.getItem("id");
     this.setState({
@@ -135,14 +134,10 @@ class Display extends Component {
       })
     }
 
-    console.log(this.state.currentList.listName);
-    console.log("On the next line, I will get the items for this list: " + JSON.stringify(nextList));
-    // console.log("the nextList vairable is: " + JSON.stringify(nextList));
 
     API.getOneList(nextList.id)
       .then(function (response) {
-        // console.log(response);
-        // console.log(response.data.Items);
+
         response.data.Items.forEach(findItem);
       })
       .catch(err => console.log(err));
@@ -161,20 +156,16 @@ class Display extends Component {
     }
 
     const addItemToList = (scrapedData) => {
-      console.log("In addItemToList Scraped Data is: " + JSON.stringify(scrapedData));
-      console.log("In addItemToList current list is: " + JSON.stringify(this.state.currentList));
 
       this.state.items.push(scrapedData);
       this.forceUpdate();
 
       API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
-        console.log("this is the callback to adding an item to a list: " + response);
+
       });
     }
     this.setState({ showModalOne: false })
-    console.log("newItem is: " + newItem)
     API.saveItem(newItem).then(function (response) {
-      console.log("response.data is: " + JSON.stringify(response))
       addItemToList(response.data);
     });
 
@@ -183,17 +174,14 @@ class Display extends Component {
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
-      console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
       alert("Please enter search term!")
     } else {
-      console.log("searching for item");
       this.setState({ showModalOne: true, notLoading: false })
-      // console.log("state.notLoading " + this.state.notLoading)
       API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-        // console.log(response);
+
         const scrapedData = {
           name: response.data.name,
           price: response.data.price,
@@ -201,7 +189,6 @@ class Display extends Component {
           image: response.data.image,
           website: "Walmart"
         }
-        console.log("scrapedData: " + JSON.stringify(scrapedData))
         handleModalInsert(scrapedData)
       })
         .catch(err => console.log(err));
@@ -262,7 +249,6 @@ class Display extends Component {
       [name]: value
     });
 
-    // console.log(this.state);
   };
 
   hideForm = () => {
@@ -301,24 +287,14 @@ class Display extends Component {
                   buttonClick={
                     this.clickList = event => {
                       event.preventDefault();
-                      console.log("You clicked on a list!")
-                      // console.log("State is: " + JSON.stringify(this.state));
-                      console.log("listOb is: " + JSON.stringify(listOb));
-                      console.log("current list is: " + JSON.stringify(this.state.currentList));
+
                       var nextList = {
                         listName: listOb.listName,
                         id: listOb.id
                       }
 
-                      console.log("nextList item is: " + JSON.stringify(nextList));
-                      //this.setState({ currentList: nextList });
                       this.switchList(nextList);
 
-                      // this.setState(
-                      //   { currentList: nextList, items: [] },
-                      //   this.populateItems()
-                      // );
-                      console.log("incoming list is: " + JSON.stringify(this.state.currentList))
                     }
                   }
                 ></UsersList>
@@ -399,7 +375,7 @@ class Display extends Component {
           <Modal
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait..."}
             body={this.state.notLoading ?
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>
@@ -428,6 +404,5 @@ class Display extends Component {
     );
   }
 }
-
 
 export default Display;

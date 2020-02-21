@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./style.css";
-// import Form from "../Form";
 import API from "../../utils/API";
 import { Row, Col } from "../Grid";
 // import { Link } from "react-router-dom";
-
 
 class Registration extends Component {
 
