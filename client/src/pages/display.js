@@ -26,11 +26,7 @@ class Display extends Component {
     userid: "",
     isLoggedIn: false,
     notLoading: false,
-<<<<<<< HEAD
-    hideForm: false
-=======
     hideform: false
->>>>>>> master
   };
 
 
@@ -251,9 +247,6 @@ class Display extends Component {
   };
 
   hideForm = () => {
-<<<<<<< HEAD
-    this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true}) 
-=======
     this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true})
   }
 
@@ -267,7 +260,6 @@ class Display extends Component {
       },
       this.populateItems(nextList)
     );
->>>>>>> master
   }
 
 
