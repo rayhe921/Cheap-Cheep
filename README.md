@@ -29,6 +29,7 @@ Follow the following step for installation App in your local machine.
 - Mongoose
 - JavaScript
 - AJAX ()
+- Puppeteer
 
 ## project tools
 - **GitHub** to maintain code for Project
@@ -41,6 +42,7 @@ Follow the following step for installation App in your local machine.
 + Goodle doc.
 + Google drive
 + Instructors and TAs
++ Google slide
 
 ## Contributors 
 + Elliott White
@@ -60,7 +62,7 @@ adding a budgeting component where user can input a total budget and prioritize 
 
 
 ## Step and Screenshort
- ![item iformatiom page](/client/public/imag/image3.png)
+ ![item iformatiom page](/../client/public/imag/image3.png)
 
  ![login page](/client/public/img/jpg.image2.jpg)
 
