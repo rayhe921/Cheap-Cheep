@@ -1,9 +1,9 @@
-const router = require("express").Router();
+// const router = require("express").Router();
 
-const scraperController = require("../../controllers/scrapeCraiglistController");
+// const scraperController = require("../../controllers/scrapeCraiglistController");
 
-router
-    .route("/craiglist/:searchTerm")
-    .get(scraperController.scraperCraiglist);
+// router
+//     .route("/craiglist/:searchTerm")
+//     .get(scraperController.scraperCraiglist);
 
-module.exports = router;
+// module.exports = router;
