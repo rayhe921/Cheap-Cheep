@@ -48,6 +48,9 @@ export default {
   addItemToList: function (currentList, itemData) {
     return axios.put("/api/list/" + currentList, itemData);
   },
+  deleteItemFromList: function (currentList, itemData) {
+    return axios.put("/api/list/delete/" + currentList, itemData);
+  },
   //User API Methods
 
   // Gets all user

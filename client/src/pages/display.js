@@ -302,6 +302,12 @@ class Display extends Component {
     );
   }
 
+  deleteItem = (event) => {
+    event.preventDefault();
+    console.log("DELETE DELETE DELETE");
+    console.log(event);
+  }
+
   render() {
 
     const loadingStyle = {
@@ -370,7 +376,21 @@ class Display extends Component {
               {this.state.items.map(Item => (
                 <tr className="table-success" key={Item._id}>
                   <th className="">
-                    <button type="button" className=" btn-sm btn btn-outline-danger btn-dark">X</button>
+                    <button 
+                    type="button" 
+                    className=" btn-sm btn btn-outline-danger btn-dark"
+                    onClick={
+                      this.clickDelete = event => {
+                        event.preventDefault();
+                        console.log("Delete!")
+                        console.log("Item name is: " + Item.name + " and Item id is: " + Item._id);
+
+                        API.deleteItemFromList(this.state.currentList.id, Item).then(function (response) {
+                          console.log("this is the callback to adding an item to a list: " + JSON.stringify(response));
+                        });
+                      }
+                    }
+                    >X</button>
                   </th>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
