@@ -124,6 +124,7 @@ class Display extends Component {
 
   };
 
+  //This function adds an item found by the scraper 
   addNewItem = (event) => {
     event.preventDefault();
 
