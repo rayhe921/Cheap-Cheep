@@ -85,7 +85,7 @@ export default {
   scrapecraiglist: function (searchTerm) {
     console.log("this is my router")
     console.log(searchTerm)
-    return axios.get("/api/scraper/Craiglist/" + searchTerm);
+    return axios.get("/api/scraper/craigslist/" + searchTerm);
   }
 
 };

@@ -152,6 +152,7 @@ class Display extends Component {
 
   }
 
+  //this handles calling the walmart scraper and collecting the data
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
@@ -176,10 +177,12 @@ class Display extends Component {
     }
   }
 
+  //this is used to help the modal display
   hideModalOne = () => {
     this.setState({ showModalOne: false })
   }
 
+  //this is used to help the modal display
   displayModalTwo = (event) => {
     event.preventDefault();
     this.setState({ showModalTwo: true })
