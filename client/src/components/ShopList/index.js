@@ -13,7 +13,7 @@ function ShopList(props) {
             <th>Item Name</th>
             <th>Lowest Price</th>
             <th>Link</th>
-            <th>Search Term</th>
+            <th>Website</th>
           </tr>
         </thead>
         <tbody>

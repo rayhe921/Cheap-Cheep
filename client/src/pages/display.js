@@ -25,7 +25,8 @@ class Display extends Component {
     loading: false,
     userid: "",
     isLoggedIn: false,
-    notLoading: false
+    notLoading: false,
+    hideform: false
   };
 
 
@@ -48,6 +49,7 @@ class Display extends Component {
       this.setState({ currentList: this.state.lists[0] })
       console.log("set current list to be: " + JSON.stringify(this.state.currentList));
       this.forceUpdate();
+      this.hideForm();
       console.log(this.state.lists);
       console.log(this.state.currentList);
     }
@@ -178,33 +180,6 @@ class Display extends Component {
 
   }
 
-  // searchCraigs = (event) => {
-  //   // const handleModalInsert = (scrapedData) => {
-  //   //   this.setState({ scrapForModal: scrapedData, notLoading: true });
-  //   //   console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
-  //   // }
-  //   event.preventDefault();
-  //   if (!this.state.searchTerm) {
-  //     alert("Please enter search term!")
-  //   } else {
-  //     console.log("searching for item");
-  //     this.setState({ showModalOne: true, notLoading: false })
-  //     // console.log("state.notLoading " + this.state.notLoading)
-  //     API.scrapeCraiglist(this.state.searchTerm).then(function (response) {
-  //       console.log(response);
-  //       // const scrapedData = {
-  //       //   name: response.data.name,
-  //       //   price: response.data.price,
-  //       //   link: response.data.link,
-  //       //   image: response.data.image
-  //       // }
-  //       // console.log("scrapedData: " + JSON.stringify(scrapedData))
-  //       // handleModalInsert(scrapedData)
-  //     })
-  //       .catch(err => console.log(err));
-  //   }
-  // }
-
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
@@ -222,7 +197,7 @@ class Display extends Component {
         const scrapedData = {
           name: response.data.name,
           price: response.data.price,
-          link: response.data.link,
+          link: "http://www." + response.data.link,
           image: response.data.image,
           website: "Walmart"
         }
@@ -261,6 +236,7 @@ class Display extends Component {
       this.populateItems(listOb);
     }
     event.preventDefault();
+    this.hideForm();
     API.saveList({
       listName: this.state.listInputText,
       user: this.state.userid
@@ -289,6 +265,9 @@ class Display extends Component {
     // console.log(this.state);
   };
 
+  hideForm = () => {
+    this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true})
+  }
 
   switchList = (nextList) => {
     console.log('changing list');
@@ -305,7 +284,7 @@ class Display extends Component {
   render() {
 
     const loadingStyle = {
-      width: "30rem",
+      width: "29.25rem",
       height: "auto"
     };
 
@@ -399,14 +378,15 @@ class Display extends Component {
                   </th>
                   <td>{Item.name}</td>
                   <td>{Item.price}</td>
-                  <td><a href={"http://www." + Item.link} target="_blank">Link</a></td>
-                  <td>{Item.seacrhTerm}</td>
+                  <td><a href={Item.link} target="_blank" rel="noopener noreferrer">Link</a></td>
+                  <td>{Item.website}</td>
                 </tr>
               ))}
             </Shoplist>
 
             <div className="row d-flex justifiy-content-center">
               <Input
+                hideform={this.state.hideForm}
                 clickWall={this.searchWall}
                 clickCraigs={this.searchForCraiglist}
                 handleInputChange={this.handleInputChange}
