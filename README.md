@@ -62,8 +62,10 @@ adding a budgeting component where user can input a total budget and prioritize 
 
 
 ## Step and Screenshort
+### Login page
  ![item iformatiom page](/client/public/img/login.jpg)
-
+This is our login page of the App. if you have not create account create one. Once you have account created go to on the top right navbar and use the your username and password to login the application. Users with validate Username and password can able to login the App.
+### Home page
  ![login page](/client/public/img/image2.jpg)
-
+After login thi application user can experience the above given home page where users can create list on the side bar, users can add item to the list, users can serach for the item with two website, users can have multiple list and it allows user to switch between list and users can also view item from the list. 
 
