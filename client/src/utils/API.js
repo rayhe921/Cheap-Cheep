@@ -48,6 +48,9 @@ export default {
   addItemToList: function (currentList, itemData) {
     return axios.put("/api/list/" + currentList, itemData);
   },
+  deleteItemFromList: function (currentList, itemData) {
+    return axios.put("/api/list/delete/" + currentList, itemData);
+  },
   //User API Methods
 
   // Gets all user
@@ -82,7 +85,7 @@ export default {
   scrapecraiglist: function (searchTerm) {
     console.log("this is my router")
     console.log(searchTerm)
-    return axios.get("/api/scraper/Craiglist/" + searchTerm);
+    return axios.get("/api/scraper/craigslist/" + searchTerm);
   }
 
 };

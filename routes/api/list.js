@@ -17,4 +17,8 @@ router
   .route("/user/:id")
   .get(ListController.findAllByUser)
 
+router
+  .route("/delete/:id")
+  .put(ListController.removeItem)
+
 module.exports = router;
