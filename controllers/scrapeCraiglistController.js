@@ -11,7 +11,8 @@ module.exports = {
 
 
         function handlePage(page){
-            console.log("the page is: " + page);
+
+
             var $ = cheerio.load(page);
             var productNames = [];
             var productPrices = [];
@@ -21,25 +22,24 @@ module.exports = {
             $(".result-title").each(function (i, element) {
                 Link = $(element).attr("href");
                 Name = $(element).text();
-                // console.log(Link)
-                // console.log(Name)
+
                 productLinks.push(Link);
                 productNames.push(Name);
             })
             $(".result-price").each(function (i, element) {
                 Prices = $(element).text();
-                //console.log(productPrices)
+
                 productPrices.push(Prices);
 
             })
             $(".swipe-wrap img").each(function (i, element) {
-                // console.log(element)
+
                 Image = $(element).attr("src")
                 imageLinks.push(Image)
-                // console.log(Image)
+
             })
 
-            //console.log(image);
+
             firstMatch.name = productNames[0];
             firstMatch.price = productPrices[0];
             firstMatch.link = productLinks[0];

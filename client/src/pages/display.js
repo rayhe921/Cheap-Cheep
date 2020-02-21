@@ -26,7 +26,8 @@ class Display extends Component {
     userid: "",
     isLoggedIn: false,
     notLoading: false,
-    hideform: false
+    hideform: false,
+    totalPrice: 0
   };
 
   componentDidMount() {
@@ -34,7 +35,8 @@ class Display extends Component {
     const id = localStorage.getItem("id");
     this.setState({
       userid: id,
-      isLoggedIn: true
+      isLoggedIn: true,
+      totalPrice: 0
     });
 
     //we use this later to add lists into state
@@ -107,7 +109,13 @@ class Display extends Component {
   populateItems = (nextList) => {
     const pushItem = (ItemData) => {
       this.state.items.push(ItemData);
+      const priceNum = ItemData.price.slice(1);
+      console.log(priceNum);
+      this.setState((state) => {
+        return {totalPrice: state.totalPrice + parseFloat(priceNum)};
+      });
       this.forceUpdate();
+      console.log("totalPrice is: " + this.state.totalPrice)
     }
 
     const findItem = (ItemID) => {
@@ -139,6 +147,12 @@ class Display extends Component {
     const addItemToList = (scrapedData) => {
 
       this.state.items.push(scrapedData);
+      const priceNum = scrapedData.price.slice(1);
+      console.log(priceNum);
+      this.setState((state) => {
+        return {totalPrice: state.totalPrice + parseFloat(priceNum)};
+      });
+      console.log("totalPrice is: " + this.state.totalPrice)
       this.forceUpdate();
 
       API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
@@ -200,7 +214,8 @@ class Display extends Component {
       this.setState({
         listInputText: "",
         currentList: listOb,
-        items: []
+        items: [],
+        totalPrice: 0
       });
       this.populateItems(listOb);
     }
@@ -237,7 +252,8 @@ class Display extends Component {
     this.setState(
       {
         currentList: nextList,
-        items: []
+        items: [],
+        totalPrice: 0
       },
       this.populateItems(nextList)
     );
@@ -309,7 +325,7 @@ class Display extends Component {
                         event.preventDefault();
 
                         const callPopulate = () => {
-                          this.setState({items : []});
+                          this.setState({items : [], totalPrice: 0});
                           this.populateItems(this.state.currentList);
                         }
 
