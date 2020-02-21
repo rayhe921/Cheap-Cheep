@@ -9,7 +9,7 @@ module.exports = {
         var firstMatch = {};
 
         //Launch puppeteer
-        puppeteer.launch().then(function (browser) {
+        puppeteer.launch({ args: ['--no-sandbox'] }).then(function (browser) {
             return browser.newPage();
         })
             .then(function (page) {
