@@ -15,6 +15,7 @@
 .navbar{
     border-bottom: 5px solid rgb(117, 198, 176);
   }
+<<<<<<< HEAD
 
 .title-font{
   /* font-family: 'Sriracha', cursive; */
@@ -24,3 +25,14 @@
   font-family: 'Righteous', cursive;
   font-size: 2.5rem;
   }
+=======
+  
+  .title-font{
+    /* font-family: 'Sriracha', cursive; */
+    /* font-family: 'Fredoka One', cursive; */
+    /* font-family: 'Knewave', cursive; */
+    /* font-family: 'Pacifico', cursive; */
+    font-family: 'Righteous', cursive;
+    font-size: 2.5rem;
+    } 
+>>>>>>> master

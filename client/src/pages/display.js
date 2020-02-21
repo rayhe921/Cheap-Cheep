@@ -26,7 +26,11 @@ class Display extends Component {
     userid: "",
     isLoggedIn: false,
     notLoading: false,
+<<<<<<< HEAD
     hideForm: false
+=======
+    hideform: false
+>>>>>>> master
   };
 
 
@@ -247,7 +251,23 @@ class Display extends Component {
   };
 
   hideForm = () => {
+<<<<<<< HEAD
     this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true}) 
+=======
+    this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true})
+  }
+
+  switchList = (nextList) => {
+    console.log('changing list');
+    console.log("In switchList, the nextList object is: " + JSON.stringify(nextList));
+    this.setState(
+      {
+        currentList: nextList,
+        items: []
+      },
+      this.populateItems(nextList)
+    );
+>>>>>>> master
   }
 
 
