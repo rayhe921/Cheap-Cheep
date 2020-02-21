@@ -3,7 +3,7 @@ Final Project
 
 Heroku Domain URL : https://limitless-depths-91026.herokuapp.com/
 
-# Overview
+## Overview
 This project is our final project for University of washington Coding Bootcamps curriculum. The project is completely develeoped using MERN (Node.js, MongoDB, Express and React). **Cheap Cheep** is our application's name. The concept behind this Application is that allows users to create personal shopping lists of many different kinds of items. Original concept of the App  was find the lowest price on these items across a variety of websites and direct the user to the best deal on each item on their list.
 As the process of building App we experienced some obstacles so, users can search for item with specific website that is **Walmart** and **Craigslist**
  
@@ -49,11 +49,18 @@ Follow the following step for installation App in your local machine.
 + Raymond He
 
 ## Motivation for building App
-
+To make the shopping process easy, accessible, efficient, organized, and most importantly conscious of your own personal budget
 
 
 ## Future Improvemt
+This is just our MVP product. There are lot of features we would like to add in this application like
+adding a budgeting component where user can input a total budget and prioritize their lists and the application will tell them which to buy and from where based on total actual cost. it will find the most inexpensive and durable product with camparison of different website product price for exact same product.
+
+
 
 
 ## Step and Screenshort
+ ![login page](/public/images/Image1.png)
+
+ ![home page for user](/public/images/Image1.png)
 
