@@ -65,22 +65,6 @@ class Display extends Component {
       });
   };
 
-  //add an item from craiglist into the database
-  addCraigItem = (event) => {
-    event.preventDefault();
-
-    API.saveItem()
-    const newItem = {
-      name: this.state.scrapForModal.name,
-      price: this.state.scrapForModal.price,
-      website: this.state.scrapForModal.website,
-      link: this.state.scrapForModal.link,
-      image: this.state.scrapForModal.image
-    }
-
-    API.saveItem(newItem);
-  }
-
   //This is our event to call the craigslist scraper 
   searchForCraiglist = (event) => {
     const handleModalInsert = (scrapedData) => {
@@ -99,9 +83,9 @@ class Display extends Component {
           image: response.data.image,
           website: "Craigslist"
         }
-        handleModalInsert(scrapedData)
+        handleModalInsert(scrapedData);
       })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   }
 
@@ -110,12 +94,10 @@ class Display extends Component {
     const pushItem = (ItemData) => {
       this.state.items.push(ItemData);
       const priceNum = ItemData.price.slice(1);
-      console.log(priceNum);
       this.setState((state) => {
         return { totalPrice: state.totalPrice + parseFloat(priceNum) };
       });
       this.forceUpdate();
-      console.log("totalPrice is: " + this.state.totalPrice)
     }
 
     const findItem = (ItemID) => {
@@ -173,11 +155,10 @@ class Display extends Component {
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
-      alert("Please enter search term!")
+      alert("Please enter search term!");
     } else {
       this.setState({ showModalOne: true, notLoading: false })
       API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-
         const scrapedData = {
           name: response.data.name,
           price: response.data.price,
@@ -185,7 +166,7 @@ class Display extends Component {
           image: response.data.image,
           website: "Walmart"
         }
-        handleModalInsert(scrapedData)
+        handleModalInsert(scrapedData);
       })
         .catch(err => console.log(err));
     }

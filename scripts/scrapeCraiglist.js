@@ -8,7 +8,7 @@ function scrapeCraiglist(searchTerm) {
   var firstMatch = {};
 
   var url = "https://seattle.craigslist.org/search/sss?query=" + searchTerm + "&sort=rel";
-  console.log("this is working")
+
   axios.get(url).then(function (response) {
     console.log(response.data);
     var $ = cheerio.load(response.data);

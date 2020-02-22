@@ -1,71 +1,54 @@
 # Cheap-Cheep
-Final Project
-
 Heroku Domain URL : https://limitless-depths-91026.herokuapp.com/
 
+## Contributors 
++ Raymond He
++ Elizabeth Holmes
++ Shreejaya lama
++ Elliott White
+
 ## Overview
-This project is our final project for University of washington Coding Bootcamps curriculum. The project is completely develeoped using MERN (Node.js, MongoDB, Express and React). **Cheap Cheep** is our application's name. The concept behind this Application is that allows users to create personal shopping lists of many different kinds of items. Original concept of the App  was find the lowest price on these items across a variety of websites and direct the user to the best deal on each item on their list.
-As the process of building App we experienced some obstacles so, users can search for item with specific website that is **Walmart** and **Craigslist**
- 
- This app allows user to create accout. User can able to login with validate username and password. Once login, App allows user to create list, search for the item with mentioned website.  save item to the list,  delete item from list and view item on list.   
+**Cheap Cheep** is our final project for University of washington Coding Bootcamps curriculum. The project is a full MERN Stack (Node.js, MongoDB, Express and React) application. This Application allows users to create personal shopping lists of different items across multiple websites. Users create an account in which they can create multiple shopping lists for different needs. Item information is scraped from the website of the user's choice, and added to their lists. The application is backed up by a mongo database for storing user, list, and item data.
 
 ## Installation
-Follow the following step for installation App in your local machine.
-1. Go to https://github.com/rayhe921/Cheap-Cheep
-2. Click on the **clone or download** from the right side of the page and copy the URL for Repo.
-3. Go to your terminal and cd to the folder you like to save Repo and do git clone and paste copy URl and enter.
-4. Change directory to the Repository.
-5. Do npm install in the root.
-6. Open the Repo to the VS code and run npm start.
+Here are the steps for running this application locally on your machine:
+1. Clone the repo to your local machine: https://github.com/rayhe921/Cheap-Cheep
+2. cd into the directory
+3. run "npm install" to install all the necessary packages
+4. run "npm start" to start the server
 
-## Technologies use for project
+## Technologies used
 - HTMl
 - Bootstrap
 - Node js
-- NPM package
 - Express
 - React
-- Routes
 - Mongoose
 - JavaScript
-- AJAX ()
+- AJAX
+- Cheerio
 - Puppeteer
 
 ## project tools
 - **GitHub** to maintain code for Project
 - **Heroku** project deveployment
 
-## Materials use for Team
-+ Slack
-+ Goole slide
-+ Lucidchart
-+ Goodle doc.
-+ Google drive
-+ Instructors and TAs
-+ Google slide
 
-## Contributors 
-+ Elliott White
-+ Elizabeth Holmes
-+ Shreejaya lama
-+ Raymond He
-
-## Motivation for building App
-To make the shopping process easy, accessible, efficient, organized, and most importantly conscious of your own personal budget
+## Known Issues
+- The Modal displaying our loading gif doesn't always display correctly. This is likely because of the way in which React batch updates setState calls.
+- Lists can't be deleted
 
 
-## Future Improvemt
-This is just our MVP product. There are lot of features we would like to add in this application like
-adding a budgeting component where user can input a total budget and prioritize their lists and the application will tell them which to buy and from where based on total actual cost. it will find the most inexpensive and durable product with camparison of different website product price for exact same product.
+## Improvement Opportunities.
+Our original concept for this application was more of a budgeting app. Users could set a budget for each list, and each time they added an item it would scrape the item across multiple websites, and return you the lowest priced version and a link to which site offered it. During our development process, we were significantly bottlenecked trying to find websites that we could scrape from successfully. In the current version of this app you can only scrape from two websites, Walmart and Craigslist. Because these two websites list products so differently, it's much harder to confirm that you're looking at the same product on each website. A production version of this application would be able to get access to product APIs unavailable to student developers, which would be a much stabler and more robust path forward.
 
+Also in our original concept, we wanted users to be able to prioritize items on their lists, so that the application would not only price compare but also tell you which items you can afford to buy based on your prioritization and total budget.
 
-
-
-## Step and Screenshort
+## Using the App
 ### Login page
  ![item iformatiom page](/client/public/img/login.jpg)
-This is our login page of the App. if you have not create account create one. Once you have account created go to on the top right navbar and use the your username and password to login the application. Users with validate Username and password can able to login the App.
+New users need to create an account using the form on this page. Once completed, users can login with their provided username and password on the top right of the page.
 ### Home page
  ![login page](/client/public/img/image2.jpg)
-After login thi application user can experience the above given home page where users can create list on the side bar, users can add item to the list, users can serach for the item with two website, users can have multiple list and it allows user to switch between list and users can also view item from the list. 
+New users will need to create a list before they can start adding items. Once this is done, the user can enter search terms and look for items on either Walmart or Craigslist with the provided buttons. If the user accepts the item found, it gets added to their list. If a user has multiple lists, they can switch between them by clicking on them. Items can be deleted by clicking the 'X' next to them.
 

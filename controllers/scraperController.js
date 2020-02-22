@@ -52,25 +52,20 @@ module.exports = {
                 firstMatch.link = productLinks[0];
                 firstMatch.image = imageLinks[0];
 
-                console.log(firstMatch);
+
                 res.json(firstMatch);
 
         }
 
 
         (async () => {
-            console.log("start of aysnc");
             const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-            console.log("next is the try catch block");
 
             try {
-                console.log("waiting on new page");
                 const page = await browser.newPage();
-                console.log("page is about to go to url");
                 await page.goto(url);
                 const content = await page.content();
 
-                console.log("cheerio has page content");
                 handlePage(content);
                 
             } catch (error) {
