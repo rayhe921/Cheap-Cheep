@@ -28,21 +28,33 @@ Here are the steps for running this application locally on your machine:
 - AJAX
 - Cheerio
 - Puppeteer
+- Passport (incomplete)
+- Shelljs (incomplete)
 
 ## project tools
 - **GitHub** to maintain code for Project
-- **Heroku** project deveployment
+- **Heroku** project deployment
 
 
 ## Known Issues
 - The Modal displaying our loading gif doesn't always display correctly. This is likely because of the way in which React batch updates setState calls.
 - Lists can't be deleted
+- Data models need additional validation (users can be depulicated)
 
 
 ## Improvement Opportunities.
 Our original concept for this application was more of a budgeting app. Users could set a budget for each list, and each time they added an item it would scrape the item across multiple websites, and return you the lowest priced version and a link to which site offered it. During our development process, we were significantly bottlenecked trying to find websites that we could scrape from successfully. In the current version of this app you can only scrape from two websites, Walmart and Craigslist. Because these two websites list products so differently, it's much harder to confirm that you're looking at the same product on each website. A production version of this application would be able to get access to product APIs unavailable to student developers, which would be a much stabler and more robust path forward.
 
 Also in our original concept, we wanted users to be able to prioritize items on their lists, so that the application would not only price compare but also tell you which items you can afford to buy based on your prioritization and total budget.
+
+
+### Unused Technologies
+There are two technologies included in our project which aren't currently successfully implemented: passport and shelljs.
+
+We intended to use passport to handle our authentication, but we ran out of time to implement it. One of the big improvement opportunities for our project is to make logging in more secure and robust.
+
+Shelljs is a library we attempted to use to debug puppeteer creating zombie chromium processes. We weren't able to get it to correctly terminate the processes, and we wound up using a try/catch block to properly close puppeteer instead of trying to 
+
 
 ## Using the App
 ### Login page
