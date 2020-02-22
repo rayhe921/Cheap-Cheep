@@ -331,7 +331,7 @@ class Display extends Component {
               ))}
             </Shoplist>
             <Card>
-              {"Total Cost: " + this.state.totalPrice}
+              {"Total Cost: $" + this.state.totalPrice}
             </Card>
 
             <div className="row d-flex justifiy-content-center">

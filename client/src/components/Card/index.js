@@ -3,8 +3,8 @@ import "./style.css";
 
 function Card(props) {
     return (
-        <div class="card">
         <div>
+        <div className="card-body price-font">
           {props.children}
         </div>
       </div>
