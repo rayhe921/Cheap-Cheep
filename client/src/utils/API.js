@@ -6,7 +6,6 @@ export default {
 
   // Gets all items
   getItem: function () {
-    console.log("this is api.js getItem")
     return axios.get("/api/item");
   },
   // Gets a item with the given id
@@ -26,7 +25,6 @@ export default {
 
   // Gets all list
   getList: function () {
-    console.log("this is from list item")
     return axios.get("/api/list");
   },
   // Gets a list with the given id
@@ -48,18 +46,18 @@ export default {
   addItemToList: function (currentList, itemData) {
     return axios.put("/api/list/" + currentList, itemData);
   },
+  //deletes an item from a specific list
   deleteItemFromList: function (currentList, itemData) {
     return axios.put("/api/list/delete/" + currentList, itemData);
   },
   //User API Methods
 
   // Gets all user
-
   getAllUsers: function () {
     return axios.get("/api/user");
   },
+  //login route
   login: function (user) {
-    console.log(user);
     return axios.post("/api/user/login", user);
   },
   // Gets a user with the given id
@@ -72,7 +70,6 @@ export default {
   },
   // Saves a user to the database
   saveUser: function (userData) {
-    console.log("This is in API.js" + userData);
     return axios.post("/api/user", userData);
   },
 
@@ -82,9 +79,8 @@ export default {
   scrapeWalmart: function (searchTerm) {
     return axios.get("/api/scraper/walmart/" + searchTerm);
   },
+  //Scrapes craigslist for the first product with the search term
   scrapecraiglist: function (searchTerm) {
-    console.log("this is my router")
-    console.log(searchTerm)
     return axios.get("/api/scraper/craigslist/" + searchTerm);
   }
 
