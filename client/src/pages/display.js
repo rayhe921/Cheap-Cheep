@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import Sidebar from "../components/Sidebar";
 import Shoplist from "../components/ShopList";
 import Input from "../components/Input";
@@ -8,8 +7,10 @@ import { Container, Row, Col } from "../components/Grid";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import API from "../utils/API";
-import UsersList from "../components/List"
-import LoadingGif from "../components/Modal/imgs/loadingChick.gif"
+import UsersList from "../components/List";
+import LoadingGif from "../components/Modal/imgs/loadingChick.gif";
+// import notFoundPic from "../components/Modal/imgs/notFound.jpg";
+import Card from "../components/Card";
 
 class Display extends Component {
 
@@ -72,7 +73,7 @@ class Display extends Component {
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
-      alert("Please enter search term!");
+      alert("Please enter a search term!");
     } else {
       this.setState({ showModalOne: true, notloading: false })
       API.scrapecraiglist(this.state.searchTerm).then(function (response) {
@@ -204,8 +205,7 @@ class Display extends Component {
     event.preventDefault();
     this.hideForm();
     API.saveList({
-      listName: this.state.listInputText,
-      user: this.state.userid
+      listName: this.state.listInputText
     }).then(function (response) {
       const newList = {
         listName: response.data.listName,
@@ -242,6 +242,7 @@ class Display extends Component {
     );
   }
 
+
   render() {
 
     const loadingStyle = {
@@ -263,9 +264,8 @@ class Display extends Component {
                     //swaps to the clicked list
                     this.clickList = event => {
                       event.preventDefault();
-
                       var nextList = {
-                        listName: listOb.listName,
+                        listname: listOb.listName,
                         id: listOb.id
                       }
 
@@ -330,6 +330,9 @@ class Display extends Component {
                 </tr>
               ))}
             </Shoplist>
+            <Card>
+              {"Total Cost: $" + this.state.totalPrice}
+            </Card>
 
             <div className="row d-flex justifiy-content-center">
               <Input
