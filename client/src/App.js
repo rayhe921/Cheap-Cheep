@@ -27,7 +27,6 @@ class App extends Component {
 
     //make sure that if we're logged in state is correct and we're on the correct route
     if (localStorage.getItem("isLoggedIn")) {
-      console.log(localStorage.getItem("isLoggedIn"));
       this.setState({ hideLogoutButton: false, showLogin: false });
 
       if (currentRoute === ""){
@@ -58,7 +57,6 @@ class App extends Component {
             password: this.state.loginPass,
   
         }).then( function(response) {
-          console.log(response);
   
           if (response.data.found === false){
             console.log("User not found.")
@@ -84,7 +82,7 @@ class App extends Component {
         [name]: value
     });
   
-    // console.log(this.state);
+
   };
 
   render() {

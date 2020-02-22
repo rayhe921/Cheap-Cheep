@@ -19,7 +19,6 @@ module.exports = {
     db.List
       .findById(req.params.id)
       .then(function (dbModel) {
-        console.log("The dbModel is: " + dbModel);
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
@@ -31,18 +30,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-    console.log("Hello, this is update in ListController");
-    console.log(req.body);
-    console.log(JSON.stringify(req.params));
     db.List
       .findOneAndUpdate({ _id: req.params.id }, { $push: { Items: req.body._id } }, { new: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   removeItem: function (req, res) {
-    console.log("Hello, this is removeItem in ListController");
-    console.log(req.body._id);
-    console.log(JSON.stringify(req.params));
     db.List
       .findOneAndUpdate({ _id: req.params.id }, { $pull: { Items: req.body._id } })
       .then(dbModel => res.json(dbModel))

@@ -26,74 +26,63 @@ class Display extends Component {
     userid: "",
     isLoggedIn: false,
     notLoading: false,
-    hideform: false
+    hideform: false,
+    totalPrice: 0
   };
 
-
   componentDidMount() {
+    //Get the user from localstorage, prime the state
     const id = localStorage.getItem("id");
     this.setState({
       userid: id,
-      isLoggedIn: true
+      isLoggedIn: true,
+      totalPrice: 0
     });
-    console.log(this.state.userid);
 
+    //we use this later to add lists into state
     const handleListInsert = (item) => {
       const listOb = {
         listName: item.listName,
         id: item._id
       }
-      //console.log(listOb);
+
       this.state.lists.push(listOb);
       this.setState({ currentList: this.state.lists[0] })
       this.forceUpdate();
       this.hideForm();
-      console.log(this.state.lists);
-      console.log(this.state.currentList);
     }
 
+<<<<<<< HEAD
     API.getList({ user: id })
       .then(function (response) {
         console.log(response.data);
         response.data.forEach(handleListInsert)
-      });
+=======
+    //once we find the lists for the user, we want to populate the current list
+    const callPopulate = () => {
+      this.populateItems(this.state.currentList);
+    }
 
-    console.log("end of componentDidMount");
-    console.log(this.state.currentList);
+    //get all the lists associated with the current user
+    API.getUserLists(id)
+      .then(function (response) {
+        response.data.forEach(handleListInsert);
+        callPopulate();
+>>>>>>> master
+      });
   };
 
-  addCraigItem = (event) => {
-    event.preventDefault();
-
-    console.log("this is working save item")
-    API.saveItem()
-    const newItem = {
-      name: this.state.scrapForModal.name,
-      price: this.state.scrapForModal.price,
-      website: this.state.scrapForModal.website,
-      link: this.state.scrapForModal.link,
-      image: this.state.scrapForModal.image
-    }
-    console.log("newItem is: " + newItem)
-    API.saveItem(newItem).then(function (response) {
-      console.log("response.data is: " + response)
-    });
-  }
-
+  //This is our event to call the craigslist scraper 
   searchForCraiglist = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
-      console.log("notLoading: " + this.state.notLoading);
-      console.log("this.state.scrapedataForCraiglistModal" + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
       alert("Please enter a search term!");
     } else {
-      console.log("craiglist searching");
       this.setState({ showModalOne: true, notloading: false })
       API.scrapecraiglist(this.state.searchTerm).then(function (response) {
-        console.log(response);
         const scrapedData = {
           name: response.data.name,
           price: response.data.price,
@@ -101,13 +90,13 @@ class Display extends Component {
           image: response.data.image,
           website: "Craigslist"
         }
-        console.log("scrapedData: " + JSON.stringify(scrapedData))
-        handleModalInsert(scrapedData)
+        handleModalInsert(scrapedData);
       })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   }
 
+<<<<<<< HEAD
 
 
   getUserLists = (userid) => {
@@ -131,11 +120,34 @@ class Display extends Component {
             pushItem(itemData);
           })
         });
+=======
+  //this function populates the selected list with its associated items in the database.
+  populateItems = (nextList) => {
+    const pushItem = (ItemData) => {
+      this.state.items.push(ItemData);
+      const priceNum = ItemData.price.slice(1);
+      this.setState((state) => {
+        return { totalPrice: state.totalPrice + parseFloat(priceNum) };
+      });
+      this.forceUpdate();
+    }
+
+    const findItem = (ItemID) => {
+      API.getOneItem(ItemID).then(function (itemData) {
+        pushItem(itemData.data);
+      })
+    }
+
+    API.getOneList(nextList.id)
+      .then(function (response) {
+        response.data.Items.forEach(findItem);
+>>>>>>> master
       })
       .catch(err => console.log(err));
 
   };
 
+  //This function adds an item found by the scraper 
   addNewItem = (event) => {
     event.preventDefault();
 
@@ -148,39 +160,42 @@ class Display extends Component {
     }
 
     const addItemToList = (scrapedData) => {
-      console.log("In addItemToList Scraped Data is: " + JSON.stringify(scrapedData));
-      console.log("In addItemToList current list is: " + JSON.stringify(this.state.currentList));
 
       this.state.items.push(scrapedData);
+      const priceNum = scrapedData.price.slice(1);
+
+      this.setState((state) => {
+        return { totalPrice: state.totalPrice + parseFloat(priceNum) };
+      });
+
       this.forceUpdate();
 
       API.addItemToList(this.state.currentList.id, scrapedData).then(function (response) {
-        console.log("this is the callback to adding an item to a list: " + response);
+
       });
     }
     this.setState({ showModalOne: false })
-    console.log("newItem is: " + newItem)
     API.saveItem(newItem).then(function (response) {
-      console.log("response.data is: " + JSON.stringify(response))
       addItemToList(response.data);
     });
 
   }
 
+  //this handles calling the walmart scraper and collecting the data
   searchWall = (event) => {
     const handleModalInsert = (scrapedData) => {
       this.setState({ scrapForModal: scrapedData, notLoading: true });
-      console.log("this.state.scrapForModal: " + JSON.stringify(this.state.scrapForModal))
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
+<<<<<<< HEAD
       alert("Please enter a search term!")
+=======
+      alert("Please enter search term!");
+>>>>>>> master
     } else {
-      console.log("searching for item");
       this.setState({ showModalOne: true, notLoading: false })
-      // console.log("state.notLoading " + this.state.notLoading)
       API.scrapeWalmart(this.state.searchTerm).then(function (response) {
-        // console.log(response);
         const scrapedData = {
           name: response.data.name,
           price: response.data.price,
@@ -188,51 +203,58 @@ class Display extends Component {
           image: response.data.image,
           website: "Walmart"
         }
-        console.log("scrapedData: " + JSON.stringify(scrapedData))
-        handleModalInsert(scrapedData)
+        handleModalInsert(scrapedData);
       })
         .catch(err => console.log(err));
     }
   }
 
+  //this is used to help the modal display
   hideModalOne = () => {
     this.setState({ showModalOne: false })
   }
 
+  //this is used to help the modal display
   displayModalTwo = (event) => {
     event.preventDefault();
     this.setState({ showModalTwo: true })
 
-    console.log("showModalTwo: " + this.state.showModalTwo)
   };
 
+  //this is used to help the modal display
   hideModalTwo = () => {
     this.setState({ showModalTwo: false })
   }
 
-
+  // this is the event for adding an item searched for to a list
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
       this.state.lists.push(listOb);
+<<<<<<< HEAD
       console.log("this.state.lists: " + JSON.stringify(this.state.lists))
       this.setState({ listInputText: "" })
+=======
+      this.setState({
+        listInputText: "",
+        currentList: listOb,
+        items: [],
+        totalPrice: 0
+      });
+      this.populateItems(listOb);
+>>>>>>> master
     }
     event.preventDefault();
     this.hideForm();
     API.saveList({
       listName: this.state.listInputText
     }).then(function (response) {
-      console.log("response " + JSON.stringify(response))
       const newList = {
         listName: response.data.listName,
         id: response.data._id
       }
       handleListInsert(newList)
-      console.log("newList: " + JSON.stringify(newList))
     })
     this.setState({ showModalTwo: false })
-    console.log("this.state.listInputText: " + this.state.listInputText)
-    console.log("this.state.lists: " + JSON.stringify(this.state.lists))
   }
 
   handleInputChange = event => {
@@ -243,20 +265,19 @@ class Display extends Component {
       [name]: value
     });
 
-    // console.log(this.state);
   };
 
   hideForm = () => {
-    this.state.lists === [] ? this.setState({hideForm: false}) : this.setState({hideForm: true})
+    this.state.lists === [] ? this.setState({ hideForm: false }) : this.setState({ hideForm: true })
   }
 
+  //Helps swap between lists
   switchList = (nextList) => {
-    console.log('changing list');
-    console.log("In switchList, the nextList object is: " + JSON.stringify(nextList));
     this.setState(
       {
         currentList: nextList,
-        items: []
+        items: [],
+        totalPrice: 0
       },
       this.populateItems(nextList)
     );
@@ -281,13 +302,24 @@ class Display extends Component {
                   id={listOb.id}
                   key={listOb.id}
                   buttonClick={
+                    //swaps to the clicked list
                     this.clickList = event => {
                       event.preventDefault();
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
                       var nextList = {
                         listname: listOb.listName,
                         id: listOb.id
                       }
+<<<<<<< HEAD
                       this.setState({ currentList: nextList });
+=======
+
+                      this.switchList(nextList);
+
+>>>>>>> master
                     }
                   }
                 ></UsersList>
@@ -318,31 +350,26 @@ class Display extends Component {
               {this.state.items.map(Item => (
                 <tr className="table-success" key={Item._id}>
                   <th className="">
-                    <button 
-                    type="button" 
-                    className=" btn-sm btn btn-outline-danger btn-dark"
-                    onClick={
-                      this.clickDelete = event => {
-                        event.preventDefault();
-                        console.log("Delete!")
-                        console.log("Item name is: " + Item.name + " and Item id is: " + Item._id);
+                    <button
+                      type="button"
+                      className=" btn-sm btn btn-outline-danger btn-dark"
+                      onClick={
+                        //this is the functionality for deleting an item from a list
+                        this.clickDelete = event => {
+                          event.preventDefault();
 
-                        const callPopulate = () => {
-                          this.setState({items : []});
-                          this.populateItems(this.state.currentList);
+                          const callPopulate = () => {
+                            this.setState({ items: [], totalPrice: 0 });
+                            this.populateItems(this.state.currentList);
+                          }
+
+                          API.deleteItemFromList(this.state.currentList.id, Item).then(function (response) {
+                            callPopulate();
+                          });
+
+                          API.deleteItem(Item._id);
                         }
-
-                        API.deleteItemFromList(this.state.currentList.id, Item).then(function (response) {
-                          callPopulate();
-                        });
-
-                        API.deleteItem(Item._id).then(function (response) {
-                          console.log("this is the callback to adding an item to a list: " + JSON.stringify(response));
-                        });
-
-
                       }
-                    }
                     >X</button>
                   </th>
                   <td>{Item.name}</td>
@@ -368,7 +395,7 @@ class Display extends Component {
           <Modal
             hideModal={this.hideModalOne}
             showModalOne={this.state.showModalOne}
-            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait."}
+            title={this.state.notLoading ? "Is This What you Wanted?" : "Cheap Cheep is searching, please wait..."}
             body={this.state.notLoading ?
               <div>
                 <h3>{this.state.scrapForModal.name}</h3>

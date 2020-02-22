@@ -1,3 +1,6 @@
+//This script was just used for testing scraper functionality.
+//The actually scraping happens in the controllers.
+
 var cheerio = require("cheerio");
 var axios = require("axios");
 
@@ -5,7 +8,7 @@ function scrapeCraiglist(searchTerm) {
   var firstMatch = {};
 
   var url = "https://seattle.craigslist.org/search/sss?query=" + searchTerm + "&sort=rel";
-  console.log("this is working")
+
   axios.get(url).then(function (response) {
     console.log(response.data);
     var $ = cheerio.load(response.data);

@@ -3,8 +3,6 @@ const db = require("../models");
 
 module.exports = {
     findAll: function(req, res) {
-      console.log()
-
       db.Item
         .find(req.query)
         // .sort({ date: -1 })
@@ -18,12 +16,9 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-      console.log("hello from create inside itemcontroller.");
-      console.log(req.body);
       db.Item
         .create(req.body)
         .then( function(dbModel){
-          console.log ("dbmodel is: " + dbModel);
           res.json(dbModel)
         })
         .catch(err => res.status(422).json(err));
