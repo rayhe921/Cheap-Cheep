@@ -10,6 +10,7 @@ import API from "../utils/API";
 import UsersList from "../components/List";
 import LoadingGif from "../components/Modal/imgs/loadingChick.gif";
 // import notFoundPic from "../components/Modal/imgs/notFound.jpg";
+import Card from "../components/Card";
 
 class Display extends Component {
 
@@ -52,12 +53,6 @@ class Display extends Component {
       this.hideForm();
     }
 
-<<<<<<< HEAD
-    API.getList({ user: id })
-      .then(function (response) {
-        console.log(response.data);
-        response.data.forEach(handleListInsert)
-=======
     //once we find the lists for the user, we want to populate the current list
     const callPopulate = () => {
       this.populateItems(this.state.currentList);
@@ -68,7 +63,6 @@ class Display extends Component {
       .then(function (response) {
         response.data.forEach(handleListInsert);
         callPopulate();
->>>>>>> master
       });
   };
 
@@ -96,31 +90,6 @@ class Display extends Component {
     }
   }
 
-<<<<<<< HEAD
-
-
-  getUserLists = (userid) => {
-    console.log("hello from getUserLists" + userid);
-  };
-
-  populateItems = () => {
-
-    const pushItem = (ItemData) => {
-      this.state.items.push(ItemData);
-    }
-
-    API.getOneList(this.state.currentList.id)
-      .then(function (response) {
-        console.log(response);
-        console.log(response.data.Items);
-        response.data.Items.forEach(ItemID => function () {
-          console.log(ItemID);
-          API.getOneItem(ItemID).then(function (itemData) {
-            console.log("GetOneItem console log.");
-            pushItem(itemData);
-          })
-        });
-=======
   //this function populates the selected list with its associated items in the database.
   populateItems = (nextList) => {
     const pushItem = (ItemData) => {
@@ -141,7 +110,6 @@ class Display extends Component {
     API.getOneList(nextList.id)
       .then(function (response) {
         response.data.Items.forEach(findItem);
->>>>>>> master
       })
       .catch(err => console.log(err));
 
@@ -188,11 +156,7 @@ class Display extends Component {
     }
     event.preventDefault();
     if (!this.state.searchTerm) {
-<<<<<<< HEAD
-      alert("Please enter a search term!")
-=======
       alert("Please enter search term!");
->>>>>>> master
     } else {
       this.setState({ showModalOne: true, notLoading: false })
       API.scrapeWalmart(this.state.searchTerm).then(function (response) {
@@ -230,10 +194,6 @@ class Display extends Component {
   submitListModal = (event) => {
     const handleListInsert = (listOb) => {
       this.state.lists.push(listOb);
-<<<<<<< HEAD
-      console.log("this.state.lists: " + JSON.stringify(this.state.lists))
-      this.setState({ listInputText: "" })
-=======
       this.setState({
         listInputText: "",
         currentList: listOb,
@@ -241,7 +201,6 @@ class Display extends Component {
         totalPrice: 0
       });
       this.populateItems(listOb);
->>>>>>> master
     }
     event.preventDefault();
     this.hideForm();
@@ -305,21 +264,13 @@ class Display extends Component {
                     //swaps to the clicked list
                     this.clickList = event => {
                       event.preventDefault();
-<<<<<<< HEAD
-=======
-
->>>>>>> master
                       var nextList = {
                         listname: listOb.listName,
                         id: listOb.id
                       }
-<<<<<<< HEAD
-                      this.setState({ currentList: nextList });
-=======
 
                       this.switchList(nextList);
 
->>>>>>> master
                     }
                   }
                 ></UsersList>
@@ -379,6 +330,9 @@ class Display extends Component {
                 </tr>
               ))}
             </Shoplist>
+            <Card>
+              {"Total Cost: " + this.state.totalPrice}
+            </Card>
 
             <div className="row d-flex justifiy-content-center">
               <Input
